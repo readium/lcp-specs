@@ -439,9 +439,9 @@ The `encryption/user_key` object contains information regarding the User Key use
         "key_check": "jJEjUDipHK3OjGt6kFq7dcOLZuicQFUYwQ+TYkAIWKm6Xv6kpHFhF7LOkUK/Owww"
     }
   },
-  "links": ...,
-  "rights": ...,
-  "signature": ...
+  "links": "...",
+  "rights": "...",
+  "signature": "..."
 }
 ```
 
@@ -596,8 +596,8 @@ Templated URIs follow the [[URI-Template]](#informative-references) specificatio
       "href": "http://www.example.com/recommended/1.opds",
       "type": "application/atom+xml; profile=opds-catalog; kind=acquisition"}
   ], 
-  "rights": ...,
-  "signature": ...
+  "rights": "...",
+  "signature": "..."
 }
 ```
 
@@ -682,7 +682,7 @@ There is also a vendor extension granting the right to tweet parts of this book.
     "end": "2013-11-25T01:08:15+01:00",
     "http://www.imaginaryebookretailer.com/lcp/rights/tweet": true
   },
-  "signature": ...
+  "signature": "..."
 }
 ```
 
