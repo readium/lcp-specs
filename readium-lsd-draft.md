@@ -368,7 +368,9 @@ When a client opens a License Document for the first time and gets access to its
 
 * It <b>MUST</b> attempt to register itself again if it couldn't do so the first time that the License Document was opened
 
-During the registration, the client <b>MUST</b> always send the same unique identifier for a specific device, no matter which Status Document it interacts with. Any further interaction <b>SHOULD</b> use the same identifier/name.
+During the registration, the client <b>MUST</b> always try to send the same unique identifier for a specific device, no matter which Status Document it interacts with. Any further interaction with a provider <b>SHOULD</b> use the same identifier/name. The client <b>SHOULD</b> consider user privacy when generating a unique identifier, for example by generating a random string during software installation. To prevent user tracking across providers, the client <b>MAY</b> generate device unique ids for each provider.
+
+If a provider uses registration to monitor license abuse, the provider <b>SHOULD</b> take care to prevent forged registrations.
 
 <table class="table-bordered large">
   <tr>
