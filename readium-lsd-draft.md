@@ -48,7 +48,7 @@ Document that contains information about the history of a License Document, alon
 {:.information}
 **This section is informative**
 
-<em> In the following example, the Status Document indicates that the License has been activated on a single device and may be updated, renewed or returned.</em>
+<em> In the following example, the Status Document indicates that the License has been registered for a single device and may be renewed or returned.</em>
 
 
     {
@@ -85,7 +85,7 @@ Document that contains information about the history of a License Document, alon
         "end": "2014-09-13T00:00:00Z"
       },
       "events": [
-        {"type": "activate", "name": "eBook App (Android)", "timestamp": "2016-07-14T00:00:00Z", "id": "709e1380-3528-11e5-a2cb-0800200c9a66"}
+        {"type": "register", "name": "eBook App (Android)", "timestamp": "2016-07-14T00:00:00Z", "id": "709e1380-3528-11e5-a2cb-0800200c9a66"}
       ]
     }
 
