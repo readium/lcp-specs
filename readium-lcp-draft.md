@@ -1069,11 +1069,13 @@ With this signature and the certificate, a valid license <b>MAY</b> be created:
 
 In order to validate the signature, the following steps <b>MUST</b> be followed in order:
 
-1. The Reading System <b>MUST</b> calculate the canonical form of the License Document following the rules as expressed in [5.3. Canonical form of the License Document](#canonical-form-of-the-license-document).
+1. The Reading System <b>MUST</b> extract and remove the signature from the License Document. 
 
-2. It <b>MUST</b> calculate the signature as defined in [5.4. Generating the signature](#generating-the-signature).
+2. It <b>MUST</b> calculate the canonical form of the License Document following the rules as expressed in [5.3. Canonical form of the License Document](#canonical-form-of-the-license-document).
 
-3. It <b>MUST</b> verify that the calculated signature value is consistent with the one embedded in the License Document.
+3. It <b>MUST</b> recalculate the signature as defined in [5.4. Generating the signature](#generating-the-signature).
+
+4. It <b>MUST</b> verify that the calculated signature value is consistent with the one previously extracted from the License Document.
 
 # 6. Encryption Profiles
 
