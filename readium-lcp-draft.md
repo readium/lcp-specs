@@ -1012,7 +1012,7 @@ Given the License Document in its canonical form
 Using the signature algorithm required by the Encryption Profile, a Content Provider must first hash the License Document, giving the following byte sequence, represented here in hexadecimal:
 
 ```json
-ce3fd2220fc26c89ed2190fd27af39c4016b623dd2bd5e5a3562dc0795769c92
+23c68442c7214ba294ddd1a2902756e9fe575116a88f36e55baf94590a90c2ad
 ```
 
 This SHA-256 form must then be signed using the Content Provider’s Private Key, giving the following result, in Base 64:
