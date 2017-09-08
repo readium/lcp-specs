@@ -19,7 +19,7 @@ This specification uses the following EPUB and Licensed Content Protection [[LCP
 
 **Publication**
 
-A logical document entity consisting of a set of interrelated [resources](http://www.idpf.org/epub/30/spec/#gloss-publication-resource-cmt-or-foreign) and packaged in an EPUB Container, as defined by the [EPUB 3 specifications](http://www.idpf.org/epub/30/spec/#sibling-specs).
+A logical document entity consisting of a set of interrelated [resources](https://www.idpf.org/epub/30/spec/#gloss-publication-resource-cmt-or-foreign) and packaged in an EPUB Container, as defined by the [EPUB 3 specifications](https://www.idpf.org/epub/30/spec/#sibling-specs).
 
 **User**
 
@@ -27,7 +27,7 @@ An individual that consumes an EPUB Publication using an EPUB Reading System.
 
 **EPUB Reading System (or Reading System)**
 
-A system that processes EPUB Publications for presentation to a User in a manner conformant with the [EPUB 3 specifications](http://www.idpf.org/epub/30/spec/#sibling-specs).
+A system that processes EPUB Publications for presentation to a User in a manner conformant with the [EPUB 3 specifications](https://www.idpf.org/epub/30/spec/#sibling-specs).
 
 Additionally, it uses the following terms:
 
@@ -63,21 +63,21 @@ Document that contains information about the history of a License Document, alon
 
       "links": [
         {"rel": "license",
-         "href": "http://example.org/license/35d9b2d6",
+         "href": "https://example.org/license/35d9b2d6",
          "type": "application/vnd.readium.lcp.license.v1.0+json"},
         {"rel": "register",
-         "href": "http://example.org/license/35d9b2d6/register{?id,name}",
+         "href": "https://example.org/license/35d9b2d6/register{?id,name}",
          "type": "application/vnd.readium.license.status.v1.0+json",
          "templated": true},
         {"rel": "return", 
-         "href": "http://example.org/license/35d9b2d6/return{?id,name}",
+         "href": "https://example.org/license/35d9b2d6/return{?id,name}",
          "type": "application/vnd.readium.lcp.license.v1.0+json",
          "templated": true},
         {"rel": "renew",
-         "href": "http://example.org/license/35d9b2d6/renew",
+         "href": "https://example.org/license/35d9b2d6/renew",
          "type": "text/html"},
         {"rel": "renew",
-         "href": "http://example.org/license/35d9b2d6/renew{?end,id,name}",
+         "href": "https://example.org/license/35d9b2d6/renew{?end,id,name}",
          "type": "application/vnd.readium.lcp.license.v1.0+json",
          "templated": true}
       ],
@@ -420,7 +420,7 @@ If a provider uses registration to monitor license abuse, the provider <b>SHOULD
     {
       "links": [
         {"rel": "register", 
-         "href": "http://example.org/license/aaa-bbbb-ccc/register{?id,name}",
+         "href": "https://example.org/license/aaa-bbbb-ccc/register{?id,name}",
          "type": "application/vnd.readium.license.status.v1.0+json",
          "templated": true}
       ]
@@ -521,7 +521,7 @@ If returning is unsuccessful, the client <b>SHOULD</b> attempt to return the Lic
     {
       "links": [
         {"rel": "return",
-         "href": "http://example.org/license/aaa-bbbb-ccc/return{?id,name}",
+         "href": "https://example.org/license/aaa-bbbb-ccc/return{?id,name}",
          "type": "application/vnd.readium.lcp.license-1.0+json",
          "templated": true}
       ]
@@ -659,10 +659,10 @@ These parameters are strictly for the case where the link returns a License Docu
     {
       "links": [
         {"rel": "renew",
-         "href": "http://example.org/license/aaa-bbbb-ccc/renew",
+         "href": "https://example.org/license/aaa-bbbb-ccc/renew",
          "type": "text/html"},
         {"rel": "renew"
-         "href": "http://example.org/license/aaa-bbbb-ccc/renew{?end,id,name}",
+         "href": "https://example.org/license/aaa-bbbb-ccc/renew{?end,id,name}",
          "type": "application/vnd.readium.lcp.license-1.0+json",
          "templated": true}
       ]
@@ -753,7 +753,7 @@ The representation of the URI mentioned in the status link <b>MUST</b> be a vali
 
 ## Normative references
 
-[JSON] [The application/json Media Type for JavaScript Object Notation (JSON)](http://www.ietf.org/rfc/rfc4627).
+[JSON] [The application/json Media Type for JavaScript Object Notation (JSON)](https://www.ietf.org/rfc/rfc4627).
 
 [RFC2119] [Key words for use in RFCs to Indicate Requirement Levels](https://tools.ietf.org/html/rfc2119).
 
