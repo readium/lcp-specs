@@ -71,14 +71,14 @@ Document that contains information about the history of a License Document, alon
          "templated": true},
         {"rel": "return", 
          "href": "https://example.org/license/35d9b2d6/return{?id,name}",
-         "type": "application/vnd.readium.lcp.license.v1.0+json",
+         "type": "application/vnd.readium.license.status.v1.0+json",
          "templated": true},
         {"rel": "renew",
          "href": "https://example.org/license/35d9b2d6/renew",
          "type": "text/html"},
         {"rel": "renew",
          "href": "https://example.org/license/35d9b2d6/renew{?end,id,name}",
-         "type": "application/vnd.readium.lcp.license.v1.0+json",
+         "type": "application/vnd.readium.license.status.v1.0+json",
          "templated": true}
       ],
       "potential_rights": {
@@ -522,7 +522,7 @@ If returning is unsuccessful, the client <b>SHOULD</b> attempt to return the Lic
       "links": [
         {"rel": "return",
          "href": "https://example.org/license/aaa-bbbb-ccc/return{?id,name}",
-         "type": "application/vnd.readium.lcp.license-1.0+json",
+         "type": "application/vnd.readium.license.status.v1.0+json",
          "templated": true}
       ]
     }
@@ -538,17 +538,17 @@ If returning is unsuccessful, the client <b>SHOULD</b> attempt to return the Lic
   </tr>
   <tr>
     <td>The server <b>MUST</b> return an updated Status Document.
-The Status Document <b>MUST</b> also return a `status` with its value set to "returned" if the status was previously set to "active" or "cancelled" if the status was previously set to "ready".
+The Status Document <b>MUST</b> contain a `status` with its value set to "returned" if the status was previously set to "active" or "cancelled" if the status was previously set to "ready".
 
 The server <b>MUST</b> update the timestamp of both License and Status Document contained in the `status` and `license` keys of the `updated` object. 
 
 The server <b>MAY</b> also add a new event in the `events` object of the Status Document.</td>
     <td>200</td>
-    <td>The client <b>MUST</b> download an updated License Document.
+    <td>The client <b>MUST</b> download an updated Status Document.
 
 The client <b>MUST NOT</b> allow the user to open the publication anymore. 
 
-The client <b>MUST NOT</b> attempt to return the License anymore.</td>
+The client <b>SHOULD NOT</b> attempt to return the License anymore.</td>
   </tr>
 </table>
 
@@ -611,20 +611,20 @@ Renewing a License is also meant primarily for library use cases, where a patron
   </tr>
   <tr>
     <td>text/html</td>
-    <td>A URL where human interactions will be required. These interactions <b>SHOULD</b> ultimately result in the extension of the term of a License Document.</td>
+    <td>A URL where human interactions will be required. Returns an HTML page. These interactions <b>SHOULD</b> ultimately result in the extension of the term of a License Document.</td>
     <td>No</td>
     <td>GET</td>
   </tr>
   <tr>
-    <td>application/vnd.readium.lcp.license-1.0+json</td>
-    <td>A URL where the License Document can be programmatically renewed.</td>
+    <td>application/vnd.readium.license.status.v1.0+json</td>
+    <td>A URL where the License Document can be programmatically renewed. Returns a Status Document.</td>
     <td>Yes</td>
     <td>PUT</td>
   </tr>
 </table>
 
 <br />
-These parameters are strictly for the case where the link returns a License Document.
+These parameters are strictly for the case where the License Document is programmatically renewed.
 
 <table class="table-bordered large">
   <tr>
@@ -654,7 +654,7 @@ These parameters are strictly for the case where the link returns a License Docu
 </table>
 
 <br />
-*An example with two renewal links: one meant for human interactions (HTML) and another for clients that can send the proper information to the server (returns a License Document).*
+*An example with two renewal links: one meant for human interactions (HTML) and another for clients that can send the proper information to the server (returns a Status Document).*
 
     {
       "links": [
@@ -663,7 +663,7 @@ These parameters are strictly for the case where the link returns a License Docu
          "type": "text/html"},
         {"rel": "renew"
          "href": "https://example.org/license/aaa-bbbb-ccc/renew{?end,id,name}",
-         "type": "application/vnd.readium.lcp.license-1.0+json",
+         "type": "application/vnd.readium.license.status.v1.0+json",
          "templated": true}
       ]
     }
@@ -684,7 +684,8 @@ The server <b>MUST</b> update the timestamp of both License and Status Document 
 
 The server <b>MAY</b> also add a new event in the `events` object of the Status Document.</td>
     <td>200</td>
-    <td style="width:150px">The client <b>MUST</b> download an updated License Document.</td>
+    <td style="width:150px">The client <b>MUST</b> download an updated Status Document.
+    The client <b>MAY</b> attempt to renew the License again later.</td>
   </tr>
 </table>
 <br/>
