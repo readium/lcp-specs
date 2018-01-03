@@ -1,6 +1,6 @@
 Copyright 2016, Readium Foundation. All Rights Reserved.
 
-Revision: 1
+Document Revision: 1.1
 
 ## 1. Overview
 
