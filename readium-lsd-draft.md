@@ -654,6 +654,7 @@ These parameters are strictly for the case where the License Document is program
 </table>
 
 <br />
+
 *An example with two renewal links: one meant for human interactions (HTML) and another for clients that can send the proper information to the server (returns a Status Document).*
 
     {
@@ -668,7 +669,7 @@ These parameters are strictly for the case where the License Document is program
       ]
     }
 
-These status codes and behaviors are strictly for the case where the link returns a License Document.
+These status codes and behaviors are strictly for the case where the link returns a Status Document.
 
 *Expected Behavior*
 
