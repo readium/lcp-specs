@@ -749,7 +749,7 @@ This specification defines one new link relation which may be used in the `links
 
 If a link with the relation status is not present in the `links` object, the client <b>MUST</b> process the LCP License Document according to the core LCP specification. 
 
-If a link with the relation status is present in the `links` object, the client <b>MUST</b> process the Status Document according to the extended rules listed in [section 3](#interactions) of this specification.
+If a link with the relation status is present in the `links` object, the client <b>MUST</b> process the Status Document according to the extended rules listed in [section 3](#3-interactions) of this specification.
 
 The representation of the URI mentioned in the status link <b>MUST</b> be a valid Status Document.
 
