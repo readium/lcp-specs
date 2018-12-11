@@ -1,6 +1,6 @@
-Copyright 2016, Readium Foundation. All Rights Reserved.
+Copyright 2018, Readium Foundation. All Rights Reserved.
 
-Document Revision: 1.2
+Document Revision: 1.3
 
 ## 1. Overview
 
@@ -9,9 +9,9 @@ Document Revision: 1.2
 {:.information}
 **This section is informative**
 
-This specification, License Status Document (1.0), defines a document for representing the status of a DRM license along with interactions that might affect its status. These interactions put additional responsibilities on both Content Providers and Reading Systems.
+This specification, License Status Document (1.1), defines a document for representing the status of a DRM license along with interactions that might affect its status. These interactions put additional responsibilities on both Content Providers and Reading Systems.
 
-One of the primary objectives is to support lending in public libraries where a user may have the ability to renew a time-limited loan or cancel one before it expires.
+One of the primary objectives is to support lending in public libraries where a user may have the ability to renew a time-limited loan or return one before it expires.
 
 ### 1.2. Terminology
 
@@ -64,7 +64,8 @@ Document that contains information about the history of a License Document, alon
       "links": [
         {"rel": "license",
          "href": "https://example.org/license/35d9b2d6",
-         "type": "application/vnd.readium.lcp.license.v1.0+json"},
+         "type": "application/vnd.readium.lcp.license.v1.0+json",
+         "profile": "http://readium.org/lcp/basic-profile"},
         {"rel": "register",
          "href": "https://example.org/license/35d9b2d6/register{?id,name}",
          "type": "application/vnd.readium.license.status.v1.0+json",
@@ -231,7 +232,7 @@ A Status Document <b>MUST</b> include at least one link where the relation is se
 
 #### 2.5.2. Link Object
 
-Each Link Object contained in links supports the following keys:
+Each Link Object contained in `links` supports the following keys:
 
 <table class="table-bordered large">
   <tr>
@@ -274,7 +275,7 @@ Each Link Object contained in links supports the following keys:
     <td>profile</td>
     <td>Expected profile used to identify the external resource.</td>
     <td>URI</td>
-    <td>No</td>
+    <td>No, default value is "http://readium.org/lcp/basic-profile"</td>
   </tr>
 </table>
 
@@ -381,6 +382,10 @@ Each interaction in this specification provides a number of Failure Types that a
 A client <b>SHOULD</b> on a regular basis retrieve a Status Document in order to update a License Document.
 
 If the `license` timestamp in the `updated` object of the Status Document is more recent than the timestamp contained in the local copy of the License Document, the client <b>MUST</b> download the License Document again and replace its previous copy with the new one.
+
+If the `links` object contains more than one link with a relation set to `license`, the client <b>MUST</b> select one of the Link Objects based on the value of their `profile` property. The selected Link Object <b>MUST</b> correspond to the highest profile value the client can handle. The order of the links is of no importance.  
+
+If the client does not find a profile it can handle in the previous set, it <b>MUST</b> consider that no updated license is available.
 
 If the `status` value of a Status Document contradicts the corresponding up-to-date License Document, the License Document takes precedence.
 
