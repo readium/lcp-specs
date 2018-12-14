@@ -9,7 +9,7 @@ Document Revision: 1.3
 {:.information}
 **This section is informative**
 
-This specification, License Status Document (1.1), defines a document for representing the status of a DRM license along with interactions that might affect its status. These interactions put additional responsibilities on both Content Providers and Reading Systems.
+This specification, License Status Document (1.0.1), defines a document for representing the status of a DRM license along with interactions that might affect its status. These interactions put additional responsibilities on both Content Providers and Reading Systems.
 
 One of the primary objectives is to support lending in public libraries where a user may have the ability to renew a time-limited loan or return one before it expires.
 
