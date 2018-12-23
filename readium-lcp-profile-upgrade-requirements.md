@@ -18,10 +18,14 @@ Daniel Weck: senior developer at EDRLab; working on Readium LCP, Readium Mobile,
 ## Introduction
 
 The European Digital Reading Lab (EDRLab) is an international, non-profit development lab, busy working on the deployment of an open, interoperable and accessible digital publishing ecosystem in Europe.
+
 We develop technology to accelerate the adoption of EPUB and Open Web technologies by the digital publishing industry. We are the European headquarter of the Readium Foundation, an international non-profit membership organization which manages open-source Reading Software, and an active member of the World Wide Web Consortium (W3C).
+
 Readium LCP is and interoperable, non-proprietary, cost effective and user-friendly Digital Rights Management technology that is emerging at a global scale. 
 The specification of Readium LCP is open and the DRM is embeddable in any reading application, based or not on Readium reading software. After two years of development of specification, open-source library development and promotion, the DRM finally hits the market in 2018 in several countries, including France, Germany, Canada, Japan, India.
+
 EDRLab is in charge of managing the Readium LCP Network; its main responsibility is to handle the maintenance and secure transfer of Confidential Information to Solution Providers willing to integrate the Readium LCP Network, and to certify the compliance of Reading Systems and License Servers with Readium LCP before they integrate the Readium LCP Network.
+
 EDRLab is also in charge of the evolution of the Readium LCP specification. This document details how the specification will evolve to allow for a smooth evolution of the crypto material that protects the LCP ecosystem against hackers. 
 
 ## Rationale
@@ -32,8 +36,8 @@ Usually, hacks don’t need any update because the DRM mechanisms put in place b
 
 The two main vectors of attack against Readium LCP will certainly be:
 
-* Theft from a trusted partner of the confidential binary library that centralizes the LCP decryption codebase including the secret crypto material; reuse its API from an application which takes as inputs the hash of the user passphrase plus some encrypted content, and outputs clear content.
-* Finding the secret crypto material inside the binary code of one of the multiple applications supporting Readium LCP; develop a software which uses this material, using as a base the open-source LCP client software provided by EDRLab. 
+* Theft from a trusted partner of the secret crypto material that centralizes the LCP decryption codebase; reuse of this information from an application which takes as inputs the hash of the user passphrase plus some encrypted content, and outputs clear content.
+* Extraction of the secret crypto material inside the binary code of one of the multiple applications supporting Readium LCP; development of a software which uses this material, using as a base the open-source LCP client software provided by EDRLab. 
 
 To protect the DRM from the second attack vector, EDRLab has obfuscated the source code of the Readium LCP software module, using a commercial product. A step by step discovery of the decryption code is therefore very difficult. 
 
