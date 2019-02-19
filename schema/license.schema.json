@@ -87,43 +87,7 @@
       "items": {
         "$ref": "link.schema.json"
       },
-      "uniqueItems": true,
-      "contains": {
-        "properties": {
-          "rel": {
-            "allOf": [
-              {
-                "anyOf": [
-                  {
-                    "type": "string",
-                    "const": "publication"
-                  },
-                  {
-                    "type": "array",
-                    "contains": {
-                      "const": "publication"
-                    }
-                  }
-                ]
-              },
-              {
-                "anyOf": [
-                  {
-                    "type": "string",
-                    "const": "hint"
-                  },
-                  {
-                    "type": "array",
-                    "contains": {
-                      "const": "hint"
-                    }
-                  }
-                ]
-              }
-            ]
-          }
-        }
-      }
+      "uniqueItems": true
     },
     "rights": {
       "type": "object",
@@ -159,8 +123,7 @@
         },
         "email": {
           "description": "The User’s e-mail address",
-          "type": "string",
-          "format": "email"
+          "type": "string"
         },
         "name": {
           "description": "The User’s name",
@@ -208,5 +171,57 @@
     "encryption",
     "links",
     "signature"
+  ],
+  "allOf": [
+    {
+      "description": "An LCP License MUST contain a link to a hint",
+      "properties": {
+        "links": {
+          "contains": {
+            "properties": {
+              "rel": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "const": "hint"
+                  },
+                  {
+                    "type": "array",
+                    "contains": {
+                      "const": "hint"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "description": "An LCP License MUST contain a link to a publication",
+      "properties": {
+        "links": {
+          "contains": {
+            "properties": {
+              "rel": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "const": "publication"
+                  },
+                  {
+                    "type": "array",
+                    "contains": {
+                      "const": "publication"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
   ]
 }
