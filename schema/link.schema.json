@@ -61,7 +61,7 @@
   "then": {
     "properties": {
       "href": {
-        "format": "uri-reference"
+        "format": "uri"
       }
     }
   },

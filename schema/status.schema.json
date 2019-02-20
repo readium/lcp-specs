@@ -61,31 +61,34 @@
       }
     },
     "events": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "description": "Identifies the type of event",
-          "type": "string",
-          "enum": [
-            "register",
-            "renew",
-            "return",
-            "revoked",
-            "cancel"
-          ]
-        },
-        "name": {
-          "description": "Name of the client, as provided by the client during an interaction",
-          "type": "string"
-        },
-        "id": {
-          "description": "Identifies the client, as provided by the client during an interaction",
-          "type": "string"
-        },
-        "timestamp": {
-          "description": "Time and date when the event occurred",
-          "type": "string",
-          "format": "date-time"
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "description": "Identifies the type of event",
+            "type": "string",
+            "enum": [
+              "register",
+              "renew",
+              "return",
+              "revoked",
+              "cancel"
+            ]
+          },
+          "name": {
+            "description": "Name of the client, as provided by the client during an interaction",
+            "type": "string"
+          },
+          "id": {
+            "description": "Identifies the client, as provided by the client during an interaction",
+            "type": "string"
+          },
+          "timestamp": {
+            "description": "Time and date when the event occurred",
+            "type": "string",
+            "format": "date-time"
+          }
         }
       }
     }
@@ -96,5 +99,35 @@
     "message",
     "updated",
     "links"
+  ],
+  "allOf": [
+    {
+      "description": "An LCP Status Document MUST contain a link to a license",
+      "properties": {
+        "links": {
+          "contains": {
+            "properties": {
+              "href": {
+                "format": "uri"
+              },
+              "rel": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "const": "license"
+                  },
+                  {
+                    "type": "array",
+                    "contains": {
+                      "const": "license"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
   ]
 }
