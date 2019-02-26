@@ -1,4 +1,4 @@
-# Readium Licensed Content Protection Specification 1.0
+# Readium Licensed Content Protection 1.0
 
 *Copyright 2016, Readium Foundation. All Rights Reserved.*
 
@@ -61,45 +61,38 @@ A system that processes [EPUB Publications](https://www.idpf.org/epub/30/spec/#g
 
 The following terms are defined by this specification:
 
-**Protected Publication**
+<dl>
+  <dt>Protected Publication</dt>
+  <dd>A Publication that has been protected according to this specification.</dd>
 
-A Publication that has been protected according to this specification.
+  <dt>License Authority</dt>
+  <dd>The entity which operates the Readium LCP ecosystem.</dd>
 
-**License Authority**
+  <dt>License Document</dt>
+  <dd>Document that contains references to the various keys, links to related external resources, rights and restrictions that are applied to the Protected Publication, and user information.</dd>
 
-The entity which operates the Readium LCP ecosystem.
+  <dt>Content Key</dt>
+  <dd>Symmetric key used to encrypt the resources of the Protected Publication. In the License Document, this Content Key will be encrypted using the User Key.</dd>
 
-**License Document**
+  <dt>User Passphrase</dt>
+  <dd>A string of text entered by the user that is used to generate the User Key.</dd>
 
-Document that contains references to the various keys, links to related external resources, rights and restrictions that are applied to the Protected Publication, and user information. 
+  <dt>User Key</dt>
+  <dd>A hash of the User Passphrase that is used to decrypt the Content Key and selected user information fields.</dd>
 
-**Content Key**
+  <dt>Encryption Profile</dt>
+  <dd>A set of encryption algorithms used in a specific Protected Publication and associated Licence Document.</dd>
 
-Symmetric key used to encrypt the resources of the Protected Publication. In the License Document, this Content Key will be encrypted using the User Key.
+  <dt>Content Provider (or Provider)</dt>
+  <dd>An entity that delivers LCP licenses for Protected Publications to Users.</dd>
 
-**User Passphrase**
+  <dt>Provider Certificate</dt>
+  <dd>A certificate that is included in the License Document to identify the Content Provider and validate the signature of the License Document.</dd>
 
-A string of text entered by the user that is used to generate the User Key.
+  <dt>Root Certificate</dt>
+  <dd>A certificate that is embedded in the Reading System in order to confirm that the Provider Certificate is valid.</dd>
 
-**User Key**
-
-A hash of the User Passphrase that is used to decrypt the Content Key and selected user information fields.
-
-**Encryption Profile**
-
-A set of encryption algorithms used in a specific Protected Publication and associated Licence Document.
-
-**Content Provider (or Provider)**
-
-An entity that delivers LCP licenses for Protected Publications to Users.
-
-**Provider Certificate**
-
-A certificate that is included in the License Document to identify the Content Provider and validate the signature of the License Document.
-
-**Root Certificate**
-
-A certificate that is embedded in the Reading System in order to confirm that the Provider Certificate is valid.
+</dl>
 
 ## 1.3. LCP Overview and Example
 *This section is informative*
@@ -114,9 +107,9 @@ Both of these files are contained inside the EPUB Container, although the Licens
 
 The License Document may also contain links to external resources, information identifying the User, and information about what rights are conveyed to the User and which are not.  Rights information may include things like the time for which the license is valid, whether the book may be printed or copied, etc.  Finally, the License Document always includes a digital signature to prevent modification of any of its components.
 
-Figure 1 shows the relationships among the various components of LCP.
+*Figure 1 shows the relationships among the various components of LCP*
 
-![LCP components](/images/LCP_Archi_1.png)
+![LCP components](images/architecture.png)
 
 ### Protecting the Publication
 
@@ -192,9 +185,9 @@ In order to decrypt and render a Protected Publication, the User’s Reading Sys
 
 ## 1.4 Conformance Statements
 
-The keywords <b>MUST</b>, <b>MUST NOT</b>, <b>REQUIRED</b>, <b>SHALL</b>, <b>SHALL NOT</b>, <b>SHOULD</b>, <b>SHOULD NOT</b>, <b>RECOMMENDED</b>, <b>MAY</b>, and <b>OPTIONAL</b> in this document are to be interpreted as described in [[RFC2119](#normative-references)].
+The keywords <b class="rfc">must</b>, <b class="rfc">must not</b>, <b class="rfc">required</b>, <b class="rfc">shall</b>, <b class="rfc">shall not</b>, <b class="rfc">should</b>, <b class="rfc">should not</b>, <b class="rfc">recommended</b>, <b class="rfc">may</b>, and <b class="rfc">optional</b> in this document are to be interpreted as described in [[RFC2119](#normative-references)].
 
-All sections of this specification are normative except where identified by the informative status label "This section is informative". The application of informative status to sections and appendices applies to all child content and subsections they <b>MAY</b> contain.
+All sections of this specification are normative except where identified by the informative status label "This section is informative". The application of informative status to sections and appendices applies to all child content and subsections they <b class="rfc">may</b> contain.
 
 All examples in this specification are informative.
 
@@ -227,7 +220,7 @@ LCP inherits the following list of files prohibited from being encrypted from th
 
 * EPUB `rootfiles` (the Package Document for any rendition)
 
-In addition, this specification defines that the following files <b>MUST NOT</b> be encrypted:
+In addition, this specification defines that the following files <b class="rfc">must not</b> be encrypted:
 
 * `META-INF/license.lcpl`
 
@@ -239,15 +232,15 @@ In addition, this specification defines that the following files <b>MUST NOT</b>
 
 ## 2.2. Using `META-INF/encryption.xml` for LCP
 
-As defined in the [[OCF](#normative-references)] specification, all encrypted Publication Resources <b>MUST</b> be identified in the well-known file `META-INF/encryption.xml` using [[XML-ENC](#normative-references)]. 
+As defined in the [[OCF](#normative-references)] specification, all encrypted Publication Resources <b class="rfc">must</b> be identified in the well-known file `META-INF/encryption.xml` using [[XML-ENC](#normative-references)]. 
 
 In Publications protected using LCP, there are additional requirements for identifying the key used to encrypt these Resources (the LCP Content Key):
 
-1. The `ds:KeyInfo` element <b>MUST</b> point to the Content Key using the `ds:RetrievalMethod` element.  
+1. The `ds:KeyInfo` element <b class="rfc">must</b> point to the Content Key using the `ds:RetrievalMethod` element.  
 
-2. The `URI` attribute of `ds:RetrievalMethod` <b>MUST</b> use a value of "`license.lcpl#/encryption/content_key`" to point to the encrypted Content Key stored in the License Document. This URI follows the [[JSON Pointer](#normative-references)] specification.
+2. The `URI` attribute of `ds:RetrievalMethod` <b class="rfc">must</b> use a value of "`license.lcpl#/encryption/content_key`" to point to the encrypted Content Key stored in the License Document. This URI follows the [[JSON Pointer](#normative-references)] specification.
 
-3. The `Type` attribute <b>MUST</b> use a value of "`http://readium.org/2014/01/lcp#EncryptedContentKey`" to identify the target of the URI as an encrypted Content Key.
+3. The `Type` attribute <b class="rfc">must</b> use a value of "`http://readium.org/2014/01/lcp#EncryptedContentKey`" to identify the target of the URI as an encrypted Content Key.
 
 *In the following example, adapted from [[OCF](#normative-references)]*, an image.jpeg resource is encrypted using AES with the Content Key.*
 
@@ -282,25 +275,25 @@ This specification defines the License Document’s syntax, location in the Cont
 
 ## 3.2. Content Conformance
 
-A License Document <b>MUST</b> meet all of the following criteria:
+A License Document <b class="rfc">must</b> meet all of the following criteria:
 
 Document properties
 
-* It <b>MUST</b> meet the conformance constraints for JSON documents as defined in [[JSON](#normative-references)].
+* It <b class="rfc">must</b> meet the conformance constraints for JSON documents as defined in [[JSON](#normative-references)].
 
-* It <b>MUST</b> be encoded using UTF-8.
+* It <b class="rfc">must</b> be encoded using UTF-8.
 
 File properties
 
-* Its filename <b>MUST</b> use the file extension `.lcpl`.
+* Its filename <b class="rfc">must</b> use the file extension `.lcpl`.
 
 * Its MIME media type is `application/vnd.readium.lcp.license.v1.0+json`
 
-* Its location in the Container <b>MUST</b> be `META-INF/license.lcpl`
+* Its location in the Container <b class="rfc">must</b> be `META-INF/license.lcpl`
 
 ## 3.3. Core License Information
 
-The License Document <b>MUST</b> contain the following name/value pairs:
+The License Document <b class="rfc">must</b> contain the following name/value pairs:
 
 <table class="table-bordered large">
 	<tr>
@@ -326,7 +319,7 @@ The License Document <b>MUST</b> contain the following name/value pairs:
 </table>
 
 <br>
-In addition, the License Document <b>MAY</b> contain the following name/value pair:
+In addition, the License Document <b class="rfc">may</b> contain the following name/value pair:
 
 <table class="table-bordered large">
 	<tr>
@@ -344,7 +337,7 @@ In addition, the License Document <b>MAY</b> contain the following name/value pa
 
 ## 3.4. Transmitting keys: The `encryption` object
 
-In addition to Core License information, the License Document <b>MUST</b> contain an `encryption` object with the following name/value pair:
+In addition to Core License information, the License Document <b class="rfc">must</b> contain an `encryption` object with the following name/value pair:
 
 <table class="table-bordered large">
   <thead>
@@ -364,9 +357,9 @@ In addition to Core License information, the License Document <b>MUST</b> contai
 </table>
 
 <br />
-The `encryption` object <b>MUST</b> also contain the following two objects: `content_key` and `user_key`.
+The `encryption` object <b class="rfc">must</b> also contain the following two objects: `content_key` and `user_key`.
 
-The `encryption/content_key` object contains the Content Key (encrypted using the User Key) used to encrypt the Publication Resources. It <b>MUST</b> contain the following name/value pairs:
+The `encryption/content_key` object contains the Content Key (encrypted using the User Key) used to encrypt the Publication Resources. It <b class="rfc">must</b> contain the following name/value pairs:
 
 <table class="table-bordered large">
   <thead>
@@ -384,14 +377,14 @@ The `encryption/content_key` object contains the Content Key (encrypted using th
 	  </tr>
 	  <tr>
 	    <td>algorithm</td>
-	    <td>Algorithm used to encrypt the Content Key, identified using the URIs defined in [XML-ENC]. This <b>MUST</b> match the Content Key encryption algorithm named in the Encryption Profile identified in `encryption/profile`.</td>
+	    <td>Algorithm used to encrypt the Content Key, identified using the URIs defined in [XML-ENC]. This <b class="rfc">must</b> match the Content Key encryption algorithm named in the Encryption Profile identified in `encryption/profile`.</td>
 	    <td>URI</td>
 	  </tr>
   </tbody>
 </table>
 
 <br />
-The `encryption/user_key` object contains information regarding the User Key used to encrypt the Content Key. It <b>MUST</b> contain the following name/value pairs:
+The `encryption/user_key` object contains information regarding the User Key used to encrypt the Content Key. It <b class="rfc">must</b> contain the following name/value pairs:
 
 <table class="table-bordered large">
   <thead>
@@ -409,7 +402,7 @@ The `encryption/user_key` object contains information regarding the User Key use
    </tr>
    <tr>
      <td>algorithm</td>
-     <td>Algorithm used to generate the User Key from the User Passphrase, identified using the URIs defined in [XML-ENC]. This <b>MUST</b> match the User Key hash algorithm named in the Encryption Profile identified in `encryption/profile`.</td>
+     <td>Algorithm used to generate the User Key from the User Passphrase, identified using the URIs defined in [XML-ENC]. This <b class="rfc">must</b> match the User Key hash algorithm named in the Encryption Profile identified in `encryption/profile`.</td>
      <td>URI</td>
    </tr>
    <tr>
@@ -450,9 +443,9 @@ The `encryption/user_key` object contains information regarding the User Key use
 
 ## 3.5. Pointing to external resources: the `links` object
 
-A License Document <b>MUST</b> also contain a `links` object.  This is used to associate the License Document with resources that are not locally available.  
+A License Document <b class="rfc">must</b> also contain a `links` object.  This is used to associate the License Document with resources that are not locally available.  
 
-Each Link Object nested in `links` contains the link URI, a link relationship and an <b>OPTIONAL</b> set of other link properties.
+Each Link Object nested in `links` contains the link URI, a link relationship and an <b class="rfc">optional</b> set of other link properties.
 
 ### Link relationships
 
@@ -487,9 +480,9 @@ This specification introduces the following link relationships for each Link Obj
 </table>
 
 <br />
-In addition to these link relations, this specification introduces the [LCP Link Relations Registry](#informative-references). All official link relations used in the License Document and declared in official LCP specification documents <b>MUST</b> be referenced in the registry.
+In addition to these link relations, this specification introduces the [LCP Link Relations Registry](#informative-references). All official link relations used in the License Document and declared in official LCP specification documents <b class="rfc">must</b> be referenced in the registry.
 
-Link relations <b>MAY</b> also be extended for vendor-specific applications. Such links <b>MUST</b> use a URI instead of a string to identify their link relations.
+Link relations <b class="rfc">may</b> also be extended for vendor-specific applications. Such links <b class="rfc">must</b> use a URI instead of a string to identify their link relations.
 
 ### Link Object
 
@@ -608,7 +601,7 @@ Templated URIs follow the [[URI-Template]](#informative-references) specificatio
 
  
 
-The License Document <b>MAY</b> also express a series of rights using the `rights` object.  The `rights` object <b>MAY</b> include the following fields:
+The License Document <b class="rfc">may</b> also express a series of rights using the `rights` object.  The `rights` object <b class="rfc">may</b> include the following fields:
 
 <table class="table-bordered large">
   <tr>
@@ -650,7 +643,7 @@ The License Document <b>MAY</b> also express a series of rights using the `right
 </table>
 
 <br/>
-All name/value pairs using an integer as their data type (print and copy for this specification) <b>MUST NOT</b> use leading zeroes in values (e.g., "9", not “09”).
+All name/value pairs using an integer as their data type (print and copy for this specification) <b class="rfc">must not</b> use leading zeroes in values (e.g., "9", not “09”).
 
 For the `print` right, a page is defined as follows:
 
@@ -662,9 +655,9 @@ For the `print` right, a page is defined as follows:
 
 The `copy` right only covers the ability to copy to the clipboard and is limited to text (no images, etc.).
 
-In addition to these rights, this specification introduces the [LCP Rights Registry](#informative-references). All official rights information used in the License Document and declared in official LCP specification documents <b>MUST</b> be referenced in the registry.
+In addition to these rights, this specification introduces the [LCP Rights Registry](#informative-references). All official rights information used in the License Document and declared in official LCP specification documents <b class="rfc">must</b> be referenced in the registry.
 
-The `rights` object <b>MAY</b> be extended to include any number of implementor-specific rights. Each extension right <b>MUST</b> be identified using a URI controlled by the implementor.
+The `rights` object <b class="rfc">may</b> be extended to include any number of implementor-specific rights. Each extension right <b class="rfc">must</b> be identified using a URI controlled by the implementor.
 
 *In this example, the License Document grants the following rights: not allowed to print at all, copy up to 2048 characters at a time of the book, and the license has an expiration date.
 There is also a vendor extension granting the right to tweet parts of this book.*
@@ -690,7 +683,7 @@ There is also a vendor extension granting the right to tweet parts of this book.
 
 ## 3.7. Identifying the user: the `user` object
 
-The License Document <b>MAY</b> embed information about the user using the `user` object. The `user` object includes the following fields:
+The License Document <b class="rfc">may</b> embed information about the user using the `user` object. The `user` object includes the following fields:
 
 <table class="table-bordered large">
   <tr>
@@ -732,11 +725,11 @@ The License Document <b>MAY</b> embed information about the user using the `user
 </table>
 
 <br />
-In addition to these user information, this specification introduces the [LCP User Fields Registry](#informative-references). All official user fields used in the License Document and declared in official LCP specification documents <b>MUST</b> be referenced in the registry.
+In addition to these user information, this specification introduces the [LCP User Fields Registry](#informative-references). All official user fields used in the License Document and declared in official LCP specification documents <b class="rfc">must</b> be referenced in the registry.
 
-As with rights, The `user` object <b>MAY</b> be extended to include any number of implementor-specific fields. Each extension field <b>MUST</b> be identified by a URI controlled by the implementor.
+As with rights, The `user` object <b class="rfc">may</b> be extended to include any number of implementor-specific fields. Each extension field <b class="rfc">must</b> be identified by a URI controlled by the implementor.
 
-To protect private User data, any of these fields <b>MAY</b> be encrypted, except for the `encrypted` field, which <b>MUST</b> remain in plain text. If encrypted, the field values <b>MUST</b> be encrypted using the User Key and the same encryption algorithm identified in the `encryption/content_key` object. The names of all encrypted fields <b>MUST</b> be listed in the `encrypted` array.
+To protect private User data, any of these fields <b class="rfc">may</b> be encrypted, except for the `encrypted` field, which <b class="rfc">must</b> remain in plain text. If encrypted, the field values <b class="rfc">must</b> be encrypted using the User Key and the same encryption algorithm identified in the `encryption/content_key` object. The names of all encrypted fields <b class="rfc">must</b> be listed in the `encrypted` array.
 
 *In the following example, an identifier, a provider and an email are provided. There is also an extension to indicate the user’s preferred language. The email is encrypted.*
 
@@ -761,7 +754,7 @@ To protect private User data, any of these fields <b>MAY</b> be encrypted, excep
 
 ## 3.8. Signing the license: the `signature` object
 
-As described in [5. Signature and Public Key Infrastructure](#signature-and-public-key-infrastructure), the License Document includes a digital signature to validate that it has not been altered.  The License Document <b>MUST</b> include information about the signature using the `signature` object. The `signature` object <b>MUST</b> include the following fields:
+As described in [5. Signature and Public Key Infrastructure](#signature-and-public-key-infrastructure), the License Document includes a digital signature to validate that it has not been altered.  The License Document <b class="rfc">must</b> include information about the signature using the `signature` object. The `signature` object <b class="rfc">must</b> include the following fields:
 
 <table class="table-bordered large">
   <tr>
@@ -771,7 +764,7 @@ As described in [5. Signature and Public Key Infrastructure](#signature-and-publ
   </tr>
   <tr>
     <td>algorithm</td>
-    <td>Algorithm used to calculate the signature, identified using the URIs given in [XML-SIG].  This <b>MUST</b> match the signature algorithm named in the Encryption Profile identified in `encryption/profile`.</td>
+    <td>Algorithm used to calculate the signature, identified using the URIs given in [XML-SIG].  This <b class="rfc">must</b> match the signature algorithm named in the Encryption Profile identified in `encryption/profile`.</td>
     <td>URI</td>
   </tr>
   <tr>
@@ -787,7 +780,7 @@ As described in [5. Signature and Public Key Infrastructure](#signature-and-publ
 </table>
 
 <br />
-For more information on how the signature and the certificate <b>SHOULD</b> be calculated, encoded and processed, see [5. Signature and Public Key Infrastructure](#signature-and-public-key-infrastructure).
+For more information on how the signature and the certificate <b class="rfc">should</b> be calculated, encoded and processed, see [5. Signature and Public Key Infrastructure](#signature-and-public-key-infrastructure).
 
 *This example shows the License Document signature.*
 
@@ -821,9 +814,9 @@ LCP uses a passphrase model for sharing the User Key: in a simple implementation
 
 ## 4.2. Calculating the User Key
 
-The User Passphrase <b>MUST</b> be a UTF-8 encoded string. There are no restrictions on the length or content of the User Passphrase. There are no requirements for how it is to be created.
+The User Passphrase <b class="rfc">must</b> be a UTF-8 encoded string. There are no restrictions on the length or content of the User Passphrase. There are no requirements for how it is to be created.
 
-The User Key is the result of applying a hashing function on the User Passphrase, using the hash algorithm provided in the `encryption/user_key` object in the License Document. Processing of any kind, including whitespace escaping or normalization, <b>SHALL NOT</b> be done on the User Passphrase before hashing.
+The User Key is the result of applying a hashing function on the User Passphrase, using the hash algorithm provided in the `encryption/user_key` object in the License Document. Processing of any kind, including whitespace escaping or normalization, <b class="rfc">shall not</b> be done on the User Passphrase before hashing.
 
 ## 4.3. Hints
 
@@ -833,21 +826,21 @@ In order to facilitate the entry of the passphrase by the User, the LCP License 
 
 2. The `links` object with `rel=hint` points to a location that provides passphrase hints or other assistance.
 
-The content of `user_key/text_hint` and of the resource pointed to by the `links` object with `rel=hint` <b>SHOULD</b> be human-readable, directed to the User, and <b>SHOULD</b> help the User enter their passphrase.
+The content of `user_key/text_hint` and of the resource pointed to by the `links` object with `rel=hint` <b class="rfc">should</b> be human-readable, directed to the User, and <b class="rfc">should</b> help the User enter their passphrase.
 
 ## 4.4. Requirements for the User Key & User Passphrase
 
-In order to simplify the process for accessing Protected Publications, the Provider <b>SHOULD</b> use the same User Key for all licenses issued to the same User.
+In order to simplify the process for accessing Protected Publications, the Provider <b class="rfc">should</b> use the same User Key for all licenses issued to the same User.
 
-The security of LCP depends in large part on the security of the User Key and User Passphrase. Therefore, special care <b>SHOULD</b> be taken to secure these throughout the licensing workflow:
+The security of LCP depends in large part on the security of the User Key and User Passphrase. Therefore, special care <b class="rfc">should</b> be taken to secure these throughout the licensing workflow:
 
-1. Passphrases <b>SHOULD</b> be sufficiently complex to prevent brute-force attacks.
+1. Passphrases <b class="rfc">should</b> be sufficiently complex to prevent brute-force attacks.
 
-2. Passphrases <b>MUST NOT</b> be transmitted in plaintext. 
+2. Passphrases <b class="rfc">must not</b> be transmitted in plaintext. 
 
-3. If the Provider needs to share User Key information among multiple systems, they <b>SHOULD</b> transmit User Keys and not User Passphrases, and <b>SHOULD</b> transmit this information over secure channels. 
+3. If the Provider needs to share User Key information among multiple systems, they <b class="rfc">should</b> transmit User Keys and not User Passphrases, and <b class="rfc">should</b> transmit this information over secure channels. 
 
-4. User Passphrases <b>MUST NOT</b> be stored by the Reading System; instead it <b>SHOULD</b> only store User Keys.
+4. User Passphrases <b class="rfc">must not</b> be stored by the Reading System; instead it <b class="rfc">should</b> only store User Keys.
 
 # 5. Signature and Public Key Infrastructure
 
@@ -858,7 +851,7 @@ Given the importance of the precise expression of various objects in the License
 
 Calculating a signature is done on a byte stream, which is unique, while the License Document is a JSON document where multiple representations might lead to the same structure. Thus, to ensure a stable signature between the Reading System and the Content Provider, some transformations must be applied prior to signing the Document and verifying the signature.
 
-The steps <b>REQUIRED</b> of the Provider to sign the License Document are:
+The steps <b class="rfc">required</b> of the Provider to sign the License Document are:
 
 1. The contents of the License Document (minus the signature object) are put in a canonical form: alphabetized with non-significant whitespace removed (see [Section 5.3](#canonical-form-of-the-license-document))
 
@@ -866,7 +859,7 @@ The steps <b>REQUIRED</b> of the Provider to sign the License Document are:
 
 3. The signature value and the Provider Certificate are added to the License Document in the `signature` object, as described in [Section 3.8](#signing-the-license-the-signature-object).
 
-The steps <b>REQUIRED</b> of the Reading System to validate the signature are:
+The steps <b class="rfc">required</b> of the Reading System to validate the signature are:
 
 1. Obtain the Root Certificate from the License Authority.  This certificate is embedded in the Reading System to validate all Provider Certificates.
 
@@ -888,29 +881,29 @@ To make sure that the Provider Certificate has not been revoked, the Reading Sys
 
 ### 5.2.1 Provider Certificates
 
-Content Providers <b>MUST</b> have a Certificate in the [[X509](#normative-references)] v3 format issued and signed by the License Authority using the Root Certificate: this is referred to here as the Provider Certificate. The subject of the Provider Certificate <b>SHOULD</b> represent the Content Provider. 
+Content Providers <b class="rfc">must</b> have a Certificate in the [[X509](#normative-references)] v3 format issued and signed by the License Authority using the Root Certificate: this is referred to here as the Provider Certificate. The subject of the Provider Certificate <b class="rfc">should</b> represent the Content Provider. 
 
-Content Providers <b>MUST</b> distribute their Provider Certificate in any License Document they issue in the `signature/certificate` field. They also <b>MUST</b> use the private key paired with their Provider Certificate’s public key to sign the License Document. For a License Document to be considered valid, the Provider Certificate <b>MUST</b>  have been valid at the time the License Document was issued (as indicated by the `issued` field), and the Provider Certificate <b>MUST NOT</b> have been revoked.
+Content Providers <b class="rfc">must</b> distribute their Provider Certificate in any License Document they issue in the `signature/certificate` field. They also <b class="rfc">must</b> use the private key paired with their Provider Certificate’s public key to sign the License Document. For a License Document to be considered valid, the Provider Certificate <b class="rfc">must</b>  have been valid at the time the License Document was issued (as indicated by the `issued` field), and the Provider Certificate <b class="rfc">must not</b> have been revoked.
 
 ### 5.2.2 Root Certificate
 
-Reading Systems <b>MUST</b> obtain the Root Certificate in the [[X509](#normative-references)] v3 format from the License Authority, and <b>SHOULD</b> keep it up to date. It <b>MUST</b> be embedded in the Reading System for offline use.
+Reading Systems <b class="rfc">must</b> obtain the Root Certificate in the [[X509](#normative-references)] v3 format from the License Authority, and <b class="rfc">should</b> keep it up to date. It <b class="rfc">must</b> be embedded in the Reading System for offline use.
 
 ## 5.3. Canonical form of the License Document
 
 The canonical form of the License Document is used when calculating and validating the signature. To create the canonical form of the License Document, the following serialization rules must be followed:
 
-1. Since it is product of the calculation, the `signature` object of the License Document <b>MUST</b> be removed.
+1. Since it is product of the calculation, the `signature` object of the License Document <b class="rfc">must</b> be removed.
 
-2. All object members (name/value pairs) of the License Document <b>MUST</b>** **be sorted in lexicographical order of their names according to their representation in UTF-8 (United Character Set code point value). Note that this rule is recursive, so that members are sorted at all levels of object nesting.
+2. All object members (name/value pairs) of the License Document <b class="rfc">must</b>** **be sorted in lexicographical order of their names according to their representation in UTF-8 (United Character Set code point value). Note that this rule is recursive, so that members are sorted at all levels of object nesting.
 
-3. Within arrays, the order of elements <b>MUST NOT</b> be altered.
+3. Within arrays, the order of elements <b class="rfc">must not</b> be altered.
 
-4. Numbers <b>MUST NOT</b> include insignificant leading or trailing zeroes. Numbers that include a fraction part (non-integers) <b>MUST</b> be expressed as a number, fraction, and exponent (normalized scientific notation) using an upper-case "E".
+4. Numbers <b class="rfc">must not</b> include insignificant leading or trailing zeroes. Numbers that include a fraction part (non-integers) <b class="rfc">must</b> be expressed as a number, fraction, and exponent (normalized scientific notation) using an upper-case "E".
 
-5. Strings <b>MUST</b> use escaping only for those characters for which it is <b>REQUIRED</b> by [[JSON](#normative-references)]: backslash (\), double-quotation mark ("), and control characters (U+0000 through U+001F). When escaping control characters, the hexadecimal digits <b>MUST</b> be upper case.
+5. Strings <b class="rfc">must</b> use escaping only for those characters for which it is <b class="rfc">required</b> by [[JSON](#normative-references)]: backslash (\), double-quotation mark ("), and control characters (U+0000 through U+001F). When escaping control characters, the hexadecimal digits <b class="rfc">must</b> be upper case.
 
-6. Non-significant whitespace (as defined in [[JSON](#normative-references)]) <b>MUST</b> be removed. Whitespace found within strings <b>MUST</b> be kept.
+6. Non-significant whitespace (as defined in [[JSON](#normative-references)]) <b class="rfc">must</b> be removed. Whitespace found within strings <b class="rfc">must</b> be kept.
 
 ### 5.3.1. Example
 *This section is informative*
@@ -984,15 +977,15 @@ Now that our document is sorted, we can strip all whitespaces and end of lines:
 
 ## 5.4. Generating the signature
 
-In order to sign a License Document, the Content Provider <b>MUST</b> go through the following steps in order:
+In order to sign a License Document, the Content Provider <b class="rfc">must</b> go through the following steps in order:
 
-1. The Content Provider <b>MUST</b> create the canonical form of the License Document following the rules given in [5.3. Canonical form of the License Document](#canonical-form-of-the-license-document).
+1. The Content Provider <b class="rfc">must</b> create the canonical form of the License Document following the rules given in [5.3. Canonical form of the License Document](#canonical-form-of-the-license-document).
 
-2. The Content Provider <b>MUST</b> calculate the signature using this canonical form of the License Document and using the algorithm described in the `algorithm` field with the private key of the Provider Certificate.
+2. The Content Provider <b class="rfc">must</b> calculate the signature using this canonical form of the License Document and using the algorithm described in the `algorithm` field with the private key of the Provider Certificate.
 
-3. The signature <b>MUST</b> be embedded in the `value` field of the `signature` object using Base 64 encoding.
+3. The signature <b class="rfc">must</b> be embedded in the `value` field of the `signature` object using Base 64 encoding.
 
-4. The Provider Certificate used to validate the signature <b>MUST</b> be inserted in the `certificate` field. It <b>MUST</b> use the DER notation and be encoded using Base 64.
+4. The Provider Certificate used to validate the signature <b class="rfc">must</b> be inserted in the `certificate` field. It <b class="rfc">must</b> use the DER notation and be encoded using Base 64.
 
 ### 5.4.1. Example
 *This section is informative*
@@ -1016,7 +1009,7 @@ q/3IInic9c/EaJHyG1Kkqk5v1zlJNsiQBmxz4lykhyD3dA2jg2ZzrOenYU9GxP/xhe5H5Kt2WaJ/hnt8
 ```
 
 
-With this signature and the certificate, a valid license <b>MAY</b> be created:
+With this signature and the certificate, a valid license <b class="rfc">may</b> be created:
 
 ```json
 {
@@ -1053,23 +1046,23 @@ With this signature and the certificate, a valid license <b>MAY</b> be created:
 
 #### **5.5.1. Validating the certificate**
 
-1. It <b>MUST</b> check that the Certificate was not expired when the License Document was last updated.
+1. It <b class="rfc">must</b> check that the Certificate was not expired when the License Document was last updated.
 
-2. It <b>MUST</b> validate the presence of the Provider Certificate in the root chain. To do so, it <b>MUST</b> check the signature of the Provider Certificate using the public key of the Root Certificate.
+2. It <b class="rfc">must</b> validate the presence of the Provider Certificate in the root chain. To do so, it <b class="rfc">must</b> check the signature of the Provider Certificate using the public key of the Root Certificate.
 
-3. It <b>MUST</b> validate that the certificate was not revoked as defined in [[X509](#normative-references)]. If a network connection is available, it <b>MUST</b> update its certificate revocation list before it checks the validity of the certificate.
+3. It <b class="rfc">must</b> validate that the certificate was not revoked as defined in [[X509](#normative-references)]. If a network connection is available, it <b class="rfc">must</b> update its certificate revocation list before it checks the validity of the certificate.
 
 #### **5.5.2. Validating the signature**
 
-In order to validate the signature, the following steps <b>MUST</b> be followed in order:
+In order to validate the signature, the following steps <b class="rfc">must</b> be followed in order:
 
-1. The Reading System <b>MUST</b> extract and remove the signature from the License Document. 
+1. The Reading System <b class="rfc">must</b> extract and remove the signature from the License Document. 
 
-2. It <b>MUST</b> calculate the canonical form of the License Document following the rules as expressed in [5.3. Canonical form of the License Document](#canonical-form-of-the-license-document).
+2. It <b class="rfc">must</b> calculate the canonical form of the License Document following the rules as expressed in [5.3. Canonical form of the License Document](#canonical-form-of-the-license-document).
 
-3. It <b>MUST</b> recalculate the signature as defined in [5.4. Generating the signature](#generating-the-signature).
+3. It <b class="rfc">must</b> recalculate the signature as defined in [5.4. Generating the signature](#generating-the-signature).
 
-4. It <b>MUST</b> verify that the calculated signature value is consistent with the one previously extracted from the License Document.
+4. It <b class="rfc">must</b> verify that the calculated signature value is consistent with the one previously extracted from the License Document.
 
 # 6. Encryption Profiles
 
@@ -1084,7 +1077,7 @@ This specification defines the Basic Encryption Profile 1.0, along with a list o
 
 ## 6.2. Encryption Profile Requirements
 
-All Encryption Profiles <b>MUST</b> identify algorithms for the following targets:  
+All Encryption Profiles <b class="rfc">must</b> identify algorithms for the following targets:  
 
 1. Publication Resources
 
@@ -1094,11 +1087,11 @@ All Encryption Profiles <b>MUST</b> identify algorithms for the following target
 
 4. Signature
 
-All algorithms used in an Encryption Profile <b>MUST</b> be defined in [[XML-ENC](#normative-references)] or [[XML-SIG](#normative-references)].
+All algorithms used in an Encryption Profile <b class="rfc">must</b> be defined in [[XML-ENC](#normative-references)] or [[XML-SIG](#normative-references)].
 
-All Encryption Profiles <b>MUST</b> use a URI to identify themselves in `profile` (contained in the `encryption` object of the License Document).
+All Encryption Profiles <b class="rfc">must</b> use a URI to identify themselves in `profile` (contained in the `encryption` object of the License Document).
 
-All Encryption Profiles <b>MUST</b> be registered in the LCP Encryption Profiles registry, as explicitly explained in the registry.
+All Encryption Profiles <b class="rfc">must</b> be registered in the LCP Encryption Profiles registry, as explicitly explained in the registry.
 
 ## 6.3. Basic Encryption Profile 1.0
 
@@ -1151,19 +1144,19 @@ Reading Systems can detect that a Publication is protected using LCP by either o
 
 2. The presence of a `ds:KeyInfo/ds:RetrievalMethod` element in `META-INF/encryption.xml` that references an LCP Content Key (i.e., `Type` attribute value is "`http://readium.org/2014/01/lcp#EncryptedContentKey`" )
 
-If `encryption.xml` references an LCP Content Key but the License Document is missing, the Reading System <b>SHOULD</b> report this to the User.
+If `encryption.xml` references an LCP Content Key but the License Document is missing, the Reading System <b class="rfc">should</b> report this to the User.
 
 ## 7.2. License Document processing
 
 ### Overall
 
-In processing a License Document, Reading Systems <b>MUST</b> ignore all name/value pairs they do not understand.
+In processing a License Document, Reading Systems <b class="rfc">must</b> ignore all name/value pairs they do not understand.
 
-Reading Systems <b>MUST NOT</b> store unencrypted versions of the Content Key and/or encrypted user fields.
+Reading Systems <b class="rfc">must not</b> store unencrypted versions of the Content Key and/or encrypted user fields.
 
 ### Validating the License Document
 
-Reading Systems <b>MUST</b>:
+Reading Systems <b class="rfc">must</b>:
 
 1. Validate the syntax and completeness of the License Document.
 
@@ -1171,55 +1164,55 @@ Reading Systems <b>MUST</b>:
 
 ### Acquiring the Publication
 
-When License Documents are delivered independently of the Protected Publication, Reading Systems <b>MUST</b>:
+When License Documents are delivered independently of the Protected Publication, Reading Systems <b class="rfc">must</b>:
 
 1. Download the Protected Publication at the given URL given in `links/publication/href`.
 
-A Reading System that will make the Protected Publication file accessible to the User <b>MUST</b> add the License Document to the downloaded Protected Publication at `META-INF/license.lcpl`.
+A Reading System that will make the Protected Publication file accessible to the User <b class="rfc">must</b> add the License Document to the downloaded Protected Publication at `META-INF/license.lcpl`.
 
-Reading Systems <b>SHOULD</b> verify the integrity of the downloaded Protected Publication, if a hash is provided.
+Reading Systems <b class="rfc">should</b> verify the integrity of the downloaded Protected Publication, if a hash is provided.
 
-A Reading System <b>SHOULD</b> report any failure to acquire the Protected Publication to the user.
+A Reading System <b class="rfc">should</b> report any failure to acquire the Protected Publication to the user.
 
 ## 7.3. User Key processing
 
-Reading Systems <b>MUST</b>:
+Reading Systems <b class="rfc">must</b>:
 
 * Show the text hint and URL when prompting the User for their User Passphrase
 
-Reading Systems <b>SHOULD</b>:
+Reading Systems <b class="rfc">should</b>:
 
 * Store the User Key, but in a secured manner
 
 * Try previously stored User Keys before prompting the User to enter their User Passphrase for a new Protected Publication
 
-Reading Systems <b>MAY</b>:
+Reading Systems <b class="rfc">may</b>:
 
 * Use an alternate technique to discover and exchange the User Key in the background.
 
 * Associate specific User Keys with specific Providers and User IDs in order to optimize the discovery of the correct User Key to process a License Document.
 
-Reading Systems <b>MUST NOT</b>:
+Reading Systems <b class="rfc">must not</b>:
 
 * Store User Passphrase, only the User Key.
 
 ## 7.4. Signature Processing
 
-Reading Systems <b>MUST</b>:
+Reading Systems <b class="rfc">must</b>:
 
 * Validate the Signature and Provider Certificate as described in [5.5. Validating the certificate and signature](#validating-the-certificate-and-signature).
 
 * Update the Certification Revocation List on a regular basis.
 
-Reading Systems <b>SHOULD</b>:
+Reading Systems <b class="rfc">should</b>:
 
 * Be able to update their Root Certificate.
 
-Reading Systems <b>MAY</b>:
+Reading Systems <b class="rfc">may</b>:
 
 * Choose to open a Publication even if their own Root Certificate is deprecated.
 
-Reading Systems <b>MUST NOT</b>:
+Reading Systems <b class="rfc">must not</b>:
 
 * Open a Publication with an invalid Signature or Provider Certificate.
 
@@ -1227,15 +1220,15 @@ Reading Systems <b>MUST NOT</b>:
 
 ## 7.5. Publication Processing
 
-Reading Systems <b>MUST</b>:
+Reading Systems <b class="rfc">must</b>:
 
 * Respect all rights limitations given in the License Document.
 
-Reading Systems <b>MAY</b>:
+Reading Systems <b class="rfc">may</b>:
 
 * Delete a Protected Publication if its License expired.
 
-Reading Systems <b>MUST NOT</b>:
+Reading Systems <b class="rfc">must not</b>:
 
 * Store unencrypted Publication Resources.
 
@@ -1258,4 +1251,12 @@ Reading Systems <b>MUST NOT</b>:
 * [LCP User Fields Registry](https://readium.org/lcp-specs/registries/user)
 * LCP Encryption Profiles Registry
 
+<style>
+.rfc {
+    color: #d55;
+    font-variant: small-caps;
+    font-style: normal;
+    font-weight: normal;
+}
+</style>
 
