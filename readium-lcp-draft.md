@@ -1,13 +1,21 @@
-Copyright 2016, Readium Foundation. All Rights Reserved.
+# Readium Licensed Content Protection Specification 1.0
 
-Document Revision: 1.2
+*Copyright 2016, Readium Foundation. All Rights Reserved.*
+
+**This version:** 
+
+* [https://readium.org/lcp-specs/readium-lcp-draft.html](https://readium.org/lcp-specs/readium-lcp-draft.html)
+
+**Previous version:** 
+
+* [https://readium.org/technical/readium-lcp-specification/](https://readium.org/technical/readium-lcp-specification/)
+
+**Document revision:** 1.3
 
 ## 1. Overview
 
 ### 1.1 Purpose and Scope
-
-{:.information}
-**This section is informative**
+*This section is informative*
 
 In order to deliver a Publication to a User with specific rights and restrictions, a Content Provider may want to encrypt the Publication’s Resources and associate them with a specific license. 
 
@@ -94,9 +102,7 @@ A certificate that is included in the License Document to identify the Content P
 A certificate that is embedded in the Reading System in order to confirm that the Provider Certificate is valid.
 
 ## 1.3. LCP Overview and Example
-
-{:.information}
-**This section is informative**
+*This section is informative*
 
 In order to encrypt Resources and expose its Encryption Profile, LCP relies on two different files:
 
@@ -195,9 +201,7 @@ All examples in this specification are informative.
 # 2. Publication
 
 ## 2.1. Introduction
-
-{:.information}
-**This section is informative**
+*This section is informative*
 
 LCP follows the [[OCF](#normative-references)] specification to identify encrypted Resources within the EPUB Container. Specifically, LCP uses `META-INF/encryption.xml` to indicate which Resources listed in the Package Document are encrypted and to reference the Content Key.
 
@@ -270,9 +274,7 @@ In Publications protected using LCP, there are additional requirements for ident
 # 3. License Document
 
 ## 3.1. Introduction
-
-{:.information}
-**This section is informative**
+*This section is informative*
 
 While `META-INF/encryption.xml` describes how the Resources are encrypted and where the encrypted Content Key is located, all of the other relevant information for LCP is stored in the License Document.
 
@@ -811,9 +813,7 @@ For more information on how the signature and the certificate <b>SHOULD</b> be c
 # 4. User Key
 
 ## 4.1. Introduction
-
-{:.information}
-**This section is informative**
+*This section is informative*
 
 In order for any symmetrically-encrypted message to work, there must be an agreed-upon key shared by the sender and receiver.  In LCP, this is the User Key. The Provider must have access to the User Key in order to secure the Content Key within the License Document. The Reading System must also have the User Key in order to decrypt the Content Key in the License Document.
 
@@ -852,9 +852,7 @@ The security of LCP depends in large part on the security of the User Key and Us
 # 5. Signature and Public Key Infrastructure
 
 ## 5.1. Introduction
-
-{:.information}
-**This section is informative**
+*This section is informative*
 
 Given the importance of the precise expression of various objects in the License Document, it is critical that the Reading System be able to verify that the content of the License Document is authentic and has not been altered. This is done via a digital signature that is verified via a Public Key Infrastructure as defined in [[X509](#normative-references)].
 
@@ -915,9 +913,7 @@ The canonical form of the License Document is used when calculating and validati
 6. Non-significant whitespace (as defined in [[JSON](#normative-references)]) <b>MUST</b> be removed. Whitespace found within strings <b>MUST</b> be kept.
 
 ### 5.3.1. Example
-
-{:.information}
-**This section is informative**
+*This section is informative*
 
 For this example, we'll use a License Document which contains a link (hint) and basic user information.
 
@@ -999,9 +995,7 @@ In order to sign a License Document, the Content Provider <b>MUST</b> go through
 4. The Provider Certificate used to validate the signature <b>MUST</b> be inserted in the `certificate` field. It <b>MUST</b> use the DER notation and be encoded using Base 64.
 
 ### 5.4.1. Example
-
-{:.information}
-**This section is informative**
+*This section is informative*
 
 Given the License Document in its canonical form
 
@@ -1080,9 +1074,7 @@ In order to validate the signature, the following steps <b>MUST</b> be followed 
 # 6. Encryption Profiles
 
 ## 6.1. Introduction
-
-{:.information}
-**This section is informative**
+*This section is informative*
 
 LCP is entirely based on standard encryption algorithms, as defined in [[XML-ENC](#normative-references)] and [[XML-SIG](#normative-references)]. In order to maintain maximum flexibility, no specific algorithms are mandated by this specification. Instead, the design of both `encryption.xml` and the License Document allow for the identification of encryption algorithms to be discovered by Reading Systems when presented with a Protected Publication.
 
@@ -1249,32 +1241,21 @@ Reading Systems <b>MUST NOT</b>:
 
 # Normative references
 
-[JSON] [The application/json Media Type for JavaScript Object Notation (JSON)](https://www.ietf.org/rfc/rfc4627).
-
-[JSON Pointer] [JavaScript Object Notation (JSON) Pointer](https://tools.ietf.org/html/rfc6901).
-
-[OCF] [Open Container Format 3.0.1](https://www.idpf.org/epub/301/spec/epub-ocf.html).
-
-[Publications] [EPUB Publications 3.0.1](https://www.idpf.org/epub/301/spec/epub-publications.html).
-
-[X509] [Internet X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL) Profile](https://tools.ietf.org/html/rfc5280).
-
-[XML-ENC] [XML Encryption Syntax and Processing Version 1.1](https://www.w3.org/TR/xmlenc-core1/).
-
-[XML-SIG] [XML Signature Syntax and Processing (Second Edition)](https://www.w3.org/TR/xmldsig-core/).
-
-[URI-Template] [URI Template](https://tools.ietf.org/html/rfc6570).
-
-[RFC2119] [Key words for use in RFCs to Indicate Requirement Levels](https://tools.ietf.org/html/rfc2119).
+* [JSON] [The application/json Media Type for JavaScript Object Notation (JSON)](https://www.ietf.org/rfc/rfc4627).
+* [JSON Pointer] [JavaScript Object Notation (JSON) Pointer](https://tools.ietf.org/html/rfc6901).
+* [OCF] [Open Container Format 3.0.1](https://www.idpf.org/epub/301/spec/epub-ocf.html).
+* [Publications] [EPUB Publications 3.0.1](https://www.idpf.org/epub/301/spec/epub-publications.html).
+* [RFC2119] [Key words for use in RFCs to Indicate Requirement Levels](https://tools.ietf.org/html/rfc2119).
+* [URI-Template] [URI Template](https://tools.ietf.org/html/rfc6570).
+* [X509] [Internet X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL) Profile](https://tools.ietf.org/html/rfc5280).
+* [XML-ENC] [XML Encryption Syntax and Processing Version 1.1](https://www.w3.org/TR/xmlenc-core1/).
+* [XML-SIG] [XML Signature Syntax and Processing (Second Edition)](https://www.w3.org/TR/xmldsig-core/).
 
 # Informative references
 
-LCP Link Relations Registry
-
-LCP Rights Registry
-
-LCP User Fields Registry
-
-LCP Encryption Profiles Registry
+* [LCP Link Relations Registry](https://readium.org/lcp-specs/registries/relations)
+* [LCP Rights Registry](https://readium.org/lcp-specs/registries/rights)
+* [LCP User Fields Registry](https://readium.org/lcp-specs/registries/user)
+* LCP Encryption Profiles Registry
 
 
