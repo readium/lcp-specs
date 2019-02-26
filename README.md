@@ -1,4 +1,10 @@
 # Readium LCP
-Workspace for LCP-related specifications &amp; archived releases.
 
-All releases are published in `releases`, drafts and live documents (registries) are listed in the root directory.
+## Drafts
+
+* [Licensed Content Protection](readium-lcp-draft.md)
+* [License Status Document](readium-lsd-draft.md)
+
+## Registries
+
+The registries are live documents available at [https://readium.org/lcp-specs/registries/](http://readium.org/lcp-specs/registries/)
