@@ -29,33 +29,26 @@ LCP also defines a simple passphrase-based authentication method for Reading Sys
 
 This specification adopts [terms defined in the EPUB 3 family of specifications](https://www.idpf.org/epub/30/spec/#sec-gloss).  Important terms used include:
 
-**Publication**
+<dl>
+  <dt>Publication</dt>
+  <dd>A logical document entity consisting of a set of interrelated resources and packaged in an EPUB Container, as defined by the EPUB 3 specifications.</dd>
 
-A logical document entity consisting of a set of interrelated [resources](https://www.idpf.org/epub/30/spec/#gloss-publication-resource-cmt-or-foreign) and packaged in an [EPUB Container](https://www.idpf.org/epub/30/spec/#gloss-container), as defined by the [EPUB 3 specifications](https://www.idpf.org/epub/30/spec/#sibling-specs).
+  <dt>Publication Resource (or Resource)</dt>
+  <dd>A resource that contains content or instructions that contribute to the logic and rendering of the EPUB Publication. </dd>
 
-**Publication Resource (or Resource)**
+  <dt>Package Document</dt>
+  <dd>A Publication Resource carrying bibliographical and structural metadata about the EPUB Publication.</dd>
 
-A resource that contains content or instructions that contribute to the logic and rendering of the [EPUB Publication](https://www.idpf.org/epub/30/spec/#gloss-epub-publication). In the absence of this resource, the Publication might not render as intended by the [Author](https://www.idpf.org/epub/30/spec/#gloss-author). Examples of Publication Resources include the [Package Document](https://www.idpf.org/epub/30/spec/#gloss-package-document), [EPUB Content Document](https://www.idpf.org/epub/30/spec/#gloss-content-document-epub)s, [EPUB Style Sheets](https://www.idpf.org/epub/30/spec/#gloss-stylesheet), audio, video, images, embedded fonts and scripts.
+  <dt>EPUB Container (or Container)</dt>
+  <dd>The ZIP-based packaging and distribution format for EPUB Publications defined in [<a href="#normative-references">OCF</a>]. </dd>
 
-With the exception of the Package Document itself, Publication Resources must be listed in the [manifest](https://www.idpf.org/epub/30/spec/epub30-publications.html#sec-manifest-elem) element from [[Publications](#normative-references)] and must be bundled in the EPUB container file unless specified otherwise in [Publication Resource Locations](https://www.idpf.org/epub/30/spec/epub30-publications.html#sec-resource-locations) from [[Publications](#normative-references)].
+  <dt>User</dt>
+  <dd>An individual that consumes an EPUB Publication using an EPUB Reading System.</dd>
 
-Examples of resources that are not Publication Resources include those identified by the Package Document [link](https://www.idpf.org/epub/30/spec/epub30-publications.html#sec-link-elem) element from [[Publications](#normative-references)] and those identified in outbound hyperlinks that resolve outside the [EPUB Container](https://www.idpf.org/epub/30/spec/#gloss-container) (e.g., referenced from an HTML5 a element href attribute).
+  <dt>EPUB Reading System (or Reading System)</dt>
+  <dd>A system that processes EPUB Publications for presentation to a User in a manner conformant with the EPUB 3 specifications.</dd>
 
-**Package Document**
-
-A [Publication Resource](https://www.idpf.org/epub/30/spec/#gloss-publication-resource-cmt-or-foreign) carrying bibliographical and structural metadata about the [EPUB Publication](https://www.idpf.org/epub/30/spec/#gloss-epub-publication), as defined in [Package Documents](https://www.idpf.org/epub/30/spec/epub30-publications.html#sec-package-documents) from [[Publications](#normative-references)].
-
-**EPUB Container (or Container)**
-
-The ZIP-based packaging and distribution format for [EPUB Publication](https://www.idpf.org/epub/30/spec/#gloss-epub-publication)s defined in [[OCF](#normative-references)].
-
-**User**
-
-An individual that consumes an [EPUB Publication](https://www.idpf.org/epub/30/spec/#gloss-epub-publication) using an [EPUB Reading System](https://www.idpf.org/epub/30/spec/#gloss-epub-reading-system).
-
-**EPUB Reading System (or Reading System)**
-
-A system that processes [EPUB Publications](https://www.idpf.org/epub/30/spec/#gloss-epub-publication) for presentation to a [User](https://www.idpf.org/epub/30/spec/#gloss-user) in a manner conformant with the [EPUB 3 specifications](https://www.idpf.org/epub/30/spec/#sibling-specs).
+</dl>
 
 ### LCP terms
 
@@ -109,7 +102,7 @@ The License Document may also contain links to external resources, information i
 
 *Figure 1 shows the relationships among the various components of LCP*
 
-![LCP components](images/architecture.png)
+![LCP architecture](images/architecture.png)
 
 ### Protecting the Publication
 
@@ -1232,7 +1225,7 @@ Reading Systems <b class="rfc">must not</b>:
 
 * Store unencrypted Publication Resources.
 
-# Normative references
+## Normative references
 
 * [JSON] [The application/json Media Type for JavaScript Object Notation (JSON)](https://www.ietf.org/rfc/rfc4627).
 * [JSON Pointer] [JavaScript Object Notation (JSON) Pointer](https://tools.ietf.org/html/rfc6901).
@@ -1244,12 +1237,19 @@ Reading Systems <b class="rfc">must not</b>:
 * [XML-ENC] [XML Encryption Syntax and Processing Version 1.1](https://www.w3.org/TR/xmlenc-core1/).
 * [XML-SIG] [XML Signature Syntax and Processing (Second Edition)](https://www.w3.org/TR/xmldsig-core/).
 
-# Informative references
+## Informative references
 
 * [LCP Link Relations Registry](https://readium.org/lcp-specs/registries/relations)
 * [LCP Rights Registry](https://readium.org/lcp-specs/registries/rights)
 * [LCP User Fields Registry](https://readium.org/lcp-specs/registries/user)
 * LCP Encryption Profiles Registry
+
+## Apendix A. JSON Schema
+
+A JSON Schema for LCP 1.0 is available under version control at [https://github.com/readium/lcp-specs/tree/master/schema](https://github.com/readium/lcp-specs/tree/master/schema)
+
+For the purpose of validating a license, use the following JSON Schema resource:
+[https://readium.org/lcp-specs/schema/license.schema.json](https://readium.org/lcp-specs/schema/license.schema.json)
 
 <style>
 .rfc {
