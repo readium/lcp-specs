@@ -233,7 +233,7 @@ In addition, this specification defines that the following files <b>MUST NOT</b>
 
 * Cover images (all Publication Resources listed in the Publication manifest with the ["cover-image" property](https://www.idpf.org/epub/30/spec/epub30-publications.html#sec-item-property-values))
 
-## 2.2. Using META-INF/encryption.xml for LCP
+## 2.2. Using `META-INF/encryption.xml` for LCP
 
 As defined in the [[OCF](#normative-references)] specification, all encrypted Publication Resources <b>MUST</b> be identified in the well-known file `META-INF/encryption.xml` using [[XML-ENC](#normative-references)]. 
 
@@ -340,7 +340,7 @@ In addition, the License Document <b>MAY</b> contain the following name/value pa
 </table>
 
 
-## 3.4. Transmitting keys:  The encryption object
+## 3.4. Transmitting keys: The `encryption` object
 
 In addition to Core License information, the License Document <b>MUST</b> contain an `encryption` object with the following name/value pair:
 
@@ -446,7 +446,7 @@ The `encryption/user_key` object contains information regarding the User Key use
 ```
 
 
-## 3.5. Pointing to external resources: the links object
+## 3.5. Pointing to external resources: the `links` object
 
 A License Document <b>MUST</b> also contain a `links` object.  This is used to associate the License Document with resources that are not locally available.  
 
@@ -602,7 +602,7 @@ Templated URIs follow the [[URI-Template]](#informative-references) specificatio
 ```
 
 
-## 3.6. Identifying rights and restrictions: the rights object
+## 3.6. Identifying rights and restrictions: the `rights` object
 
  
 
@@ -686,7 +686,7 @@ There is also a vendor extension granting the right to tweet parts of this book.
 }
 ```
 
-## 3.7. Identifying the user: the user object
+## 3.7. Identifying the user: the `user` object
 
 The License Document <b>MAY</b> embed information about the user using the `user` object. The `user` object includes the following fields:
 
@@ -757,7 +757,7 @@ To protect private User data, any of these fields <b>MAY</b> be encrypted, excep
 }
 ```
 
-## 3.8. Signing the license: the signature object
+## 3.8. Signing the license: the `signature` object
 
 As described in [5. Signature and Public Key Infrastructure](#signature-and-public-key-infrastructure), the License Document includes a digital signature to validate that it has not been altered.  The License Document <b>MUST</b> include information about the signature using the `signature` object. The `signature` object <b>MUST</b> include the following fields:
 
