@@ -534,7 +534,7 @@ As described in [5. Signature and Public Key Infrastructure](#signature-and-publ
 
 | Name | Value | Format |
 | ---- | ----- | ------ |
-| `algorithm` | Algorithm used to calculate the signature, identified using the URIs given in [[XML-Sig](#normative-references)].  This <b class="rfc">must</b> match the signature algorithm named in the Encryption Profile identified in `encryption/profile` | URI |
+| `algorithm` | Algorithm used to calculate the signature, identified using the URIs given in [[XML-SIG](#normative-references)].  This <b class="rfc">must</b> match the signature algorithm named in the Encryption Profile identified in `encryption/profile` | URI |
 | `certificate` | The Provider Certificate: an X509 certificate used by the Content Provider | Base 64 encoded DER certificate |
 | `value` | Value of the signature | Base 64 encoded octet sequence |
 
