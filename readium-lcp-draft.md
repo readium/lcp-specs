@@ -288,125 +288,43 @@ File properties
 
 The License Document <b class="rfc">must</b> contain the following name/value pairs:
 
-<table class="table-bordered large">
-	<tr>
-	  <th>Name</th>
-	  <th>Value</th>
-	  <th>Format/data type</th>
-	</tr>
-	<tr>
-	  <td>id</td>
-	  <td>Unique identifier for the License</td>
-	  <td>String</td>
-	</tr>
-	<tr>
-	  <td>issued</td>
-	  <td>Date when the license was first issued</td>
-	  <td>ISO 8601</td>
-	</tr>
-	<tr>
-	  <td>provider</td>
-	  <td>Unique identifier for the Provider</td>
-	  <td>URI</td>
-	</tr>
-</table>
+| Name | Value | Format |
+| ---- | ----- | ------ |
+| `id` | Unique identifier for the License | String |
+| `issued` | Date and time when the license was first issued | ISO 8601 |
+| `provider` | Unique identifier for the Provider | URI |
 
-<br>
 In addition, the License Document <b class="rfc">may</b> contain the following name/value pair:
 
-<table class="table-bordered large">
-	<tr>
-	  <th>Name</th>
-	  <th>Value</th>
-	  <th>Format/data type</th>
-	</tr>
-	<tr>
-	  <td>updated</td>
-	  <td>Date when the license was last updated</td>
-	  <td>ISO 8601</td>
-	</tr>
-</table>
-
+| Name | Value | Format |
+| ---- | ----- | ------ |
+| `updated` | Date and time when the license was last updated | ISO 8601 |
 
 ## 3.4. Transmitting keys: The `encryption` object
 
 In addition to Core License information, the License Document <b class="rfc">must</b> contain an `encryption` object with the following name/value pair:
 
-<table class="table-bordered large">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Value</th>
-      <th>Format/data type</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>profile</td>
-      <td>Identifies the Encryption Profile used by this LCP-protected Publication</td>
-      <td>URI</td>
-    </tr>
-  </tbody>
-</table>
+| Name | Value | Format |
+| ---- | ----- | ------ |
+| `profile` | Identifies the Encryption Profile used by this LCP-protected Publication | URI |
 
-<br />
 The `encryption` object <b class="rfc">must</b> also contain the following two objects: `content_key` and `user_key`.
 
 The `encryption/content_key` object contains the Content Key (encrypted using the User Key) used to encrypt the Publication Resources. It <b class="rfc">must</b> contain the following name/value pairs:
 
-<table class="table-bordered large">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Value</th>
-      <th>Format/data type</th>
-    </tr>
-  </thead>
-  <tbody>
-  	<tr>
-	    <td>encrypted_value</td>
-	    <td>Encrypted Content Key</td>
-	    <td>Base 64 encoded octet sequence</td>
-	  </tr>
-	  <tr>
-	    <td>algorithm</td>
-	    <td>Algorithm used to encrypt the Content Key, identified using the URIs defined in [XML-ENC]. This <b class="rfc">must</b> match the Content Key encryption algorithm named in the Encryption Profile identified in `encryption/profile`.</td>
-	    <td>URI</td>
-	  </tr>
-  </tbody>
-</table>
+| Name | Value | Format |
+| ---- | ----- | ------ |
+| `encrypted_value` | Encrypted Content Key | Base 64 encoded octet sequence |
+| `algorithm` | Algorithm used to encrypt the Content Key, identified using the URIs defined in [XML-ENC]. This <b class="rfc">must</b> match the Content Key encryption algorithm named in the Encryption Profile identified in `encryption/profile`. | URI |
 
-<br />
 The `encryption/user_key` object contains information regarding the User Key used to encrypt the Content Key. It <b class="rfc">must</b> contain the following name/value pairs:
 
-<table class="table-bordered large">
-  <thead>
-   <tr>
-     <th>Name</th>
-     <th>Value</th>
-     <th>Format/data type</th>
-   </tr>
-  </thead>
-  <tbody> 
-   <tr>
-     <td>text_hint</td>
-     <td>A hint to be displayed to the User to help them remember the User Passphrase</td>
-     <td>String</td>
-   </tr>
-   <tr>
-     <td>algorithm</td>
-     <td>Algorithm used to generate the User Key from the User Passphrase, identified using the URIs defined in [XML-ENC]. This <b class="rfc">must</b> match the User Key hash algorithm named in the Encryption Profile identified in `encryption/profile`.</td>
-     <td>URI</td>
-   </tr>
-   <tr>
-     <td>key_check</td>
-     <td>The value of the License Document’s `id` field, encrypted using the User Key and the same algorithm identified for Content Key encryption in `encryption/content_key/algorithm`. This is used to verify that the Reading System has the correct User Key.</td>
-     <td>Base 64 encoded octet sequence</td>
-   </tr>
-  </tbody>
-</table>
+| Name | Value | Format |
+| ---- | ----- | ------ |
+| `text_hint` | A hint to be displayed to the User to help them remember the User Passphrase | String |
+| `algorithm` | Algorithm used to generate the User Key from the User Passphrase, identified using the URIs defined in [[XML-ENC]((#normative-references))]. This <b class="rfc">must</b> match the User Key hash algorithm named in the Encryption Profile identified in `encryption/profile`. | URI |
+| `key_check` | The value of the License Document’s `id` field, encrypted using the User Key and the same algorithm identified for Content Key encryption in `encryption/content_key/algorithm`. This is used to verify that the Reading System has the correct User Key. | Base 64 encoded octet sequence |
 
-<br />
 *This example shows the encryption information for a License Document that uses the base Encryption Profile for LCP 1.0.*
 
 ```json
@@ -444,35 +362,13 @@ Each Link Object nested in `links` contains the link URI, a link relationship an
 
 This specification introduces the following link relationships for each Link Object:
 
-<table class="table-bordered large">
-  <tr>
-    <th>Relation</th>
-    <th>Semantics</th>
-    <th>Required?</th>
-  </tr>
-  <tr>
-    <td>hint</td>
-    <td>Location where a Reading System can redirect a User looking for additional information about the User Passphrase.</td>
-    <td>Yes</td>
-  </tr>
-  <tr>
-    <td>publication</td>
-    <td>Location where the Publication associated with the License Document can be downloaded</td>
-    <td>Yes</td>
-  </tr>
-  <tr>
-    <td>self</td>
-    <td>As defined in the IANA registry of link relations: "Conveys an identifier for the link's context."</td>
-    <td>No</td>
-  </tr>
-  <tr>
-    <td>support</td>
-    <td>Support resources for the user (either a website, an email or a telephone number).</td>
-    <td>No</td>
-  </tr>
-</table>
+| Relation | Semantics | Required? |
+| -------- | --------- | --------- |
+| `hint` | Location where a Reading System can redirect a User looking for additional information about the User Passphrase | Yes |
+| `publication` | Location where the Publication associated with the License Document can be downloaded | Yes |
+| `self` | As defined in the IANA registry of link relations: "Conveys an identifier for the link's context." | No |
+| `support` | Support resources for the user (either a website, an email or a telephone number) | No |
 
-<br />
 In addition to these link relations, this specification introduces the [LCP Link Relations Registry](#informative-references). All official link relations used in the License Document and declared in official LCP specification documents <b class="rfc">must</b> be referenced in the registry.
 
 Link relations <b class="rfc">may</b> also be extended for vendor-specific applications. Such links <b class="rfc">must</b> use a URI instead of a string to identify their link relations.
@@ -481,65 +377,18 @@ Link relations <b class="rfc">may</b> also be extended for vendor-specific appli
 
 Each Link Object supports the following keys:
 
-<table class="table-bordered large">
-  <tr>
-    <th>Name</th>
-    <th>Value</th>
-    <th>Format/data type</th>
-    <th>Required?</th>
-  </tr>
-  <tr>
-    <td>href</td>
-    <td>Link location.</td>
-    <td>URI or URI Template</td>
-    <td>Yes</td>
-  </tr>
-  <tr>
-    <td>rel</td>
-    <td>Link relationship to the document.</td>
-    <td>List of well-known relation values, URIs for extensions</td>
-    <td>Yes</td>
-  </tr>  
-  <tr>
-    <td>title</td>
-    <td>Title of the link.</td>
-    <td>String</td>
-    <td>No</td>
-  </tr>
-  <tr>
-    <td>type</td>
-    <td>Expected MIME media type value for the external resources.</td>
-    <td>MIME media type</td>
-    <td>No, but highly recommended</td>
-  </tr>
-  <tr>
-    <td>templated</td>
-    <td>Indicates that the href is a URI Template.</td>
-    <td>Boolean</td>
-    <td>No, default value is "false"</td>
-  </tr>
-  <tr>
-    <td>profile</td>
-    <td>Expected profile used to identify the external resource.</td>
-    <td>URI</td>
-    <td>No</td>
-  </tr>
-  <tr>
-    <td>length</td>
-    <td>Content length in octets.</td>
-    <td>Integer</td>
-    <td>No</td>
-  </tr>
-  <tr>
-    <td>hash</td>
-    <td>SHA-256 hash of the resource.</td>
-    <td>Base 64 encoded octet sequence</td>
-    <td>No</td>
-  </tr>
-</table>
+| Name | Value | Format | Required? |
+| ---- | ----- | ------ | --------- |
+| `href` | Location of the linked resources | URI or URI Template | Yes |
+| `rel` | Link relationship to the document | List of well-known relation values, URIs for extensions | Yes |
+| `title` | Title of the link | String | No |
+| `type` | Expected MIME media type value for the external resources | MIME media type | No, but highly recommended |
+| `templated` | Indicates that the href is a URI Template | Boolean | No, default value is "false" |
+| `profile` | Expected profile used to identify the external resource | URI | No |
+| `length` | Content length in octets | Integer | No |
+| `hash` | SHA-256 hash of the resource | Base 64 encoded octet sequence | No |
 
-<br />
-Templated URIs follow the [[URI-Template]](#informative-references) specification.
+Templated URIs follow the [[URI-Template]](#normative-references) specification.
  
 *In this example, the License Document points to a publication, contains the location of a hint about its User Passphrase and uses an extension to* ***provide authentication and recommandation services***.
 
@@ -592,48 +441,14 @@ Templated URIs follow the [[URI-Template]](#informative-references) specificatio
 
 ## 3.6. Identifying rights and restrictions: the `rights` object
 
- 
-
 The License Document <b class="rfc">may</b> also express a series of rights using the `rights` object.  The `rights` object <b class="rfc">may</b> include the following fields:
 
-<table class="table-bordered large">
-  <tr>
-    <th>Name</th>
-    <th>Value</th>
-    <th>Format/data type</th>
-    <th>Default</th>
-  </tr>
-  <tr>
-    <td>print</td>
-    <td>Maximum number of pages that can be printed over the lifetime of the license</td>
-    <td>Integer</td>
-    <td>Unlimited</td>
-  </tr>
-  <tr>
-    <td>copy</td>
-    <td>Maximum number of characters that can be copied to the clipboard over the lifetime of the license</td>
-    <td>Integer</td>
-    <td>Unlimited</td>
-  </tr>
-  <tr>
-    <td>start</td>
-    <td>Date and time when the license begins</td>
-    <td>ISO 8601 date</td>
-    <td>None (perpetual license)</td>
-  </tr>
-  <tr>
-    <td>end</td>
-    <td>Date and time when the license ends</td>
-    <td>ISO 8601 date</td>
-    <td>None (perpetual license)</td>
-  </tr>
-  <tr>
-    <td>[Extension URI]</td>
-    <td>[Defined by implementor]</td>
-    <td>[Defined by implementor]</td>
-    <td>[Defined by implementor]</td>
-  </tr>
-</table>
+| Name | Value | Format | Default |
+| ---- | ----- | ------ | ------- |
+| `print` | Maximum number of pages that can be printed over the lifetime of the license | Integer | Unlimited |
+| `copy` | Maximum number of characters that can be copied to the clipboard over the lifetime of the license | Integer | Unlimited |
+| `start` | Date and time when the license begins | ISO 8601 | None (perpetual license) |
+| `end` | Date and time when the license ends | ISO 8601 | None (perpetual license) |
 
 <br/>
 All name/value pairs using an integer as their data type (print and copy for this specification) <b class="rfc">must not</b> use leading zeroes in values (e.g., "9", not “09”).
@@ -678,46 +493,13 @@ There is also a vendor extension granting the right to tweet parts of this book.
 
 The License Document <b class="rfc">may</b> embed information about the user using the `user` object. The `user` object includes the following fields:
 
-<table class="table-bordered large">
-  <tr>
-    <th>Name</th>
-    <th>Value</th>
-    <th>Format/data type</th>
-    <th>Required?</th>
-  </tr>
-  <tr>
-    <td>id</td>
-    <td>Unique identifier for the User at a specific Provider</td>
-    <td>String</td>
-    <td>No, but highly recommended</td>
-  </tr>
-  <tr>
-    <td>email</td>
-    <td>The User’s e-mail address</td>
-    <td>String</td>
-    <td>No</td>
-  </tr>
-  <tr>
-    <td>name</td>
-    <td>The User’s name</td>
-    <td>String</td>
-    <td>No</td>
-  </tr>
-  <tr>
-    <td>encrypted</td>
-    <td>A list of which user object values are encrypted in this License Document</td>
-    <td>Array of one or more strings matching the above names or an extension</td>
-    <td>Yes, if encryption is used for any field</td>
-  </tr>
-  <tr>
-    <td>[Extension URI]</td>
-    <td>[Defined by implementor]</td>
-    <td>[Defined by implementor]</td>
-    <td>[Defined by implementor]</td>
-  </tr>
-</table>
+| Name | Value | Format | Required? |
+| ---- | ----- | ------ | --------- |
+| `id` | Unique identifier for the User at a specific Provider | String | No, but highly recommended |
+| `email` | The User’s e-mail address | String | No |
+| `name` | The User’s name | String | No |
+| `encrypted` | A list of which user object values are encrypted in this License Document | Array of one or more strings matching the above names or an extension | Yes, if encryption is used for any field |
 
-<br />
 In addition to these user information, this specification introduces the [LCP User Fields Registry](#informative-references). All official user fields used in the License Document and declared in official LCP specification documents <b class="rfc">must</b> be referenced in the registry.
 
 As with rights, The `user` object <b class="rfc">may</b> be extended to include any number of implementor-specific fields. Each extension field <b class="rfc">must</b> be identified by a URI controlled by the implementor.
@@ -749,30 +531,13 @@ To protect private User data, any of these fields <b class="rfc">may</b> be encr
 
 As described in [5. Signature and Public Key Infrastructure](#signature-and-public-key-infrastructure), the License Document includes a digital signature to validate that it has not been altered.  The License Document <b class="rfc">must</b> include information about the signature using the `signature` object. The `signature` object <b class="rfc">must</b> include the following fields:
 
-<table class="table-bordered large">
-  <tr>
-    <th>Name</th>
-    <th>Value</th>
-    <th>Format/data type</th>
-  </tr>
-  <tr>
-    <td>algorithm</td>
-    <td>Algorithm used to calculate the signature, identified using the URIs given in [XML-SIG].  This <b class="rfc">must</b> match the signature algorithm named in the Encryption Profile identified in `encryption/profile`.</td>
-    <td>URI</td>
-  </tr>
-  <tr>
-    <td>certificate</td>
-    <td>The Provider Certificate: an X509 certificate used by the Content Provider</td>
-    <td>Base 64 encoded DER certificate</td>
-  </tr>
-  <tr>
-    <td>value</td>
-    <td>Value of the signature</td>
-    <td>Base 64 encoded octet sequence</td>
-  </tr>
-</table>
 
-<br />
+| Name | Value | Format |
+| ---- | ----- | ------ |
+| `algorithm` | Algorithm used to calculate the signature, identified using the URIs given in [[XML-Sig](#normative-references)].  This <b class="rfc">must</b> match the signature algorithm named in the Encryption Profile identified in `encryption/profile` | URI |
+| `certificate` | The Provider Certificate: an X509 certificate used by the Content Provider | Base 64 encoded DER certificate |
+| `value` | Value of the signature | Base 64 encoded octet sequence |
+
 For more information on how the signature and the certificate <b class="rfc">should</b> be calculated, encoded and processed, see [5. Signature and Public Key Infrastructure](#signature-and-public-key-infrastructure).
 
 *This example shows the License Document signature.*
@@ -794,7 +559,6 @@ For more information on how the signature and the certificate <b class="rfc">sho
   }
 }
 ```
-
 
 # 4. User Key
 
@@ -991,13 +755,13 @@ Given the License Document in its canonical form
 
 Using the signature algorithm required by the Encryption Profile, a Content Provider must first hash the License Document, giving the following byte sequence, represented here in hexadecimal:
 
-```json
+```
 23c68442c7214ba294ddd1a2902756e9fe575116a88f36e55baf94590a90c2ad
 ```
 
 This SHA-256 form must then be signed using the Content Provider’s Private Key, giving the following result, in Base 64:
 
-```json
+```
 q/3IInic9c/EaJHyG1Kkqk5v1zlJNsiQBmxz4lykhyD3dA2jg2ZzrOenYU9GxP/xhe5H5Kt2WaJ/hnt8+GWrEx1QOwnNEij5CmIpZ63yRNKnFS5rSRnDMYmQT/fkUYco7BUi7MPPU6OFf4+kaToNWl8m/ZlMxDcS3BZnVhSEKzUNQn1f2y3sUcXjes7wHbImDc6dRthbL/E+assh5HEqakrDuA4lM8XNfukEYQJnivqhqMLOGM33RnS5nZKrPPK/c2F/vGjJffSrlX3W3Jlds0/MZ6wtVeKIugR06c56V6+qKsnMLAQJaeOxxBXmbFdAEyplP9irn4D9tQZKqbbMIw==
 ```
 
@@ -1033,7 +797,6 @@ With this signature and the certificate, a valid license <b class="rfc">may</b> 
   }
 }
 ```
-
 
 ## 5.5. Validating the certificate and signature
 
@@ -1092,39 +855,12 @@ Basic Encryption Profile 1.0 is officially identified in the `encryption` object
 
 The following algorithms are associated to the Basic Encryption Profile 1.0:
 
-<table class="table-bordered large">
-  <tr>
-    <th>Encryption target</th>
-    <th>Algorithm (name)</th>
-    <th>Algorithm (URI)</th>
-    <th>Identified in</th>
-  </tr>
-  <tr>
-    <td>Publication Resources</td>
-    <td>AES 256 bits CBC</td>
-    <td>http://www.w3.org/2001/04/xmlenc#aes256-cbc</td>
-    <td>encryption.xml</td>
-  </tr>
-  <tr>
-    <td>Content Key, User fields (if encrypted)</td>
-    <td>AES 256 bits CBC</td>
-    <td>http://www.w3.org/2001/04/xmlenc#aes256-cbc</td>
-    <td>License Document</td>
-  </tr>
-  <tr>
-    <td>User Passphrase</td>
-    <td>SHA-256</td>
-    <td>http://www.w3.org/2001/04/xmlenc#sha256</td>
-    <td>License Document</td>
-  </tr>
-  <tr>
-    <td>Signature</td>
-    <td>RSA with SHA-256</td>
-    <td>http://www.w3.org/2001/04/xmldsig-more#rsa-sha256
-</td>
-    <td>License Document</td>
-  </tr>
-</table>
+| Encryption target | Algorithm (name) | Algorithm (URI) | Identified in |
+| ----------------- | ---------------- | --------------- | ------------- |
+| Publication Resources | AES 256 bits CBC | [http://www.w3.org/2001/04/xmlenc#aes256-cbc](http://www.w3.org/2001/04/xmlenc#aes256-cbc) | `encryption.xml` |
+| Content Key, User fields (if encrypted) | AES 256 bits CBC | [http://www.w3.org/2001/04/xmlenc#aes256-cbc](http://www.w3.org/2001/04/xmlenc#aes256-cbc) | License Document | 
+| User Passphrase | SHA-256 | [http://www.w3.org/2001/04/xmlenc#sha256](http://www.w3.org/2001/04/xmlenc#sha256) | License Document |
+| Signature | RSA with SHA-256 | [http://www.w3.org/2001/04/xmldsig-more#rsa-sha256](http://www.w3.org/2001/04/xmldsig-more#rsa-sha256) | License Document |
 
 
 # 7. Reading System Behavior
@@ -1250,6 +986,7 @@ A JSON Schema for LCP 1.0 is available under version control at [https://github.
 
 For the purpose of validating a license, use the following JSON Schema resource:
 [https://readium.org/lcp-specs/schema/license.schema.json](https://readium.org/lcp-specs/schema/license.schema.json)
+
 
 <style>
 .rfc {
