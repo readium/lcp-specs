@@ -100,7 +100,7 @@ Both of these files are contained inside the EPUB Container, although the Licens
 
 The License Document may also contain links to external resources, information identifying the User, and information about what rights are conveyed to the User and which are not.  Rights information may include things like the time for which the license is valid, whether the book may be printed or copied, etc.  Finally, the License Document always includes a digital signature to prevent modification of any of its components.
 
-*Figure 1 shows the relationships among the various components of LCP*
+*Figure 1: Relationships among the various components of LCP*
 
 ![LCP architecture](images/architecture.png)
 
@@ -235,7 +235,7 @@ In Publications protected using LCP, there are additional requirements for ident
 
 3. The `Type` attribute <b class="rfc">must</b> use a value of "`http://readium.org/2014/01/lcp#EncryptedContentKey`" to identify the target of the URI as an encrypted Content Key.
 
-*In the following example, adapted from [[OCF](#normative-references)]*, an image.jpeg resource is encrypted using AES with the Content Key.*
+*Example1: An `image.jpeg` resource is encrypted using AES with the Content Key in `encryption.xml`.*
 
 ```xml
 <encryption
@@ -325,7 +325,7 @@ The `encryption/user_key` object contains information regarding the User Key use
 | `algorithm` | Algorithm used to generate the User Key from the User Passphrase, identified using the URIs defined in [[XML-ENC]((#normative-references))]. This <b class="rfc">must</b> match the User Key hash algorithm named in the Encryption Profile identified in `encryption/profile`. | URI |
 | `key_check` | The value of the License Document’s `id` field, encrypted using the User Key and the same algorithm identified for Content Key encryption in `encryption/content_key/algorithm`. This is used to verify that the Reading System has the correct User Key. | Base 64 encoded octet sequence |
 
-*This example shows the encryption information for a License Document that uses the base Encryption Profile for LCP 1.0.*
+*Example 2: Encryption information for a License Document that uses the base Encryption Profile for LCP 1.0.*
 
 ```json
 {
@@ -390,7 +390,7 @@ Each Link Object supports the following keys:
 
 Templated URIs follow the [[URI-Template]](#normative-references) specification.
  
-*In this example, the License Document points to a publication, contains the location of a hint about its User Passphrase and uses an extension to* ***provide authentication and recommandation services***.
+*Example 3: A License Document that points to a publication, contains the location of a hint about its User Passphrase and uses an extension to provide authentication and recommandation services.*
 
 ```json
 {
@@ -467,8 +467,7 @@ In addition to these rights, this specification introduces the [LCP Rights Regis
 
 The `rights` object <b class="rfc">may</b> be extended to include any number of implementor-specific rights. Each extension right <b class="rfc">must</b> be identified using a URI controlled by the implementor.
 
-*In this example, the License Document grants the following rights: not allowed to print at all, copy up to 2048 characters at a time of the book, and the license has an expiration date.
-There is also a vendor extension granting the right to tweet parts of this book.*
+*Example 4:  License Document that grants a number of rights such as not allowing print at all, copying up to 2048 characters, tweeting (using a vendor extension) and a validity limited in time.*
 
 ```json
 {
@@ -506,7 +505,7 @@ As with rights, The `user` object <b class="rfc">may</b> be extended to include 
 
 To protect private User data, any of these fields <b class="rfc">may</b> be encrypted, except for the `encrypted` field, which <b class="rfc">must</b> remain in plain text. If encrypted, the field values <b class="rfc">must</b> be encrypted using the User Key and the same encryption algorithm identified in the `encryption/content_key` object. The names of all encrypted fields <b class="rfc">must</b> be listed in the `encrypted` array.
 
-*In the following example, an identifier, a provider and an email are provided. There is also an extension to indicate the user’s preferred language. The email is encrypted.*
+*Example 5: License Document where an identifier, a provider and an email are provided for the user. There is also an extension to indicate the user’s preferred language. The email is encrypted.*
 
 ```json
 {
@@ -540,7 +539,7 @@ As described in [5. Signature and Public Key Infrastructure](#signature-and-publ
 
 For more information on how the signature and the certificate <b class="rfc">should</b> be calculated, encoded and processed, see [5. Signature and Public Key Infrastructure](#signature-and-public-key-infrastructure).
 
-*This example shows the License Document signature.*
+*Example 6: Signature based on the basic LCP encryption profile.*
 
 ```json
 {

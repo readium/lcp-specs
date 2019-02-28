@@ -2,8 +2,8 @@
 
 ## Drafts
 
-* [Readium Licensed Content Protection Specification 1.0](lcp.md)
-* [Readium License Status Document Specification 1.0](lsd.md)
+* [Licensed Content Protection 1.0](lcp.md)
+* [License Status Document 1.0](lsd.md)
 
 ## Registries
 
