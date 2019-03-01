@@ -31,17 +31,15 @@ This specification uses the following EPUB and Licensed Content Protection [[LCP
 
 Additionally, it uses the following terms:
 
-**Content Provider**
+<dl>
+  <dt>Content Provider</dt>
+  <dd>The authority that grants the License Document and the Publication to the User, usually a Web Server.</dd>
 
-The authority that grants the License Document and the Publication to the User, usually a Web Server.
+  <dt>License Document</dt>
+  <dd>Document that contains references to the various keys and restrictions that are applied by a specific DRM on a Publication.</dd>
 
-**License Document**
-
-Document that contains references to the various keys and restrictions that are applied by a specific DRM on a Publication.
-
-**Status Document**
-
-Document that contains information about the history of a License Document, along with its current status and available interactions.
+  <dt>Status Document</dt>
+  <dd>Document that contains information about the history of a License Document, along with its current status and available interactions.</dd>
 
 ### 1.3. Example 
 *This section is informative*
@@ -136,31 +134,12 @@ The MIME media type for a Status Document is `application/vnd.readium.license.st
 
 A Status Document <b class="rfc">must</b> include the following information:
 
-<table class="table-bordered large">
-  <tr>
-    <th>Key</th>
-    <th>Semantics</th>
-    <th>Format/data type</th>
-  </tr>
-  <tr>
-    <td>id</td>
-    <td>Unique identifier for the License Document associated to the Status Document.</td>
-    <td>String</td>
-  </tr>
-  <tr>
-    <td>status</td>
-    <td>Current status of the License.</td>
-    <td>Controlled vocabulary, as defined in section 2.3</td>
-  </tr>
-  <tr>
-    <td>message</td>
-    <td>A message meant to be displayed to the User regarding the current status of the license.</td>
-    <td>String</td>
-  </tr>
-</table>
+| Key | Semantics | Format |
+| --- | --------- | ------ |
+| `id` | Unique identifier for the License Document associated to the Status Document | String |
+| `status` | Current status of the License | Controlled vocabulary, as defined in section 2.3 |
+| `message` | A message meant to be displayed to the User regarding the current status of the license | String |
 
-
-<br />
 All messages provided in the message key <b class="rfc">should</b> be localized based on the HTTP `Accept-Language` header included in the request for the Status Document.
 
 ### 2.3. Status
@@ -168,59 +147,23 @@ All messages provided in the message key <b class="rfc">should</b> be localized 
 The `status` field succinctly describes the current status of the license. 
 The following values are allowed:
 
-<table class="table-bordered large">
-  <tr>
-    <th>Name</th>
-    <th>Value</th>
-  </tr>
-  <tr>
-    <td>ready</td>
-    <td>The License Document is available, but the user hasn't accessed the License and/or Status Document yet.</td>
-  </tr>
-  <tr>
-    <td>active</td>
-    <td>The license is active, and a device has been successfully registered for this license.
-This is the default value if the License Document does not contain a registration link, or a registration mechanism through the license itself.</td>
-  </tr>
-  <tr>
-    <td>revoked</td>
-    <td>The license is no longer active, it has been invalidated by the Issuer.</td>
-  </tr>
-  <tr>
-    <td>returned</td>
-    <td>The license is no longer active, it has been invalidated by the User.</td>
-  </tr>
-  <tr>
-    <td>cancelled</td>
-    <td>The license is no longer active because it was cancelled prior to activation.</td>
-  </tr>
-  <tr>
-    <td>expired</td>
-    <td>The license is no longer active because it has expired.</td>
-  </tr>
-</table>
+| Value | Semantics |
+| ----- | --------- |
+| `ready` | The License Document is available, but the user hasn't accessed the License and/or Status Document yet. |
+| `active` | The license is active, and a device has been successfully registered for this license.<br /> This is the default value if the License Document does not contain a registration link, or a registration mechanism through the license itself. |
+| `revoked` | The license is no longer active, it has been invalidated by the Issuer. |
+| `returned` | The license is no longer active, it has been invalidated by the User. |
+| `cancelled` | The license is no longer active because it was cancelled prior to activation. |
+| `expired` | The license is no longer active because it has expired. |
 
 ### 2.4. Timestamps
 
 A Status Document <b class="rfc">must</b> include an `updated` object where the following keys and associated timestamps are provided:
 
-<table class="table-bordered large">
-  <tr>
-    <th>Key</th>
-    <th>Semantics</th>
-    <th>Format/data type</th>
-  </tr>
-  <tr>
-    <td>license</td>
-    <td>Time and Date when the License Document was last updated.</td>
-    <td>ISO 8601 time and date</td>
-  </tr>
-  <tr>
-    <td>status</td>
-    <td>Time and Date when the Status Document was last updated.</td>
-    <td>ISO 8601 time and date</td>
-  </tr>
-</table>
+| Key | Semantics | Format |
+| --- | --------- | ------ |
+| `license` | Time and Date when the License Document was last updated. | ISO 8601  |
+| `status` | Time and Date when the Status Document was last updated. | ISO 8601 | 
 
 ### 2.5. Links
 
@@ -228,72 +171,24 @@ A Status Document <b class="rfc">must</b> include a `links` object.
 
 A Status Document <b class="rfc">must</b> include at least one link where the relation is set to `license`.
 
-#### 2.5.1 The licence Relation
-<table class="table-bordered large">
-  <tr>
-    <th>Relation</th>
-    <th>Semantics</th>
-    <th>Templated?</th>
-    <th>Required?</th>
-    <th>HTTP Verb</th>
-  </tr>
-  <tr>
-    <td>license</td>
-    <td>Location of the License Document associated to the Status Document.</td>
-    <td>No</td>
-    <td>Yes</td>
-    <td>GET</td>
-  </tr>
-</table>
+#### 2.5.1 The `license` Relation
+
+| Relation | Semantics | Templated? | Required? | HTTP Verb |
+| -------- | --------- | ---------- | --------- | --------- |
+| `license` | Location of the License Document associated to the Status Document. | No | Yes | GET |
 
 #### 2.5.2. Link Object
 
 Each Link Object contained in `links` supports the following keys:
 
-<table class="table-bordered large">
-  <tr>
-    <th>Name</th>
-    <th>Value</th>
-    <th>Format/data type</th>
-    <th>Required?</th>
-  </tr>
-  <tr>
-    <td>href</td>
-    <td>Link location.</td>
-    <td>URI or URI Template</td>
-    <td>Yes</td>
-  </tr>
-  <tr>
-    <td>rel</td>
-    <td>Link relationship to the document.</td>
-    <td>List of well-known relation values, URIs for extensions</td>
-    <td>Yes</td>
-  </tr>
-  <tr>
-    <td>title</td>
-    <td>Title of the link.</td>
-    <td>String</td>
-    <td>No</td>
-  </tr>
-  <tr>
-    <td>type</td>
-    <td>Expected MIME media type value for the external resources.</td>
-    <td>MIME media type</td>
-    <td>No, but highly recommended</td>
-  </tr>
-  <tr>
-    <td>templated</td>
-    <td>Indicates that the href is a URI Template.</td>
-    <td>Boolean</td>
-    <td>No, default value is "false"</td>
-  </tr>
-  <tr>
-    <td>profile</td>
-    <td>Expected profile used to identify the external resource.</td>
-    <td>URI</td>
-    <td>No, default value is "http://readium.org/lcp/basic-profile"</td>
-  </tr>
-</table>
+| Key | Semantics | Format | Required? |
+| --- | --------- | ------ | --------- |
+| `href` | Link location. | URI or URI Template | Yes |
+| `rel` | Link relationship to the document. | List of well-known relation values, URIs for extensions | Yes |
+| `title` | Title of the link. | String | No |
+| `type` | Expected MIME media type value for the external resources. | MIME media type | No, but highly recommended |
+| `templated` | Indicates that the href is a URI Template. | Boolean | No, default value is `false` |
+| `profile` | Expected profile used to identify the external resource. | URI | No |
 
 ### 2.6. Potential Rights
 
@@ -301,19 +196,9 @@ A Status Document <b class="rfc">may</b> provide a list of potential changes all
 
 This specification defines the following expression of potential rights:
 
-<table class="table-bordered large">
-  <tr>
-    <th>Key</th>
-    <th>Semantics</th>
-    <th>Format/data type</th>
-  </tr>
-  <tr>
-    <td>end</td>
-    <td>Time and Date when the license ends.</td>
-    <td>ISO 8601 time and date</td>
-  </tr>
-</table>
-
+| Key | Semantics | Format |
+| --- | --------- | ------ |
+| `end` | Time and Date when the license ends. | ISO 8601  |
 
 ### 2.7. Events
 
@@ -321,63 +206,23 @@ A Status Document <b class="rfc">may</b> provide an ordered list of events relat
 
 These events are documented in an `events` object where the following keys are used to describe an event:
 
-<table class="table-bordered large">
-  <tr>
-    <th>Key</th>
-    <th>Semantics</th>
-    <th>Format/data type</th>
-  </tr>
-  <tr>
-    <td>type</td>
-    <td>Identifies the type of event.</td>
-    <td>See the enumeration below.</td>
-  </tr>
-  <tr>
-    <td>name</td>
-    <td>Name of the client, as provided by the client during an interaction.</td>
-    <td>String</td>
-  </tr>
-  <tr>
-    <td>id</td>
-    <td>Identifies the client, as provided by the client during an interaction.</td>
-    <td>String</td>
-  </tr>
-  <tr>
-    <td>timestamp</td>
-    <td>Time and date when the event occurred.</td>
-    <td>ISO 8601 time and date</td>
-  </tr>
-</table>
+| Key | Semantics | Format |
+| --- | --------- | ------ |
+| `type` | Identifies the type of event. | See the enumeration below. |
+| `name` | Name of the client, as provided by the client during an interaction. | String |
+| `id` | Identifies the client, as provided by the client during an interaction. | String |
+| `timestamp` | Time and date when the event occurred. | ISO 8601 |
 
 
 The following `type` values are allowed:
 
-<table class="table-bordered large">
-  <tr>
-    <th>Name</th>
-    <th>Value</th>
-  </tr>
-  <tr>
-    <td>register</td>
-    <td>Signals a successful registration event by a device.</td>
-  </tr>
-  <tr>
-    <td>renew</td>
-    <td>Signals a successful renew event.</td>
-  </tr>
-  <tr>
-    <td>return</td>
-    <td>Signals a successful return event.</td>
-  </tr>
-  <tr>
-    <td>revoke</td>
-    <td>Signals a revocation event.</td>
-  </tr>
-  <tr>
-    <td>cancel</td>
-    <td>Signals a cancellation event.</td>
-  </tr>
-</table>
+| Value | Semantics |
+| ----- | --------- |
+| `register` | Signals a successful registration event by a device. |
+| `renew` | Signals a successful renew event. |
+| `return` | Signals a successful return event. |
+| `revoke` | Signals a revocation event. |
+| `cancel` | Signals a cancellation event. |
 
 ## 3. Interactions
 
@@ -388,7 +233,6 @@ In addition to a standardized document, the LSD Specifications also defines a nu
 To provide a consistent behavior for both clients and end users, all servers must handle errors using the Problem Details JSON object as defined in [[RFC7807](#normative-references)] with the following additional requirements:
 
 * The server <b class="rfc">must</b> return a `title` and a `type` in the Problem Details JSON object
-
 * The server <b class="rfc">should</b> attempt to localize both `title` and `detail` based on the `Accept-Language` header sent by the client
 
 Each interaction in this specification provides a number of Failure Types that are returned to the client if the interaction fails.
@@ -414,9 +258,7 @@ Registration is meant to provide the server with a hint of how many clients have
 When a client opens a License Document for the first time and gets access to its associated Status Document:
 
 * It <b class="rfc">must</b> attempt to register itself using the link exposed in the Status Document
-
 * It <b class="rfc">must not</b> block the user from accessing the Publication associated to the License Document if the registration fails
-
 * It <b class="rfc">must</b> attempt to register itself again if it couldn't do so the first time that the License Document was opened
 
 During the registration, the client <b class="rfc">must</b> always try to send the same unique identifier for a specific device, no matter which Status Document it interacts with. Any further interaction with a provider <b class="rfc">should</b> use the same identifier/name. The client <b class="rfc">should</b> consider user privacy when generating a unique identifier, for example by generating a random string during software installation. To prevent user tracking across providers, the client <b class="rfc">may</b> generate device unique ids for each provider.
@@ -464,40 +306,26 @@ If a provider uses registration to monitor license abuse, the provider <b class=
 </table>
 
 
-<br />
-
 *An example of a simple activation link.*
 
+```json
+{
+  "links": [
     {
-      "links": [
-        {"rel": "register", 
-         "href": "https://example.org/license/aaa-bbbb-ccc/register{?id,name}",
-         "type": "application/vnd.readium.license.status.v1.0+json",
-         "templated": true}
-      ]
+      "rel": "register", 
+      "href": "https://example.org/license/aaa-bbbb-ccc/register{?id,name}",
+      "type": "application/vnd.readium.license.status.v1.0+json",
+      "templated": true
     }
+  ]
+}
+```
 
 *Expected Behavior*
 
-
-<table class="table-bordered large">
-  <tr>
-    <th>Server side behavior</th>
-    <th>HTTP status code</th>
-    <th>Client side behavior</th>
-  </tr>
-  <tr>
-    <td>The server registers the device identified by 'id' and returns an updated Status Document.
-The server <b class="rfc">must</b> update the timestamp of the Status Document contained in the status key of the updated object. 
-
-If the status was previously set to ready, it <b class="rfc">must</b> be updated by the server to active instead.
-
-The server <b class="rfc">may</b> also add a new event in the events object of the Status Document.</td>
-    <td>200</td>
-    <td style="width:150px">The client <b class="rfc">must not</b> attempt to register the device again.</td>
-  </tr>
-</table>
-
+* **Server side behavior**<br />The server registers the device identified by `id` and returns an updated Status Document. <br />The server <b class="rfc">must</b> update the timestamp of the Status Document contained in the status key of the `updated` object. <br />If the status was previously set to ready, it <b class="rfc">must</b> be updated by the server to active instead. <br />The server <b class="rfc">may</b> also add a new event in the `events` object of the Status Document.
+* **HTTP status code**<br />200
+* **Client side behavior**<br />The client <b class="rfc">must not</b> attempt to register the device again.
 
 *Failure Modes*
 
@@ -806,6 +634,14 @@ The representation of the URI mentioned in the status link <b class="rfc">must</
 * [RFC2119] [Key words for use in RFCs to Indicate Requirement Levels](https://tools.ietf.org/html/rfc2119).
 * [RFC78707] [JSON Problem Details](https://tools.ietf.org/html/rfc7807).
 * [URI-Template] [URI Template](https://tools.ietf.org/html/rfc6570).
+
+## Apendix A. JSON Schema
+
+A JSON Schema for LSD 1.0 is available under version control at [https://github.com/readium/lcp-specs/tree/master/schema](https://github.com/readium/lcp-specs/tree/master/schema)
+
+For the purpose of validating a status document, use the following JSON Schema resource:
+[https://readium.org/lcp-specs/schema/status.schema.json](https://readium.org/lcp-specs/schema/status.schema.json)
+
 
 <style>
 .rfc {
