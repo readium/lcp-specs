@@ -41,7 +41,10 @@ Additionally, it uses the following terms:
   <dt>Status Document</dt>
   <dd>Document that contains information about the history of a License Document, along with its current status and available interactions.</dd>
 
-### 1.3. Example 
+</dl>
+
+### 1.3. Example
+
 *This section is informative*
 
 In the following example, the Status Document indicates that the License has been registered for a single device and may be renewed or returned.
