@@ -2,6 +2,14 @@
 
 *Copyright 2018, Readium Foundation. All Rights Reserved.*
 
+**This version:** 
+
+* [https://readium.org/lcp-specs/lsd.html](https://readium.org/lcp-specs/lsd.html)
+
+**Previous version:** 
+
+* [https://readium.org/technical/readium-lsd-specification/](https://readium.org/technical/readium-lsd-specification/)
+
 **Document Revision:** 1.3
 
 ## 1. Overview
@@ -121,11 +129,11 @@ All examples in this specification are informative.
 
 A Status Document <b class="rfc">must</b> meet all of the following criteria:
 
-Document properties
+**Document properties**
 
-It <b class="rfc">must</b> meet the conformance constraints for JSON documents as defined in [JSON](#normative-references).
-It <b class="rfc">must</b> parse as a single JSON object.
-It <b class="rfc">must</b> be encoded using UTF-8.
+* It <b class="rfc">must</b> meet the conformance constraints for JSON documents as defined in [JSON](#normative-references).
+* It <b class="rfc">must</b> parse as a single JSON object.
+* It <b class="rfc">must</b> be encoded using UTF-8.
 
 Access to a Status Document <b class="rfc">must not</b> require any form of authentication. 
 
@@ -268,46 +276,28 @@ During the registration, the client <b class="rfc">must</b> always try to send t
 
 If a provider uses registration to monitor license abuse, the provider <b class="rfc">should</b> take care to prevent forged registrations.
 
-<table class="table-bordered large">
-  <tr>
-    <th>Relation</th>
-    <th>Semantics</th>
-    <th>Templated?</th>
-    <th>Required?</th>
-    <th>HTTP Verb</th>
-  </tr>
-  <tr>
-    <td>register</td>
-    <td>Associate a new device with the License</td>
-    <td>Yes</td>
-    <td>No</td>
-    <td>POST</td>
-  </tr>
-</table>
+| Relation | Semantics | Templated? | Required? | HTTP Verb |
+| -------- | --------- | ---------- | --------- | --------- |
+| `register` | Associate a new device with the License | Yes | No | POST |
 
-<br />
 
-<table class="table-bordered large">
-  <tr>
-    <th>Parameter</th>
-    <th>Format</th>
-    <th>Semantics</th>
-    <th>Required ?</th>
-  </tr>
-  <tr>
-    <td>id</td>
-    <td>String</td>
-    <td>A unique identifier for the device.</td>
-    <td>Yes</td>
-  </tr>
-  <tr>
-    <td>name</td>
-    <td>String</td>
-    <td>Human readable name for the device.</td>
-    <td>Yes</td>
-  </tr>
-</table>
+| Parameter | Format | Semantics | Required? |
+| --------- | ------ | --------- | --------- |
+| `id` | String | A unique identifier for the device. | Yes |
+| `name` | String | Human readable name for the device. | Yes |
 
+**Expected Behavior**
+
+| Server side behavior | HTTP Status Code | Client side behavior |
+| -------------------- | ---------------- | -------------------- |
+| The server registers the device identified by `id` and returns an updated Status Document. <br />The server <b class="rfc">must</b> update the timestamp of the Status Document contained in the status key of the `updated` object. <br />If the status was previously set to ready, it <b class="rfc">must</b> be updated by the server to active instead. <br />The server <b class="rfc">may</b> also add a new event in the `events` object of the Status Document. | 200 | The client <b class="rfc">must not</b> attempt to register the device again. |
+
+**Failure Modes**
+
+| Type | HTTP Status Code | Title |
+| ---- | ---------------- | ----- |
+| http://readium.org/license-status-document/error/registration | 400 | Your device could not be registered properly. |
+| http://readium.org/license-status-document/error/server | 5xx | An unexpected error has occurred. |
 
 *An example of a simple activation link.*
 
@@ -324,280 +314,109 @@ If a provider uses registration to monitor license abuse, the provider <b class=
 }
 ```
 
-*Expected Behavior*
-
-* **Server side behavior**<br />The server registers the device identified by `id` and returns an updated Status Document. <br />The server <b class="rfc">must</b> update the timestamp of the Status Document contained in the status key of the `updated` object. <br />If the status was previously set to ready, it <b class="rfc">must</b> be updated by the server to active instead. <br />The server <b class="rfc">may</b> also add a new event in the `events` object of the Status Document.
-* **HTTP status code**<br />200
-* **Client side behavior**<br />The client <b class="rfc">must not</b> attempt to register the device again.
-
-*Failure Modes*
-
-<table class="table-bordered large">
-  <tr>
-    <th>Type</th>
-    <th>Status Code</th>
-    <th>Title</th>
-  </tr>
-  <tr>
-    <td>http://readium.org/license-status-document/error/registration</td>
-    <td>400</td>
-    <td>Your device could not be registered properly.</td>
-  </tr>
-  <tr>
-    <td>http://readium.org/license-status-document/error/server</td>
-    <td>5xx</td>
-    <td>An unexpected error has occurred.</td>
-  </tr>
-</table>
-
 ### 3.4. Returning a Publication
 
 Returning a publication is meant primarily for library use cases, where a patron can return a publication early in order to get access to a new loan.
 
 If returning is unsuccessful, the client <b class="rfc">should</b> attempt to return the License again at a later time without necessarily asking the user again.
 
-<table class="table-bordered large">
-  <tr>
-    <th>Relation</th>
-    <th>Semantics</th>
-    <th>Templated?</th>
-    <th>Required?</th>
-    <th>HTTP Verb</th>
-  </tr>
-  <tr>
-    <td>return</td>
-    <td>Ask for the License to be immediately invalidated.</td>
-    <td>Yes</td>
-    <td>No</td>
-    <td>PUT</td>
-  </tr>
-</table>
+| Relation | Semantics | Templated? | Required? | HTTP Verb |
+| -------- | --------- | ---------- | --------- | --------- |
+| `return` | Ask for the License to be immediately invalidated. | Yes | No | PUT |
 
-<br />
 
-<table class="table-bordered large">
-  <tr>
-    <th> Parameter</th>
-    <th>Format</th>
-    <th>Semantics</th>
-    <th>Required ?</th>
-  </tr>
-  <tr>
-    <td>id</td>
-    <td>String</td>
-    <td>A unique identifier for the device.</td>
-    <td>No</td>
-  </tr>
-  <tr>
-    <td>name</td>
-    <td>String</td>
-    <td>Human readable name for the device.</td>
-    <td>No</td>
-  </tr>
-</table>
+| Parameter | Format | Semantics | Required? |
+| --------- | ------ | --------- | --------- |
+| `id` | String | A unique identifier for the device. | No |
+| `name` | String | Human readable name for the device. | No |
 
+**Expected Behavior**
+
+| Server side behavior | HTTP Status Code | Client side behavior |
+| -------------------- | ---------------- | -------------------- |  
+| The server <b class="rfc">must</b> return an updated Status Document.<br /> The Status Document <b class="rfc">must</b> contain a `status` with its value set to "returned" if the status was previously set to "active" or "cancelled" if the status was previously set to "ready".<br /> The server <b class="rfc">must</b> update the timestamp of both License and Status Document contained in the `status` and `license` keys of the `updated` object. <br /> The server <b class="rfc">may</b> also add a new event in the `events` object of the Status Document. | 200 | The client <b class="rfc">must</b> download an updated Status Document.<br /> The client <b class="rfc">must not</b> allow the user to open the publication anymore. <br /> The client <b class="rfc">should not</b> attempt to return the License anymore. |
+
+
+**Failure Modes**
+
+| Type | HTTP Status Code | Title |
+| ---- | ---------------- | ----- |
+| http://readium.org/license-status-document/error/return | 400 | Your publication could not be returned properly. |
+| http://readium.org/license-status-document/error/return/already | 403 | Your publication has already been returned before. |
+| http://readium.org/license-status-document/error/return/expired | 403 | Your publication has already expired. |
+| http://readium.org/license-status-document/error/server | 5xx | An unexpected error has occurred. |
 
 *An example of a simple return link.*
 
-
+```json
+{
+  "links": [
     {
-      "links": [
-        {"rel": "return",
-         "href": "https://example.org/license/aaa-bbbb-ccc/return{?id,name}",
-         "type": "application/vnd.readium.license.status.v1.0+json",
-         "templated": true}
-      ]
+      "rel": "return",
+      "href": "https://example.org/license/aaa-bbbb-ccc/return{?id,name}",
+      "type": "application/vnd.readium.license.status.v1.0+json",
+      "templated": true
     }
+  ]
+}
+```
 
-
-*Expected Behavior*
-
-<table class="table-bordered large">
-  <tr>
-    <th>Server side behavior</th>
-    <th>HTTP status code</th>
-    <th>Client side behavior</th>
-  </tr>
-  <tr>
-    <td>The server <b class="rfc">must</b> return an updated Status Document.
-The Status Document <b class="rfc">must</b> contain a `status` with its value set to "returned" if the status was previously set to "active" or "cancelled" if the status was previously set to "ready".
-
-The server <b class="rfc">must</b> update the timestamp of both License and Status Document contained in the `status` and `license` keys of the `updated` object. 
-
-The server <b class="rfc">may</b> also add a new event in the `events` object of the Status Document.</td>
-    <td>200</td>
-    <td>The client <b class="rfc">must</b> download an updated Status Document.
-
-The client <b class="rfc">must not</b> allow the user to open the publication anymore. 
-
-The client <b class="rfc">should not</b> attempt to return the License anymore.</td>
-  </tr>
-</table>
-
-
-*Failure Modes*
-
-<table class="table-bordered large">
-  <tr>
-    <th>Type</th>
-    <th>Status Code</th>
-    <th>Title</th>
-  </tr>
-  <tr>
-    <td>http://readium.org/license-status-document/error/return</td>
-    <td>400</td>
-    <td>Your publication could not be returned properly.</td>
-  </tr>
-  <tr>
-    <td>http://readium.org/license-status-document/error/return/already</td>
-    <td>403</td>
-    <td>Your publication has already been returned before.</td>
-  </tr>
-  <tr>
-    <td>http://readium.org/license-status-document/error/return/expired</td>
-    <td>403</td>
-    <td>Your publication has already expired.</td>
-  </tr>
-  <tr>
-    <td>http://readium.org/license-status-document/error/server</td>
-    <td>5xx</td>
-    <td>An unexpected error has occurred.</td>
-  </tr>
-</table>
 
 ### 3.5. Renewing a License
 
 Renewing a License is also meant primarily for library use cases, where a patron can renew a loan for an extended period of time.
 
-<table class="table-bordered large">
-  <tr>
-    <th>Relation</th>
-    <th>Semantics</th>
-    <th>Required?</th>
-  </tr>
-  <tr>
-    <td>renew</td>
-    <td>Extends the expiration date of a license into the future</td>
-    <td>No</td>
-  </tr>
-</table>
+| Relation | Semantics | Required? |
+| -------- | --------- | --------- |
+| `renew` | Extends the expiration date of a license into the future | No |
 
-<br/>
+| Media Type | Semantics | Templated? | HTTP Verb |
+| ---------- | --------- | ---------- | --------- |
+| `text/html` | A URL where human interactions will be required. Returns an HTML page. These interactions <b class="rfc">should</b> ultimately result in the extension of the term of a License Document. | No | GET |
+| `application/vnd.readium.license.status.v1.0+json` | A URL where the License Document can be programmatically renewed. Returns a Status Document. | Yes | PUT |
 
-<table class="table-bordered large">
-  <tr>
-    <th>Media Type</th>
-    <th>Semantics</th>
-    <th>Templated?</th>
-    <th>Verb</th>
-  </tr>
-  <tr>
-    <td>text/html</td>
-    <td>A URL where human interactions will be required. Returns an HTML page. These interactions <b class="rfc">should</b> ultimately result in the extension of the term of a License Document.</td>
-    <td>No</td>
-    <td>GET</td>
-  </tr>
-  <tr>
-    <td>application/vnd.readium.license.status.v1.0+json</td>
-    <td>A URL where the License Document can be programmatically renewed. Returns a Status Document.</td>
-    <td>Yes</td>
-    <td>PUT</td>
-  </tr>
-</table>
-
-<br />
 These parameters are strictly for the case where the License Document is programmatically renewed.
 
-<table class="table-bordered large">
-  <tr>
-    <th>Parameter</th>
-    <th>Format</th>
-    <th>Semantics</th>
-    <th>Required ?</th>
-  </tr>
-  <tr>
-    <td>id</td>
-    <td>String</td>
-    <td>A unique identifier for the device.</td>
-    <td>No</td>
-  </tr>
-  <tr>
-    <td>name</td>
-    <td>String</td>
-    <td>Human readable name for the device.</td>
-    <td>No</td>
-  </tr>
-  <tr>
-    <td>end</td>
-    <td>ISO 8601</td>
-    <td>A new expiration date for the license</td>
-    <td>No</td>
-  </tr>
-</table>
 
-<br />
+| Parameter | Format | Semantics | Required? |
+| --------- | ------ | --------- | --------- |
+| `id` | String | A unique identifier for the device. | No |
+| `name` | String | Human readable name for the device. | No |
+| `end` | ISO 8601 | A new expiration date for the license.  | No |
+
+**Expected Behavior**
+
+| Server side behavior | HTTP Status Code | Client side behavior |
+| -------------------- | ---------------- | -------------------- | 
+| The server <b class="rfc">must</b> return an updated Status Document. <br /> The server <b class="rfc">must</b> update the timestamp of both License and Status Document contained in the `status` and `license` keys of the `updated` object.<br /> The server <b class="rfc">may</b> also add a new event in the `events` object of the Status Document. | 200 | The client <b class="rfc">must</b> download an updated Status Document.<br />The client <b class="rfc">may</b> attempt to renew the License again later. |
+
+**Failure Modes**
+
+| Type | HTTP Status Code | Title |
+| ---- | ---------------- | ----- |
+| http://readium.org/license-status-document/error/renew | 4xx | Your publication could not be renewed properly. |
+| http://readium.org/license-status-document/error/renew/date | 403 | Incorrect renewal period, your publication could not be renewed. |
+| http://readium.org/license-status-document/error/server | 5xx | An unexpected error has occurred. |
 
 *An example with two renewal links: one meant for human interactions (HTML) and another for clients that can send the proper information to the server (returns a Status Document).*
 
+```json
+{
+  "links": [
     {
-      "links": [
-        {"rel": "renew",
-         "href": "https://example.org/license/aaa-bbbb-ccc/renew",
-         "type": "text/html"},
-        {"rel": "renew"
-         "href": "https://example.org/license/aaa-bbbb-ccc/renew{?end,id,name}",
-         "type": "application/vnd.readium.license.status.v1.0+json",
-         "templated": true}
-      ]
+      "rel": "renew",
+      "href": "https://example.org/license/aaa-bbbb-ccc/renew",
+      "type": "text/html"
+    },
+    {
+      "rel": "renew"
+      "href": "https://example.org/license/aaa-bbbb-ccc/renew{?end,id,name}",
+      "type": "application/vnd.readium.license.status.v1.0+json",
+      "templated": true
     }
-
-These status codes and behaviors are strictly for the case where the link returns a Status Document.
-
-*Expected Behavior*
-
-<table class="table-bordered large">
-  <tr>
-    <th>Server side behavior</th>
-    <th>HTTP status code</th>
-    <th>Client side behavior</th>
-  </tr>
-  <tr>
-    <td>The server <b class="rfc">must</b> return an updated Status Document.
-The server <b class="rfc">must</b> update the timestamp of both License and Status Document contained in the `status` and `license` keys of the `updated` object. 
-
-The server <b class="rfc">may</b> also add a new event in the `events` object of the Status Document.</td>
-    <td>200</td>
-    <td style="width:150px">The client <b class="rfc">must</b> download an updated Status Document.
-    The client <b class="rfc">may</b> attempt to renew the License again later.</td>
-  </tr>
-</table>
-<br/>
-
-*Failure Modes*
-
-<table class="table-bordered large">
-  <tr>
-    <th>Type</th>
-    <th>Status Code</th>
-    <th>Title</th>
-  </tr>
-  <tr>
-    <td>http://readium.org/license-status-document/error/renew</td>
-    <td>4xx</td>
-    <td>Your publication could not be renewed properly.</td>
-  </tr>
-  <tr>
-    <td>http://readium.org/license-status-document/error/renew/date</td>
-    <td>403</td>
-    <td>Incorrect renewal period, your publication could not be renewed.</td>
-  </tr>
-  <tr>
-    <td>http://readium.org/license-status-document/error/server</td>
-    <td>5xx</td>
-    <td>An unexpected error has occurred.</td>
-  </tr>
-</table>
-
+  ]
+}
+```
 ## 4. Relationship to Readium Licensed Content Protection 1.0
 
 ### 4.1. Introduction
@@ -611,18 +430,9 @@ It does not add any structural elements to the LCP License Document, but the lin
 
 This specification defines one new link relation which may be used in the `links` object of an LCP License Document.
 
-<table class="table-bordered large">
-  <tr>
-    <th>Relation</th>
-    <th>Semantics</th>
-    <th>Required?</th>
-  </tr>
-  <tr>
-    <td>status</td>
-    <td>Location of the Status Document associated with this License Document.</td>
-    <td>No</td>
-  </tr>
-</table>
+| Relation | Semantics | Required? |
+| -------- | --------- | --------- |
+| `status` | Location of the Status Document associated with this License Document. | No |
 
 If a link with the relation status is not present in the `links` object, the client <b class="rfc">must</b> process the LCP License Document according to the core LCP specification. 
 

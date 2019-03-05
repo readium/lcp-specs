@@ -4,7 +4,7 @@
 
 **This version:** 
 
-* [https://readium.org/lcp-specs/readium-lcp-draft.html](https://readium.org/lcp-specs/readium-lcp-draft.html)
+* [https://readium.org/lcp-specs/lcp.html](https://readium.org/lcp-specs/lcp.html)
 
 **Previous version:** 
 
