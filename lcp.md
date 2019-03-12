@@ -1,3 +1,5 @@
+[![Readium Logo](https://readium.org/assets/logos/readium-logo.png)](https://readium.org)
+
 # Readium Licensed Content Protection 1.0
 
 *Copyright 2016, Readium Foundation. All Rights Reserved.*
@@ -960,7 +962,7 @@ Reading Systems <b class="rfc">must not</b>:
 
 * Store unencrypted Publication Resources.
 
-## Normative references
+## Normative References
 
 * [JSON] [The application/json Media Type for JavaScript Object Notation (JSON)](https://www.ietf.org/rfc/rfc4627).
 * [JSON Pointer] [JavaScript Object Notation (JSON) Pointer](https://tools.ietf.org/html/rfc6901).
@@ -972,7 +974,7 @@ Reading Systems <b class="rfc">must not</b>:
 * [XML-ENC] [XML Encryption Syntax and Processing Version 1.1](https://www.w3.org/TR/xmlenc-core1/).
 * [XML-SIG] [XML Signature Syntax and Processing (Second Edition)](https://www.w3.org/TR/xmldsig-core/).
 
-## Informative references
+## Informative References
 
 * [LCP Link Relations Registry](https://readium.org/lcp-specs/registries/relations)
 * [LCP Rights Registry](https://readium.org/lcp-specs/registries/rights)

@@ -1,3 +1,5 @@
+[![Readium Logo](https://readium.org/assets/logos/readium-logo.png)](https://readium.org)
+
 # Readium License Status Document 1.0
 
 *Copyright 2018, Readium Foundation. All Rights Reserved.*
@@ -10,7 +12,7 @@
 
 * [https://readium.org/technical/readium-lsd-specification/](https://readium.org/technical/readium-lsd-specification/)
 
-**Document Revision:** 1.3
+**Document Revision:** 1.4
 
 ## 1. Overview
 
@@ -129,8 +131,6 @@ All examples in this specification are informative.
 
 A Status Document <b class="rfc">must</b> meet all of the following criteria:
 
-**Document properties**
-
 * It <b class="rfc">must</b> meet the conformance constraints for JSON documents as defined in [JSON](#normative-references).
 * It <b class="rfc">must</b> parse as a single JSON object.
 * It <b class="rfc">must</b> be encoded using UTF-8.
@@ -139,7 +139,7 @@ Access to a Status Document <b class="rfc">must not</b> require any form of auth
 
 A Status Document <b class="rfc">should not</b> be served over an insecure connection. 
 
-The MIME media type for a Status Document is `application/vnd.readium.license.status.v1.0+json`, and HTTP servers <b class="rfc">must</b> set the “Content-Type” header appropriately.
+The MIME media type for a Status Document is `application/vnd.readium.license.status.v1.0+json` and HTTP servers <b class="rfc">must</b> set the “Content-Type” header appropriately.
 
 ### 2.2. Core Information
 
@@ -153,7 +153,7 @@ A Status Document <b class="rfc">must</b> include the following information:
 
 All messages provided in the message key <b class="rfc">should</b> be localized based on the HTTP `Accept-Language` header included in the request for the Status Document.
 
-### 2.3. Status
+### 2.3. Status of a License
 
 The `status` field succinctly describes the current status of the license. 
 The following values are allowed:
@@ -178,19 +178,7 @@ A Status Document <b class="rfc">must</b> include an `updated` object where the 
 
 ### 2.5. Links
 
-A Status Document <b class="rfc">must</b> include a `links` object.
-
-A Status Document <b class="rfc">must</b> include at least one link where the relation is set to `license`.
-
-#### 2.5.1 The `license` Relation
-
-| Relation | Semantics | Templated? | Required? | HTTP Verb |
-| -------- | --------- | ---------- | --------- | --------- |
-| `license` | Location of the License Document associated to the Status Document. | No | Yes | GET |
-
-#### 2.5.2. Link Object
-
-Each Link Object contained in `links` supports the following keys:
+A Status Document <b class="rfc">must</b> include a `links` object. It contains an array of Link Objects where each object <b class="rfc">may</b> contain the following keys:
 
 | Key | Semantics | Format | Required? |
 | --- | --------- | ------ | --------- |
@@ -200,6 +188,14 @@ Each Link Object contained in `links` supports the following keys:
 | `type` | Expected MIME media type value for the external resources. | MIME media type | No, but highly recommended |
 | `templated` | Indicates that the href is a URI Template. | Boolean | No, default value is `false` |
 | `profile` | Expected profile used to identify the external resource. | URI | No |
+
+
+A Status Document <b class="rfc">must</b> include at least one link where the relation is set to `license`.
+
+| Relation | Semantics | Templated? | Required? | HTTP Verb |
+| -------- | --------- | ---------- | --------- | --------- |
+| `license` | Location of the License Document associated to the Status Document. | No | Yes | GET |
+
 
 ### 2.6. Potential Rights
 
