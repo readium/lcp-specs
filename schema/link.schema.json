@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://readium.org/readium-lcp-specs/schema/link.schema.json",
+  "$id": "https://readium.org/lcp-specs/schema/link.schema.json",
   "title": "Readium LCP Link",
   "type": "object",
   "properties": {
