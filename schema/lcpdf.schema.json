@@ -3,12 +3,12 @@
   "$id": "https://readium.org/lcp-specs/schema/lcpdf.schema.json",
   "title": "LCP for PDF",
   "type": "object",
-  "$ref": "https://readium.org/lcp-specs/schema/license.schema.json",
+  "$ref": "https://readium.org/webpub-manifest/schema/publication.schema.json",
   "allOf": [
     {
       "description": "The readingOrder specified in manifest.json must strictly reference one or more PDF documents",
       "properties": {
-        "links": {
+        "readingOrder": {
           "properties": {
             "type": {
               "const": "application/pdf"
