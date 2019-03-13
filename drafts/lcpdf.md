@@ -10,7 +10,7 @@ This document is an early draft.
 * All LCP for PDF packages <strong class="rfc">must</strong> use:
   * the `.lcpdf` extension
   * the `application/pdf+lcp` media type
-* The `readingOrder` specified in `manifest.json` <strong class="rfc">must</strong> strictly reference PDF documents 
+* The `readingOrder` specified in `manifest.json` <strong class="rfc">must</strong> strictly reference one or more PDF documents 
 * PDF documents referenced in the `readingOrder` <strong class="rfc">must not</strong> be compressed in the package
 * A cover <strong class="rfc">should</strong> be referenced in `resources` of `manifest.json` and <strong class="rfc">must not</strong> be encrypted
 * An embedded LCP License Document <strong class="rfc">must</strong> be located at `license.lcpl`
@@ -43,6 +43,7 @@ This document is an early draft.
           "scheme": "http://readium.org/2014/01/lcp",
           "profile": "http://readium.org/lcp/basic-profile",
           "algorithm": "http://www.w3.org/2001/04/xmlenc#aes256-cbc"
+        }
       }
     }
   ],
