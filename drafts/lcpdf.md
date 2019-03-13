@@ -41,7 +41,7 @@ This document is an early draft.
       "properties": {
         "encrypted": {
           "scheme": "http://readium.org/2014/01/lcp",
-          "profile": "http://readium.org/lcp/basic-profile"
+          "profile": "http://readium.org/lcp/basic-profile",
           "algorithm": "http://www.w3.org/2001/04/xmlenc#aes256-cbc"
       }
     }
