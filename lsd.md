@@ -422,7 +422,7 @@ This specification defines a way for a Content Provider to connect an LCP Licens
 
 It does not add any structural elements to the LCP License Document, but the link relations it defines and the potential rights it enumerates <b class="rfc">may</b> appear in an LCP License Document.
 
-### 4.2. The status Relation
+### 4.2. The `status` Relation
 
 This specification defines one new link relation which may be used in the `links` object of an LCP License Document.
 

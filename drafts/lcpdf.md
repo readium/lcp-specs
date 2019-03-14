@@ -57,6 +57,16 @@ This document is an early draft.
 }
 ```
 
+# Demo
+
+An example where the PDF is not (yet) encrypted is available at: [http://readium.org/lcp-specs/examples/lcpdf/rwpm.lcpdf](http://readium.org/lcp-specs/examples/lcpdf/rwpm.lcpdf)
+
+# JSON Schema
+
+A JSON Schema for the manifest of an LCPDF package is available under version control at: [https://github.com/readium/lcp-specs/blob/master/schema/lcpdf.schema.json](https://github.com/readium/lcp-specs/blob/master/schema/lcpdf.schema.json)
+
+For validating a manifest, use the following reference: [https://readium.org/lcp-specs/schema/lcpdf.schema.json](https://readium.org/lcp-specs/schema/lcpdf.schema.json)
+
   
 <style>
 .rfc {
