@@ -1,7 +1,11 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://readium.org/lcp-specs/schema/license.schema.json",
-  "title": "Readium LCP",
+  "title": "Readium LCP v1.0",
+  "description": "Copyright (c) 2019 The Readium Foundation.",
+	"description": "Edited by DRMInside, 2016.",
+	"description": "Edited by L.Le Meur / EDRLab, 2017.",
+	"description": "Edited by H.Gardeur / Feedbooks, 2019.",
   "type": "object",
   "properties": {
     "id": {
@@ -23,8 +27,8 @@
       "type": "string",
       "format": "date-time"
     },
-    "encrypted": {
-      "description": "Unique identifier for the Provider",
+    "encryption": {
+      "description": "Information related to the encryption of the content",
       "type": "object",
       "properties": {
         "profile": {
@@ -69,6 +73,7 @@
               "type": "string"
             }
           },
+          "additionalProperties": false,
           "required": [
             "algorithm",
             "key_check",
@@ -157,6 +162,7 @@
           "contentEncoding": "base64"
         }
       },
+      "additionalProperties": false,
       "required": [
         "algorithm",
         "certificate",
