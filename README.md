@@ -2,7 +2,7 @@
 
 # Readium LCP
 
-## Drafts
+## Specifications
 
 * [Licensed Content Protection 1.0](lcp.md)
 * [License Status Document 1.0](lsd.md)
