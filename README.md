@@ -10,3 +10,7 @@
 ## Registries
 
 The registries are live documents available at [https://readium.org/lcp-specs/registries/](https://readium.org/lcp-specs/registries/)
+
+## More information
+
+More information about LCP is found on the [EDRLab web site](https://www.edrlab.org/readium-lcp/)
