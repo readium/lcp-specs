@@ -4,4 +4,4 @@ title: About
 permalink: /about/
 ---
 
-This page will be filled later. 
+This page will be completed later. 
