@@ -5,7 +5,6 @@
 layout: home
 ---
 
-# Readium LCP
 
 ## Specifications
 
@@ -14,7 +13,7 @@ layout: home
 
 ## Registries
 
-The registries are live documents available at [https://readium.org/lcp-specs/registries/](https://readium.org/lcp-specs/registries/)
+Registries are live documents available at [here](https://readium.org/lcp-specs/registries/)
 
 ## More information
 
