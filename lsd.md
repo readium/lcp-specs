@@ -1,5 +1,8 @@
-[![Readium Logo](https://readium.org/assets/logos/readium-logo.png)](https://readium.org)
-
+---
+layout: default
+permalink: "readium-lsd-specification"
+title: "Readium LSD specification"
+---
 # Readium License Status Document 1.0
 
 *Copyright 2018, Readium Foundation. All Rights Reserved.*

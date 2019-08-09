@@ -1,8 +1,12 @@
-[![Readium Logo](https://readium.org/assets/logos/readium-logo.png)](https://readium.org)
+---
+layout: default
+permalink: "readium-lcp-specification"
+title: "Readium LCP specification"
+---
 
 # Readium Licensed Content Protection 1.0
 
-*Copyright 2016, Readium Foundation. All Rights Reserved.*
+*Copyright 2019, Readium Foundation. All Rights Reserved.*
 
 **This version:** 
 
