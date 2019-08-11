@@ -27,7 +27,7 @@ twitter_username: EDRLab_EPUB
 # Build settings
 markdown: kramdown
 #theme: jekyll-theme-architect
-theme: minima
+theme: jekyll-theme-tactile
 plugins:
   - jekyll-feed
 
