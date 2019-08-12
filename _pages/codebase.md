@@ -1,6 +1,6 @@
 ---
 layout: default
-permalink: "/lcp-specs/readium-lcp-codebase"
+permalink: "/readium-lcp-codebase"
 title:  "Readium LCP Codebase"
 ---
 

@@ -1,6 +1,6 @@
 ---
 layout: default
-permalink: "/lcp-specs/readium-lsd-specification"
+permalink: "/readium-lsd-specification"
 title: "Readium License Status Document specification"
 ---
 
