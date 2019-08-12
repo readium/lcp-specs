@@ -1,6 +1,6 @@
 ---
 layout: default
-permalink: "/lcp-specs/lcp-profile-upgrade-requirements"
+permalink: "/lcp-profile-upgrade-requirements"
 title: "Readium LCP Profile Upgrade Requirements"
 ---
 

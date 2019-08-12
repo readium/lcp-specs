@@ -1,6 +1,6 @@
 ---
 layout: default
-permalink: "/lcp-specs/lcp-profile-upgrade"
+permalink: "/lcp-profile-upgrade"
 title: "Readium LCP Profile Upgrade"
 ---
 
