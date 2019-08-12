@@ -1,6 +1,6 @@
 ---
 layout: default
-permalink: "/lcp-specs/readium-lcp-specification"
+permalink: "/readium-lcp-specification"
 title: "Readium LCP specification"
 ---
 
