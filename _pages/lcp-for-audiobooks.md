@@ -1,3 +1,8 @@
+---
+layout: default
+permalink: "/lcp-specs/lcp-for-audiobooks"
+title: "LCP for Audiobooks"
+---
 # LCP for Audiobooks
 
 ## Status of this Document

@@ -1,19 +1,14 @@
+---
+layout: default
+permalink: "/lcp-specs/lcp-profile-upgrade-requirements"
+title: "Readium LCP Profile Upgrade Requirements"
+---
 
 # Readium LCP Profile upgrade - Requirements
 
 August 2018
 
-By: Laurent Le Meur
-
-## Who was involved in this project
-
-The following EDRLab team members and several members of the association are involved in this project:
-
-* Laurent Le Meur: CTO of EDRLab, involved in every EDRLab project, including Readium LCP, Readium Mobile, Readium Desktop, Readium Web, Web Publications.
-Daniel Weck: senior developer at EDRLab; working on Readium LCP, Readium Mobile, Readium Desktop, Readium Web.
-* Hadrien Gardeur: CEO of Feedbooks, a French distributor of EPUB ebooks and developer of mobile reading applications; co-editor of the LCP specification and implementer of Readium LCP.
-* Rémi Bauzac: CTO of TEA (The Ebook Alternative), a French solution provider for the publishing industry and member of EDRLab; implementer of Readium LCP.
-* Stefaan Nemegger: lead developer at ePagine, a French solution provider for the publishing industry and member of EDRLab; implementer of Readium LCP.
+By: Laurent Le Meur, EDRLab
 
 ## Introduction
 
@@ -46,7 +41,7 @@ Both attacks still require that the end user of the LCP hacking software has acq
 The objective of this proposal is to make hackers’ life much less comfortable by allowing a modification of the crypto material on which Readium LCP is based, on a regular basis (e.g. every two years, or if we see that a major breach of the crypto material has spread around the world).
 Another hypothetical reason for updating the LCP crypto material would be to adopt the latest cryptographic industry standards, in order to protect the integrity of the LCP ecosystem in the long run.
 
-This protection will be based on the evolution of the LCP profile.  An LCP profile consists in root certificates, cipher algorithms and confidential cryptographic material.  
+This protection will be based on the evolution of the LCP profile. An LCP profile consists in root certificates, cipher algorithms and confidential cryptographic material.  
 
 Readium LCP already supports this notion of profile and two profiles are currently used in the ecosystem: a “basic” profile detailed in the LCP specification and used for test applications only; A “1.0” profile, given only to trusted partners and used only for production-grade applications. This proposal will therefore make the notion of LCP profile a useful brick of the LCP ecosystem. 
 
@@ -63,3 +58,14 @@ Readium LCP already supports this notion of profile and two profiles are current
 **Req 5**: The solution MUST allow the deprecation of the oldest profile revisions after some years. 
 
 **Req 6**: The solution MUST NOT require a new encryption of the complete database of publications distributed by a license provider at the time a profile update occurs. 
+
+
+## Who was involved in this project
+
+The following EDRLab team members and several members of the association are involved in this project:
+
+* Laurent Le Meur: CTO of EDRLab, involved in every EDRLab project, including Readium LCP, Readium Mobile, Readium Desktop, Readium Web, Web Publications.
+Daniel Weck: senior developer at EDRLab; working on Readium LCP, Readium Mobile, Readium Desktop, Readium Web.
+* Hadrien Gardeur: CEO of Feedbooks, a French distributor of EPUB ebooks and developer of mobile reading applications; co-editor of the LCP specification and implementer of Readium LCP.
+* Rémi Bauzac: CTO of TEA (The Ebook Alternative), a French solution provider for the publishing industry and member of EDRLab; implementer of Readium LCP.
+* Stefaan Nemegger: lead developer at ePagine, a French solution provider for the publishing industry and member of EDRLab; implementer of Readium LCP.

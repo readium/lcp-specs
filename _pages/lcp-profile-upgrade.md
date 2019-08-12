@@ -1,18 +1,14 @@
+---
+layout: default
+permalink: "/lcp-specs/lcp-profile-upgrade"
+title: "Readium LCP Profile Upgrade"
+---
+
 # Readium LCP Profile upgrade - Technical solution
 
 December 2018
 
-By: Laurent Le Meur, Daniel Weck
-
-## Who was involved in this project
-
-The following EDRLab team members and several members of the association are involved in this project:
-
-* Laurent Le Meur: CTO of EDRLab, involved in every EDRLab project, including Readium LCP, Readium Mobile, Readium Desktop, Readium Web, Web Publications.
-Daniel Weck: senior developer at EDRLab; working on Readium LCP, Readium Mobile, Readium Desktop, Readium Web.
-* Hadrien Gardeur: CEO of Feedbooks, a French distributor of EPUB ebooks and developer of mobile reading applications; co-editor of the LCP specification and implementer of Readium LCP.
-* Rémi Bauzac: CTO of TEA (The Ebook Alternative), a French solution provider for the publishing industry and member of EDRLab; implementer of Readium LCP.
-* Stefaan Nemegger: lead developer at ePagine, a French solution provider for the publishing industry and member of EDRLab; implementer of Readium LCP.
+By: Laurent Le Meur & Daniel Weck, EDRLab
 
 ## Summary
 This document describes a mechanism for seamlessly transitioning an operational LCP ecosystem to the most recent profile revision, whilst ensuring forward compatibility for outdated client software, and for non-updatable user devices.
@@ -264,5 +260,14 @@ The server that issues License Status Documents must now be capable of generatin
 This codebase will evolve in Q1 2019.
 
 
+## Who was involved in this project
+
+The following EDRLab team members and several members of the association are involved in this project:
+
+* Laurent Le Meur: CTO of EDRLab, involved in every EDRLab project, including Readium LCP, Readium Mobile, Readium Desktop, Readium Web, Web Publications.
+Daniel Weck: senior developer at EDRLab; working on Readium LCP, Readium Mobile, Readium Desktop, Readium Web.
+* Hadrien Gardeur: CEO of Feedbooks, a French distributor of EPUB ebooks and developer of mobile reading applications; co-editor of the LCP specification and implementer of Readium LCP.
+* Rémi Bauzac: CTO of TEA (The Ebook Alternative), a French solution provider for the publishing industry and member of EDRLab; implementer of Readium LCP.
+* Stefaan Nemegger: lead developer at ePagine, a French solution provider for the publishing industry and member of EDRLab; implementer of Readium LCP.
 
 
