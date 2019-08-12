@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: default
 permalink: "readium-lsd-specification"
 title: "Readium LSD specification"
 ---

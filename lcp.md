@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: default
 permalink: "readium-lcp-specification"
 title: "Readium LCP specification"
 ---

@@ -3,7 +3,10 @@
   <div class="wrapper">
     {%- assign default_paths = site.pages | map: "path" -%}
     {%- assign page_paths = site.header_pages | default: default_paths -%}
-    <a class="site-title" rel="author" href="{{ "/" | relative_url }}">{{ site.title | escape }}</a>
+
+    <a  href="https://www.readium.org">
+      <img src="/assets/logos/readium-logo.png" class="site-logo" alt="Readium Home" title="Readium Home">
+    </a>
 
     {%- if page_paths -%}
       <nav class="site-nav">
@@ -17,6 +20,7 @@
         </label>
 
         <div class="trigger">
+            <a class="page-link" href="/">Overview</a>
             <a class="page-link" href="readium-lcp-specification">LCP</a>
             <a class="page-link" href="readium-lsd-specification">LSD</a>
         </div>
