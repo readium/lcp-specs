@@ -1,6 +1,6 @@
 ---
 layout: default
-permalink: "readium-lsd-specification"
+permalink: "/lcp-specs/readium-lsd-specification"
 title: "Readium License Status Document specification"
 ---
 
@@ -10,11 +10,11 @@ title: "Readium License Status Document specification"
 
 **This version:** 
 
-* [https://readium.org/lcp-specs/readium-lsd-specification](/readium-lsd-specification)
+* [https://readium.org/lcp-specs/readium-lsd-specification](/lcp-specs/readium-lsd-specification)
 
 **Previous version:** 
 
-* [https://readium.org/lcp-specs/readium-lsd-specification-1-0-3](/history/readium-lsd-specification-1-0-3)
+* [https://readium.org/lcp-specs/history/readium-lsd-specification-1-0-3](/lcp-specs/history/readium-lsd-specification-1-0-3)
 
 **Document Revision:** 4
 

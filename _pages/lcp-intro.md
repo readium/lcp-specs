@@ -18,13 +18,38 @@ Client applications can be developed on mobile devices, desktop computers and e-
 
 LCP is free from transaction costs. The only mandatory cost for using the DRM is a yearly certification fee for each server or client application supporting LCP.
 
-## Publication Formats
+## EPUB, PDF, Audiobooks, DiViNa
 
 Different publication formats can be protected by LCP; this includes: 
 
-* EPUB 2 and EPUB 3, including embedded audio and video content,
-* PDF,
-* Readium Packaged Web Publications (audiobooks and DiViNa).
+* EPUB 2 and EPUB 3, including with embedded audio and video content
+* PDF documents
+* Readium Packaged Web Publications (audiobooks and DiViNa)
+
+## Specifications
+
+* [Licensed Content Protection 1.0](/lcp-specs/readium-lcp-specification) defines the structure of a license document .
+* [License Status Document 1.0](/lcp-specs/readium-lsd-specification) defines a document representing the status of a license along with interactions that might affect its status.
+* [LCP Profile Upgrade](/lcp-specs/lcp-profile-upgrade) defines a mechanism for seamlessly transitioning an operational LCP ecosystem to the most recent profile revision, whilst ensuring forward compatibility for outdated client software, and for non-updatable user devices.
+
+## Draft specifications
+
+The following specifications are currently drafts: 
+
+* [LCP for PDF](/lcp-specs/lcp-for-pdf) defines how PDF documents are protected by LCP. 
+* [LCP for Audiobooks](/lcp-specs/lcp-for-audiobooks) defines how Audiobooks using the Readium Packaged Web Publication format are protected by LCP. 
+
+## Registries
+
+Registries are live documents listing controlled values associated with the specifications. They are available [here](/lcp-specs/registries/).
+
+## Software
+
+A large [open-source codebase](/lcp-specs/readium-lcp-codebase/) has been developed as part of the Readium project by EDRLab. This includes a full featured License Server, DRM libraries compliant with different Readium toolkits (Readium SDK, Readium Mobile / Desktop), plus a lightweight library which can be integrated on any device.
+
+## ISO Standardization
+
+Readium LCP has been submitted to ISO standarization by Japan, South Korea and France. The work is in progress and LCP should become an international standard by Q4 2020.
 
 ## Core Technology
 
@@ -34,25 +59,17 @@ Readium LCP is built using standard & best practice technology for content encry
 * SHA-256 for user passphrases
 * RSA with SHA-256 for signing licenses.
 
-## ISO Standardization
+## Requirements
 
-Readium LCP has been submitted to ISO standarization by Japan, South Korea and France. The work is in progress and LCP should become an international standard by Q4 2020.
+It is often useful to get access to the requirements which prelude to technical specifications. 
 
-## Specifications
+The requirements and use-cases for the LCP technology have been expressed in 2012 and can still be found on the [IDPF website, EPUB content protection](http://idpf.org/epub-content-protection).
 
-* [Licensed Content Protection 1.0](readium-lcp-specification) defines a license document;
-* [License Status Document 1.0](readium-lsd-specification) defines a document representing the status of a license along with interactions that might affect its status;
+Other requirement papers are:
 
-## Registries
+* [LCP Profile Upgrade Requirements](/lcp-specs/lcp-profile-upgrade-requirements). 
 
-Registries are live documents listing controlled values associated with the specifications. They are available [here](/registries/).
-
-## Software
-
-A large [open-source codebase](readium-lcp-codebase/) has been developed as part of the Readium project by EDRLab. This includes a full featured License Server, DRM libraries compliant with different Readium toolkits (Readium SDK, Readium Mobile / Desktop), plus a lightweight library which can be integrated on any device. 
 
 ## More Information
-
-The requirements and use-cases for the LCP technology have been expressed in 2012 and can still be found on the [IDPF website](http://idpf.org/epub-content-protection).
 
 More information about LCP is found on the [EDRLab web site](https://www.edrlab.org/readium-lcp/) and via email (contact at edrlab.org).

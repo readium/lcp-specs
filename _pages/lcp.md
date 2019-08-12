@@ -1,6 +1,6 @@
 ---
 layout: default
-permalink: "readium-lcp-specification"
+permalink: "/lcp-specs/readium-lcp-specification"
 title: "Readium LCP specification"
 ---
 
@@ -10,11 +10,11 @@ title: "Readium LCP specification"
 
 **This version:** 
 
-* [https://readium.org/lcp-specs/readium-lcp-specification](/readium-lcp-specification)
+* [https://readium.org/lcp-specs/readium-lcp-specification](/lcp-specs/readium-lcp-specification)
 
 **Previous version:** 
 
-* [https://readium.org/cp-specs/history/readium-lcp-specification-1-0-2](/history/readium-lcp-specification-1-0-2)
+* [https://readium.org/lcp-specs/history/readium-lcp-specification-1-0-2](/lcp-specs/history/readium-lcp-specification-1-0-2)
 
 **Document revision:** 3
 
@@ -108,7 +108,7 @@ The License Document may also contain links to external resources, information i
 
 *Figure 1: Relationships among the various components of LCP*
 
-![LCP architecture](images/architecture.png)
+![LCP architecture](/images/architecture.png)
 
 ### Protecting the Publication
 
