@@ -8,18 +8,20 @@ LCP stands for “Licensed Content Protection”.
 
 Readium LCP is a Digital Rights Management (DRM) technology developed *by* the publishing industry, *for* the publishing industry. It is a vendor-neutral, interoperable and distributed DRM solution, created and promoted by Readium members and managed by [EDRLab](https://www.edrlab.org). 
 
-LCP defines a simple passphrase-based authentication method, which is minimally intrusive for the end user, but still fulfills the needs of public libraries and publishers. 
+LCP defines a simple passphrase-based authentication method, which is minimally intrusive for end users AND fulfills the requirements of public libraries, booksellers and publishers regarding content protection. 
  
-LCP is designed for privacy and GDPR compliance (required for EU adoption) since no third-party is collecting data on behalf of the distributor.
+LCP is designed for privacy and GDPR compliance (required for EU adoption) since no third-party is collecting user data.
 
-Client applications can be developed on mobile devices, desktop computers and e-readers. But browser based applications cannot integrate LCP, as such applications cannot handle safely DRM details. 
+Client applications can be developed on mobile devices, desktop computers and e-readers. Browser based applications cannot integrate LCP, as such applications cannot handle DRM details safely enough. 
+
+LCP is free from transaction costs. The only mandatory cost for using the DRM is a yearly certification fee for each server or client application supporting LCP.
 
 ## Formats
 
 Different publication formats can be protected by LCP; this includes: 
 
-* EPUB 2 and EPUB 3, including embedded audio and video content;
-* PDF;
+* EPUB 2 and EPUB 3, including embedded audio and video content,
+* PDF,
 * Readium Packaged Web Publications (audiobooks and DiViNa).
 
 ## Core technology
@@ -51,7 +53,5 @@ A large [open-source codebase](readium-lcp-codebase/) has been developed as part
 
 The requirements and use-cases for the LCP technology have been expressed in 2012 and can still be found on the [IDPF website](http://idpf.org/epub-content-protection).
 
-More information about LCP is found on the [EDRLab web site](https://www.edrlab.org/readium-lcp/).
-
-Readium LCP is free from transaction costs. The only mandatory cost for using the DRM is a yearly certification fee for each server or client application supporting LCP. Please contact EDRLab for more information (contact at edrlab.org).
+More information about LCP is found on the [EDRLab web site](https://www.edrlab.org/readium-lcp/) and via email (contact at edrlab.org).
 
