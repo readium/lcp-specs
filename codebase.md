@@ -4,6 +4,8 @@ permalink: "readium-lcp-codebase"
 title:  "Readium LCP Codebase"
 ---
 
+# Readium LCP Codebase 
+
 A large open-source codebase has been developed as part of the Readium project by [EDRLab](https://www.edrlab.org). This includes a full featured License Server, DRM libraries compliant with different Readium toolkits (Readium SDK, Readium Mobile / Desktop), plus a lightweight library which can be integrated on any device. 
 
 ## Readium LCP Server software
@@ -26,11 +28,17 @@ The R2 LCP Kotlin library, targeting Android devices, is a module of the Readium
 
 &gt; Download it on: [GitHub repository](https://github.com/readium/r2-lcp-kotlin)
 
-### Swifth library
+### Swift library
 
 The R2 LCP Swift library, targeting iOS devices, is a module of the Readium Mobile for iOS toolkit.
 
 &gt; Download it on: [GitHub repository](https://github.com/readium/r2-lcp-swift)
+
+### Node.js library
+
+The R2 LCP Node.js library, targeting desktop computers, is a module of the Readium Mobile for Desktop toolkit.
+
+&gt; Download it on: [GitHub repository](https://github.com/readium/r2-lcp-js)
 
 ## Be part of the Readium LCP Network
 The interoperability and security of the Readium LCP ecosystem is guaranteed by EDRLab. 

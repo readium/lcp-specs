@@ -2,7 +2,7 @@
 layout: default
 ---
 
-## Introduction
+# Introduction
 
 LCP stands for “Licensed Content Protection”.
 
