@@ -1,21 +1,22 @@
 ---
 layout: default
 permalink: "readium-lsd-specification"
-title: "Readium LSD specification"
+title: "Readium License Status Document specification"
 ---
+
 # Readium License Status Document 1.0
 
 *Copyright 2018, Readium Foundation. All Rights Reserved.*
 
 **This version:** 
 
-* [https://readium.org/lcp-specs/lsd.html](https://readium.org/lcp-specs/lsd.html)
+* [https://readium.org/lcp-specs/readium-lsd-specification](/readium-lsd-specification)
 
 **Previous version:** 
 
-* [https://readium.org/technical/readium-lsd-specification/](https://readium.org/technical/readium-lsd-specification/)
+* [https://readium.org/lcp-specs/readium-lsd-specification-1-0-3](/history/readium-lsd-specification-1-0-3)
 
-**Document Revision:** 1.4
+**Document Revision:** 4
 
 ## 1. Overview
 

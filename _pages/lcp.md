@@ -10,13 +10,13 @@ title: "Readium LCP specification"
 
 **This version:** 
 
-* [https://readium.org/lcp-specs/lcp.html](https://readium.org/lcp-specs/lcp.html)
+* [https://readium.org/lcp-specs/readium-lcp-specification](/readium-lcp-specification)
 
 **Previous version:** 
 
-* [https://readium.org/technical/readium-lcp-specification/](https://readium.org/technical/readium-lcp-specification/)
+* [https://readium.org/cp-specs/history/readium-lcp-specification-1-0-2](/history/readium-lcp-specification-1-0-2)
 
-**Document revision:** 1.3
+**Document revision:** 3
 
 ## 1. Overview
 
