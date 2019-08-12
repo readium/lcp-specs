@@ -1,4 +1,3 @@
-[![Readium Logo](https://readium.org/assets/logos/readium-logo.png)](https://readium.org)
 
 # Readium LCP Registries
 
