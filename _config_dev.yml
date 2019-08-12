@@ -1,0 +1,2 @@
+# This removes the /lcp-specs/ URL part in dev mode. 
+section: /

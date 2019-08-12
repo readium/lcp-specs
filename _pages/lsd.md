@@ -10,11 +10,11 @@ title: "Readium License Status Document specification"
 
 **This version:** 
 
-* [https://readium.org/lcp-specs/readium-lsd-specification](/lcp-specs/readium-lsd-specification)
+* [https://readium.org/lcp-specs/readium-lsd-specification]({{site.section}}readium-lsd-specification)
 
 **Previous version:** 
 
-* [https://readium.org/lcp-specs/history/readium-lsd-specification-1-0-3](/lcp-specs/history/readium-lsd-specification-1-0-3)
+* [https://readium.org/lcp-specs/history/readium-lsd-specification-1-0-3]({{site.section}}history/readium-lsd-specification-1-0-3)
 
 **Document Revision:** 4
 

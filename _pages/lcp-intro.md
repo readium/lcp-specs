@@ -28,24 +28,24 @@ Different publication formats can be protected by LCP; this includes:
 
 ## Specifications
 
-* [Licensed Content Protection 1.0](/lcp-specs/readium-lcp-specification) defines the structure of a license document .
-* [License Status Document 1.0](/lcp-specs/readium-lsd-specification) defines a document representing the status of a license along with interactions that might affect its status.
-* [LCP Profile Upgrade](/lcp-specs/lcp-profile-upgrade) defines a mechanism for seamlessly transitioning an operational LCP ecosystem to the most recent profile revision, whilst ensuring forward compatibility for outdated client software, and for non-updatable user devices.
+* [Licensed Content Protection 1.0]({{site.section}}readium-lcp-specification) defines the structure of a license document .
+* [License Status Document 1.0]({{site.section}}readium-lsd-specification) defines a document representing the status of a license along with interactions that might affect its status.
+* [LCP Profile Upgrade]({{site.section}}lcp-profile-upgrade) defines a mechanism for seamlessly transitioning an operational LCP ecosystem to the most recent profile revision, whilst ensuring forward compatibility for outdated client software, and for non-updatable user devices.
 
 ## Draft specifications
 
 The following specifications are currently drafts: 
 
-* [LCP for PDF](/lcp-specs/lcp-for-pdf) defines how PDF documents are protected by LCP. 
-* [LCP for Audiobooks](/lcp-specs/lcp-for-audiobooks) defines how Audiobooks using the Readium Packaged Web Publication format are protected by LCP. 
+* [LCP for PDF]({{site.section}}lcp-for-pdf) defines how PDF documents are protected by LCP. 
+* [LCP for Audiobooks]({{site.section}}lcp-for-audiobooks) defines how Audiobooks using the Readium Packaged Web Publication format are protected by LCP. 
 
 ## Registries
 
-Registries are live documents listing controlled values associated with the specifications. They are available [here](/lcp-specs/registries/).
+Registries are live documents listing controlled values associated with the specifications. They are available [here]({{site.section}}registries/).
 
 ## Software
 
-A large [open-source codebase](/lcp-specs/readium-lcp-codebase/) has been developed as part of the Readium project by EDRLab. This includes a full featured License Server, DRM libraries compliant with different Readium toolkits (Readium SDK, Readium Mobile / Desktop), plus a lightweight library which can be integrated on any device.
+A large [open-source codebase]({{site.section}}readium-lcp-codebase/) has been developed as part of the Readium project by EDRLab. This includes a full featured License Server, DRM libraries compliant with different Readium toolkits (Readium SDK, Readium Mobile / Desktop), plus a lightweight library which can be integrated on any device.
 
 ## ISO Standardization
 
@@ -67,7 +67,7 @@ The requirements and use-cases for the LCP technology have been expressed in 201
 
 Other requirement papers are:
 
-* [LCP Profile Upgrade Requirements](/lcp-specs/lcp-profile-upgrade-requirements). 
+* [LCP Profile Upgrade Requirements]({{site.section}}lcp-profile-upgrade-requirements). 
 
 
 ## More Information

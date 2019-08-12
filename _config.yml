@@ -13,13 +13,14 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: the LCP DRM
+title: Readium LCP - ebook DRM
 author: EDRLab
 email: contact@edrlab.org
 description: >- # this means to ignore newlines until "url:"
   Specifications and extensions of 
   the Readium LCP DRM.
-url: "https://www.readium.org/lcp-specs/" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://www.readium.org/lcp-specs/" # the base hostname & protocol for your site
+section: /lcp-specs/ # URL part to be added to links in production
 
 # SEO
 google_analytics: UA-29134664-1
@@ -27,9 +28,6 @@ google_analytics: UA-29134664-1
 # Build settings
 markdown: kramdown
 theme: jekyll-theme-primer
-plugins:
-  - jekyll-feed
-repository: readium/lcp-specs
 
 include: ["_pages"]
 
