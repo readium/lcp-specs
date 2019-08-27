@@ -4,8 +4,8 @@
 
 ## Specifications
 
-* [Licensed Content Protection 1.0](lcp.md)
-* [License Status Document 1.0](lsd.md)
+* [Licensed Content Protection 1.0](https://readium.org/lcp-specs/readium-lcp-specification)
+* [License Status Document 1.0](https://readium.org/lcp-specs/readium-lsd-specification)
 
 ## Registries
 
