@@ -1,10 +1,4 @@
----
-layout: default
-permalink: "/lcp-for-pdf"
-title: "Readium LCP for PDF"
----
-
-# LCP for PDF
+# Readium LCP for PDF
 
 ## Status of this Document
 

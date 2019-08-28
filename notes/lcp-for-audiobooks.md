@@ -1,9 +1,4 @@
----
-layout: default
-permalink: "/lcp-for-audiobooks"
-title: "LCP for Audiobooks"
----
-# LCP for Audiobooks
+# Readium LCP for Audiobooks
 
 ## Status of this Document
 

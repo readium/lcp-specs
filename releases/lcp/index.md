@@ -1,5 +1,4 @@
-
-# Readium Licensed Content Protection 1.0.3
+# Readium Licensed Content Protection 1.0.4
 
 *Copyright 2019, Readium Foundation. All Rights Reserved.*
 
@@ -9,11 +8,11 @@
 
 **This version:** 
 
-* [https://readium.org/lcp-specs/releases/lcp/lcp-1-0-3](lcp-1-0-3.md)
+* [https://readium.org/lcp-specs/releases/lcp/](index.md)
 
 **Previous version:** 
 
-* [https://readium.org/lcp-specs/releases/lcp/lcp-1-0-2](lcp-1-0-2.md)
+* [https://readium.org/lcp-specs/releases/lcp/lcp-1-0-3](lcp-1-0-3.md)
 
 ## 1. Overview
 
@@ -22,34 +21,37 @@
 
 In order to deliver a Publication to a User with specific rights and restrictions, a Content Provider may want to encrypt the Publication’s Resources and associate them with a specific license. 
 
-This specification, Licensed Content Protection (LCP), defines a standard License Document and an Encryption Profile for encrypting resources in EPUB 3 Publications, expressing rights and restrictions, and for securely delivering decryption keys to Reading Systems via licenses for specific Users.
-
-LCP also defines a simple passphrase-based authentication method for Reading Systems to access encrypted resources and verify a license.
+This specification, Licensed Content Protection (LCP), defines a standard License Document and an Encryption Profile for encrypting resources in different publication formats (especially EPUB), and for securely delivering decryption keys to Reading Systems via licenses tailored to specific Users. It also defines a simple passphrase-based authentication method for Reading Systems to access encrypted resources and verify a license.
 
 ## 1.2. Terminology
 
 ### EPUB terms
 
-This specification adopts [terms defined in the EPUB 3 family of specifications](https://www.idpf.org/epub/30/spec/#sec-gloss).  Important terms used include:
+This specification adopts [terms defined in the EPUB 3 family of specifications](https://www.w3.org/publishing/epub3/epub-spec.html#sec-terminology).  Important terms used include:
 
 <dl>
   <dt>Publication</dt>
-  <dd>A logical document entity consisting of a set of interrelated resources and packaged in an EPUB Container, as defined by the EPUB 3 specifications.</dd>
+  <dd>A logical document entity consisting of a set of interrelated resources, packaged in an EPUB Container.</dd>
 
   <dt>Publication Resource (or Resource)</dt>
   <dd>A resource that contains content or instructions that contribute to the logic and rendering of the EPUB Publication. </dd>
 
   <dt>Package Document</dt>
-  <dd>A Publication Resource carrying bibliographical and structural metadata about the EPUB Publication.</dd>
+  <dd>A Publication Resource carrying meta information about the EPUB Publication, provides a manifest of resources and defines the default reading order.</dd>
 
   <dt>EPUB Container (or Container)</dt>
-  <dd>The ZIP-based packaging and distribution format for EPUB Publications defined in [<a href="#normative-references">OCF</a>]. </dd>
-
-  <dt>User</dt>
-  <dd>An individual that consumes an EPUB Publication using an EPUB Reading System.</dd>
+  <dd>The ZIP-based packaging and distribution format for EPUB Publications defined in [<a href="#normative-references">OCF ZIP Container</a>]. </dd>
 
   <dt>EPUB Reading System (or Reading System)</dt>
-  <dd>A system that processes EPUB Publications for presentation to a User in a manner conformant with the EPUB 3 specifications.</dd>
+  <dd>A system that processes EPUB Publications for presentation to a user in a manner conformant with the EPUB 3 specification.</dd>
+
+  <dt>Codec</dt>
+  <dd>Codec refers to content types that have intrinsic binary format qualities, such as video and audio media types which are 
+  already designed for optimum compression, or which provide optimized streaming capabilities.</dd>
+
+  <dt>Non-Codec</dt>
+  <dd>Non-Codec refers to content types that benefit from compression due to the nature of their internal data structure, 
+  such as file formats based on character strings (for example, HTML, CSS, etc.).</dd>
 
 </dl>
 
@@ -69,6 +71,9 @@ The following terms are defined by this specification:
 
   <dt>Content Key</dt>
   <dd>Symmetric key used to encrypt the resources of the Protected Publication. In the License Document, this Content Key will be encrypted using the User Key.</dd>
+
+  <dt>User</dt>
+  <dd>An individual that consumes a Publication using a Reading System.</dd>
 
   <dt>User Passphrase</dt>
   <dd>A string of text entered by the user that is used to generate the User Key.</dd>
@@ -105,7 +110,7 @@ The License Document may also contain links to external resources, information i
 
 *Figure 1: Relationships among the various components of LCP*
 
-![LCP architecture](/images/architecture.png)
+![LCP architecture]({{site.section}}images/architecture.png)
 
 ### Protecting the Publication
 
@@ -220,17 +225,26 @@ In addition, this specification defines that the following files <b class="rfc">
 
 * `META-INF/license.lcpl`
 
-* Navigation Documents referenced in any Package Document from the Publication (all Publication Resources listed in the Publication manifest with the ["nav" property](https://www.idpf.org/epub/30/spec/epub30-publications.html#sec-item-property-values))
+* Navigation Documents referenced in any Package Document from the Publication (all Publication Resources listed in the Publication manifest with the ["nav" property](https://www.w3.org/publishing/epub32/epub-packages.html#sec-item-property-values))
 
 * NCX documents referenced in any Package Document from the Publication (all Publication Resources listed in the Publication manifest with the media type "application/x-dtbncx+xml")
 
-* Cover images (all Publication Resources listed in the Publication manifest with the ["cover-image" property](https://www.idpf.org/epub/30/spec/epub30-publications.html#sec-item-property-values))
+* Cover images (all Publication Resources listed in the Publication manifest with the ["cover-image" property](https://www.w3.org/publishing/epub32/epub-packages.html#sec-item-property-values))
 
 ## 2.2. Using `META-INF/encryption.xml` for LCP
 
 As defined in the [[OCF](#normative-references)] specification, all encrypted Publication Resources <b class="rfc">must</b> be identified in the well-known file `META-INF/encryption.xml` using [[XML-ENC](#normative-references)]. 
 
-In Publications protected using LCP, there are additional requirements for identifying the key used to encrypt these Resources (the LCP Content Key):
+Publication Resources with Non-Codec content types <b class="rfc">should</b> be compressed and the Deflate compression algorithm <b class="rfc">must</b> be used. This practice ensures that file entries stored in the Container have a smaller size.
+
+Resources with Codec content types <b class="rfc">should</b> be stored without compression. In such case, compression would introduce unnecessary processing overhead at production time (especially with large resource files) and would impact audio/video playback performance at consumption time.
+
+In Publications protected using LCP, there are additional requirements for determining the length of the full resource ahead of media playback, especially when using partial content requests:
+
+Streams of data that are compressed before they are encrypted <b class="rfc">must</b> provide additional `EncryptionProperties` metadata to specify the size of the initial resource (i.e., before compression and encryption), as per the Compression XML element defined in [OCF, Compression and Encryption](https://www.w3.org/publishing/epub32/epub-ocf.html#sec-enc-compression). 
+Streams of data that are not compressed before they are encrypted <b class="rfc">should</b> provide such additional `EncryptionProperties` metadata.
+
+In Publications protected using LCP, the following XML syntax identifies the key used to encrypt Resources (the LCP Content Key):
 
 1. The `ds:KeyInfo` element <b class="rfc">must</b> point to the Content Key using the `ds:RetrievalMethod` element.  
 
@@ -255,6 +269,11 @@ In Publications protected using LCP, there are additional requirements for ident
         <enc:CipherData>
             <enc:CipherReference URI="image.jpeg"/>
         </enc:CipherData>
+        <enc:EncryptionProperties>
+          <enc:EncryptionProperty xmlns:ns="http://www.idpf.org/2016/encryption#compression">
+              <ns:Compression Method="8" OriginalLength="35000"/>
+          </enc:EncryptionProperty>
+      </enc:EncryptionProperties>
     </enc:EncryptedData>
 </encryption>
 ```
@@ -372,7 +391,7 @@ This specification introduces the following link relationships for each Link Obj
 | `self` | As defined in the IANA registry of link relations: "Conveys an identifier for the link's context." | No |
 | `support` | Support resources for the user (either a website, an email or a telephone number) | No |
 
-In addition to these link relations, this specification introduces the [LCP Link Relations Registry](#informative-references). All official link relations used in the License Document and declared in official LCP specification documents <b class="rfc">must</b> be referenced in the registry.
+In addition to these link relations, this specification introduces the [LCP Link Relations Registry](#informative-references), in which all link relations defined in this specification are referenced.
 
 Link relations <b class="rfc">may</b> also be extended for vendor-specific applications. Such links <b class="rfc">must</b> use a URI instead of a string to identify their link relations.
 
@@ -460,13 +479,13 @@ For the `print` right, a page is defined as follows:
 
 1. The page as defined in the Publication, if it is pre-paginated (fixed layout) OR
 
-2. The page as defined by the [page-list nav element](https://www.idpf.org/epub/30/spec/epub30-contentdocs.html#sec-xhtml-nav-def-types-pagelist) of the [EPUB Navigation Document](https://www.idpf.org/epub/30/spec/epub30-contentdocs.html#sec-xhtml-nav), if this exists OR
+2. The page as defined by the [page-list nav element](https://www.w3.org/publishing/epub32/epub-packages.html#sec-nav-pagelist) of the [EPUB Navigation Document](https://www.w3.org/publishing/epub32/epub-packages.html#sec-package-nav-def), if this exists OR
 
 3. 1024 Unicode characters for all other cases
 
 The `copy` right only covers the ability to copy to the clipboard and is limited to text (no images, etc.).
 
-In addition to these rights, this specification introduces the [LCP Rights Registry](#informative-references). All official rights information used in the License Document and declared in official LCP specification documents <b class="rfc">must</b> be referenced in the registry.
+In addition to these rights, this specification introduces the [LCP Rights Registry](#informative-references), in which all rights  defined in this specification are referenced.
 
 The `rights` object <b class="rfc">may</b> be extended to include any number of implementor-specific rights. Each extension right <b class="rfc">must</b> be identified using a URI controlled by the implementor.
 
@@ -502,7 +521,7 @@ The License Document <b class="rfc">may</b> embed information about the user usi
 | `name` | The User’s name | String | No |
 | `encrypted` | A list of which user object values are encrypted in this License Document | Array of one or more strings matching the above names or an extension | Yes, if encryption is used for any field |
 
-In addition to these user information, this specification introduces the [LCP User Fields Registry](#informative-references). All official user fields used in the License Document and declared in official LCP specification documents <b class="rfc">must</b> be referenced in the registry.
+In addition to these user information, this specification introduces the [LCP User Fields Registry](#informative-references), in which all user fields defined in this specification are referenced.
 
 As with rights, The `user` object <b class="rfc">may</b> be extended to include any number of implementor-specific fields. Each extension field <b class="rfc">must</b> be identified by a URI controlled by the implementor.
 
@@ -853,7 +872,7 @@ All Encryption Profiles <b class="rfc">must</b> be registered in the LCP Encrypt
 
 ## 6.3. Basic Encryption Profile 1.0
 
-Basic Encryption Profile 1.0 is officially identified in the `encryption` object of the License Document using the URL `http://readium.org/lcp/basic-profile` for the `profile` attribute value.
+Basic Encryption Profile 1.0 is identified in the `encryption` object of the License Document using the URL `http://readium.org/lcp/basic-profile` for the `profile` attribute value.
 
 The following algorithms are associated to the Basic Encryption Profile 1.0:
 
@@ -965,10 +984,10 @@ Reading Systems <b class="rfc">must not</b>:
 
 ## Normative References
 
+* [EPUB] [EPUB 3.2](https://www.w3.org/publishing/epub3/).
 * [JSON] [The application/json Media Type for JavaScript Object Notation (JSON)](https://www.ietf.org/rfc/rfc4627).
 * [JSON Pointer] [JavaScript Object Notation (JSON) Pointer](https://tools.ietf.org/html/rfc6901).
-* [OCF] [Open Container Format 3.0.1](https://www.idpf.org/epub/301/spec/epub-ocf.html).
-* [Publications] [EPUB Publications 3.0.1](https://www.idpf.org/epub/301/spec/epub-publications.html).
+* [OCF] [Open Container Format 3.2](https://www.w3.org/publishing/epub32/epub-ocf.html).
 * [RFC2119] [Key words for use in RFCs to Indicate Requirement Levels](https://tools.ietf.org/html/rfc2119).
 * [URI-Template] [URI Template](https://tools.ietf.org/html/rfc6570).
 * [X509] [Internet X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL) Profile](https://tools.ietf.org/html/rfc5280).
@@ -988,14 +1007,4 @@ A JSON Schema for LCP 1.0 is available under version control at [https://github.
 
 For the purpose of validating a license, use the following JSON Schema resource:
 [https://readium.org/lcp-specs/schema/license.schema.json](https://readium.org/lcp-specs/schema/license.schema.json)
-
-
-<style>
-.rfc {
-    color: #d55;
-    font-variant: small-caps;
-    font-style: normal;
-    font-weight: normal;
-}
-</style>
 

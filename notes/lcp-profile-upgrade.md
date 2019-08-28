@@ -1,12 +1,6 @@
----
-layout: default
-permalink: "/lcp-profile-upgrade"
-title: "Readium LCP Profile Upgrade"
----
+# Readium LCP Profile Upgrade - Technical solution
 
-# Readium LCP Profile upgrade - Technical solution
-
-December 2018
+*December 2018*
 
 By: Laurent Le Meur & Daniel Weck, EDRLab
 

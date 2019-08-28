@@ -30,21 +30,21 @@ Different publication formats can be protected by LCP; this includes:
 
 ## Specifications
 
-* [Licensed Content Protection 1.0]({{site.section}}readium-lcp-specification) defines the structure of a license document .
-* [License Status Document 1.0]({{site.section}}readium-lsd-specification) defines a document representing the status of a license along with interactions that might affect its status.
+* [Licensed Content Protection 1.0](releases/lcp/) defines the structure of a license document .
+* [License Status Document 1.0](releases/lsd/) defines a document representing the status of a license along with interactions that might affect its status.
 
 
 ## Technical Notes
 
 The following technical notes are currently in draft: 
 
-* [LCP for PDF]({{site.section}}lcp-for-pdf) defines how PDF documents are protected by LCP. 
-* [LCP for Audiobooks]({{site.section}}lcp-for-audiobooks) defines how Audiobooks using the Readium Packaged Web Publication format are protected by LCP. 
-* [LCP Profile Upgrade]({{site.section}}lcp-profile-upgrade) defines a mechanism for seamlessly transitioning an operational LCP ecosystem to the most recent profile revision, whilst ensuring forward compatibility for outdated client software, and for non-updatable user devices.
+* [LCP for PDF](notes/lcp-for-pdf.md) defines how PDF documents are protected by LCP. 
+* [LCP for Audiobooks](notes/lcp-for-audiobooks.md) defines how Audiobooks using the Readium Packaged Web Publication format are protected by LCP. 
+* [LCP Profile Upgrade](notes/lcp-profile-upgrade.md) defines a mechanism for seamlessly transitioning an operational LCP ecosystem to the most recent profile revision, whilst ensuring forward compatibility for outdated client software, and for non-updatable user devices.
 
 ## Registries
 
-Registries are live documents listing controlled values associated with the specifications. They are available [here]({{site.section}}registries/).
+Registries are live documents listing controlled values associated with the specifications. They are available [here](registries/).
 
 
 ## Requirements
@@ -55,7 +55,7 @@ The requirements and use-cases for the LCP technology have been expressed in 201
 
 Other requirement papers are:
 
-* [LCP Profile Upgrade Requirements]({{site.section}}lcp-profile-upgrade-requirements). 
+* [LCP Profile Upgrade Requirements](notes/lcp-profile-upgrade-requirements). 
 
 ## Software
 
