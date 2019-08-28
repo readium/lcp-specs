@@ -1,4 +1,3 @@
-
 # Readium LCP Registries
 
 - [LCP Link Relations Registry](relations.md)

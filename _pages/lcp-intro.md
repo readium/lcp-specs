@@ -30,14 +30,15 @@ Different publication formats can be protected by LCP; this includes:
 
 * [Licensed Content Protection 1.0]({{site.section}}readium-lcp-specification) defines the structure of a license document .
 * [License Status Document 1.0]({{site.section}}readium-lsd-specification) defines a document representing the status of a license along with interactions that might affect its status.
-* [LCP Profile Upgrade]({{site.section}}lcp-profile-upgrade) defines a mechanism for seamlessly transitioning an operational LCP ecosystem to the most recent profile revision, whilst ensuring forward compatibility for outdated client software, and for non-updatable user devices.
 
-## Draft specifications
 
-The following specifications are currently drafts: 
+## Technical Notes
+
+The following technical notes are currently in draft: 
 
 * [LCP for PDF]({{site.section}}lcp-for-pdf) defines how PDF documents are protected by LCP. 
 * [LCP for Audiobooks]({{site.section}}lcp-for-audiobooks) defines how Audiobooks using the Readium Packaged Web Publication format are protected by LCP. 
+* [LCP Profile Upgrade]({{site.section}}lcp-profile-upgrade) defines a mechanism for seamlessly transitioning an operational LCP ecosystem to the most recent profile revision, whilst ensuring forward compatibility for outdated client software, and for non-updatable user devices.
 
 ## Registries
 
