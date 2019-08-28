@@ -30,8 +30,8 @@ Different publication formats can be protected by LCP; this includes:
 
 ## Specifications
 
-* [Licensed Content Protection 1.0](releases/lcp/latest) defines the structure of a license document .
-* [License Status Document 1.0](releases/lsd/latest) defines a document representing the status of a license along with interactions that might affect its status.
+* [Licensed Content Protection 1.0](releases/lcp/latest.md) defines the structure of a license document .
+* [License Status Document 1.0](releases/lsd/latest.md) defines a document representing the status of a license along with interactions that might affect its status.
 
 
 ## Technical Notes
