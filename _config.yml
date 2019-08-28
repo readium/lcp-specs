@@ -16,14 +16,9 @@
 title: Readium LCP - ebook DRM
 author: EDRLab
 email: contact@edrlab.org
-description: >- # this means to ignore newlines until "url:"
-  Specifications and extensions of 
-  the Readium LCP DRM.
+description: Specifications and extensions of the Readium LCP DRM.
 url: "https://readium.org/lcp-specs/" # the base hostname & protocol for your site
 section: /lcp-specs/ # URL part to be added to links in production
-
-# SEO
-google_analytics: UA-29134664-1
 
 # Build settings
 markdown: kramdown
