@@ -19,7 +19,7 @@ email: contact@edrlab.org
 description: >- # this means to ignore newlines until "url:"
   Specifications and extensions of 
   the Readium LCP DRM.
-url: "https://www.readium.org/lcp-specs/" # the base hostname & protocol for your site
+url: "https://readium.org/lcp-specs/" # the base hostname & protocol for your site
 section: /lcp-specs/ # URL part to be added to links in production
 
 # SEO
