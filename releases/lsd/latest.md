@@ -1,22 +1,18 @@
----
-layout: default
-permalink: "/readium-lsd-specification"
-title: "Readium License Status Document specification"
----
-
-# Readium License Status Document 1.0
+# Readium License Status Document 1.0.4
 
 *Copyright 2018, Readium Foundation. All Rights Reserved.*
 
+**Latest version:** 
+
+* [https://readium.org/lcp-specs/releases/lsd/latest](latest.md)
+
 **This version:** 
 
-* [https://readium.org/lcp-specs/readium-lsd-specification]({{site.section}}readium-lsd-specification)
+* [https://readium.org/lcp-specs/releases/lsd/latest](latest.md)
 
 **Previous version:** 
 
-* [https://readium.org/lcp-specs/history/readium-lsd-specification-1-0-3]({{site.section}}history/readium-lsd-specification-1-0-3)
-
-**Document Revision:** 4
+* [https://readium.org/lcp-specs/releases/lsd/lsd-1-0-3](lsd-1-0-3.md)
 
 ## 1. Overview
 

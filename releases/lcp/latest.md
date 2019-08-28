@@ -4,11 +4,11 @@
 
 **Latest version:** 
 
-* [https://readium.org/lcp-specs/releases/lcp/](index.md)
+* [https://readium.org/lcp-specs/releases/lcp/latest](latest.md)
 
 **This version:** 
 
-* [https://readium.org/lcp-specs/releases/lcp/](index.md)
+* [https://readium.org/lcp-specs/releases/lcp/latest](latest.md)
 
 **Previous version:** 
 
