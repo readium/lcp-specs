@@ -19,7 +19,7 @@
 ### 1.1 Purpose and Scope
 *This section is informative*
 
-This specification, License Status Document (1.0.1), defines a document for representing the status of a DRM license along with interactions that might affect its status. These interactions put additional responsibilities on both Content Providers and Reading Systems.
+This specification, License Status Document, defines a document for representing the status of a DRM license along with interactions that might affect its status. These interactions put additional responsibilities on both Content Providers and Reading Systems.
 
 One of the primary objectives is to support lending in public libraries where a user may have the ability to renew a time-limited loan or return one before it expires.
 
@@ -439,7 +439,7 @@ The representation of the URI mentioned in the status link <b class="rfc">must</
 ## Normative references
 
 * [JSON] [The application/json Media Type for JavaScript Object Notation (JSON)](https://www.ietf.org/rfc/rfc4627).
-* [LCP] [Readium Licensed Content Protection](http://readium.github.io/readium-lcp-specification).
+* [LCP] [Readium Licensed Content Protection](http://readium.org/lcp-specs/releases/lcp/latest).
 * [RFC2119] [Key words for use in RFCs to Indicate Requirement Levels](https://tools.ietf.org/html/rfc2119).
 * [RFC78707] [JSON Problem Details](https://tools.ietf.org/html/rfc7807).
 * [URI-Template] [URI Template](https://tools.ietf.org/html/rfc6570).

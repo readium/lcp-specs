@@ -110,7 +110,7 @@ The License Document may also contain links to external resources, information i
 
 *Figure 1: Relationships among the various components of LCP*
 
-![LCP architecture]({{site.section}}images/architecture.png)
+![LCP architecture](../../images/architecture.png)
 
 ### Protecting the Publication
 
