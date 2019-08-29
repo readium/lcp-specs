@@ -550,7 +550,7 @@ To protect private User data, any of these fields <b class="rfc">may</b> be encr
 
 ## 3.8. Signing the license: the `signature` object
 
-As described in [5. Signature and Public Key Infrastructure](#signature-and-public-key-infrastructure), the License Document includes a digital signature to validate that it has not been altered.  The License Document <b class="rfc">must</b> include information about the signature using the `signature` object. The `signature` object <b class="rfc">must</b> include the following fields:
+As described in [5. Signature and Public Key Infrastructure](#5-signature-and-public-key-infrastructure), the License Document includes a digital signature to validate that it has not been altered.  The License Document <b class="rfc">must</b> include information about the signature using the `signature` object. The `signature` object <b class="rfc">must</b> include the following fields:
 
 
 | Name | Value | Format |
@@ -559,7 +559,7 @@ As described in [5. Signature and Public Key Infrastructure](#signature-and-publ
 | `certificate` | The Provider Certificate: an X509 certificate used by the Content Provider | Base 64 encoded DER certificate |
 | `value` | Value of the signature | Base 64 encoded octet sequence |
 
-For more information on how the signature and the certificate <b class="rfc">should</b> be calculated, encoded and processed, see [5. Signature and Public Key Infrastructure](#signature-and-public-key-infrastructure).
+For more information on how the signature and the certificate <b class="rfc">should</b> be calculated, encoded and processed, see [5. Signature and Public Key Infrastructure](#5-signature-and-public-key-infrastructure).
 
 *Example 6: Signature based on the basic LCP encryption profile.*
 
@@ -631,11 +631,11 @@ Calculating a signature is done on a byte stream, which is unique, while the Lic
 
 The steps <b class="rfc">required</b> of the Provider to sign the License Document are:
 
-1. The contents of the License Document (minus the signature object) are put in a canonical form: alphabetized with non-significant whitespace removed (see [Section 5.3](#canonical-form-of-the-license-document))
+1. The contents of the License Document (minus the signature object) are put in a canonical form: alphabetized with non-significant whitespace removed (see [Section 5.3](#53-canonical-form-of-the-license-document))
 
 2. The signature value for the canonical form of the License Document is calculated following the algorithm identified in the Encryption Profile.  This typically will involve taking a hash of the data and encrypting it using the private key.
 
-3. The signature value and the Provider Certificate are added to the License Document in the `signature` object, as described in [Section 3.8](#signing-the-license-the-signature-object).
+3. The signature value and the Provider Certificate are added to the License Document in the `signature` object, as described in [Section 3.8](#38-signing-the-license-the-signature-object).
 
 The steps <b class="rfc">required</b> of the Reading System to validate the signature are:
 
@@ -757,7 +757,7 @@ Now that our document is sorted, we can strip all whitespaces and end of lines:
 
 In order to sign a License Document, the Content Provider <b class="rfc">must</b> go through the following steps in order:
 
-1. The Content Provider <b class="rfc">must</b> create the canonical form of the License Document following the rules given in [5.3. Canonical form of the License Document](#canonical-form-of-the-license-document).
+1. The Content Provider <b class="rfc">must</b> create the canonical form of the License Document following the rules given in [5.3. Canonical form of the License Document](#53-canonical-form-of-the-license-document).
 
 2. The Content Provider <b class="rfc">must</b> calculate the signature using this canonical form of the License Document and using the algorithm described in the `algorithm` field with the private key of the Provider Certificate.
 
@@ -835,9 +835,9 @@ In order to validate the signature, the following steps <b class="rfc">must</b> 
 
 1. The Reading System <b class="rfc">must</b> extract and remove the signature from the License Document. 
 
-2. It <b class="rfc">must</b> calculate the canonical form of the License Document following the rules as expressed in [5.3. Canonical form of the License Document](#canonical-form-of-the-license-document).
+2. It <b class="rfc">must</b> calculate the canonical form of the License Document following the rules as expressed in [5.3. Canonical form of the License Document](#53-canonical-form-of-the-license-document).
 
-3. It <b class="rfc">must</b> recalculate the signature as defined in [5.4. Generating the signature](#generating-the-signature).
+3. It <b class="rfc">must</b> recalculate the signature as defined in [5.4. Generating the signature](#54-generating-the-signature).
 
 4. It <b class="rfc">must</b> verify that the calculated signature value is consistent with the one previously extracted from the License Document.
 
@@ -910,7 +910,7 @@ Reading Systems <b class="rfc">must</b>:
 
 1. Validate the syntax and completeness of the License Document.
 
-2. Validate the signature as defined in [5.5. Validating the certificate and signature](#validating-the-certificate-and-signature).
+2. Validate the signature as defined in [5.5. Validating the certificate and signature](#55-validating-the-certificate-and-signature).
 
 ### Acquiring the Publication
 
@@ -950,7 +950,7 @@ Reading Systems <b class="rfc">must not</b>:
 
 Reading Systems <b class="rfc">must</b>:
 
-* Validate the Signature and Provider Certificate as described in [5.5. Validating the certificate and signature](#validating-the-certificate-and-signature).
+* Validate the Signature and Provider Certificate as described in [5.5. Validating the certificate and signature](#55-validating-the-certificate-and-signature).
 
 * Update the Certification Revocation List on a regular basis.
 
