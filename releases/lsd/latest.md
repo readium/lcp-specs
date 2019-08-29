@@ -1,4 +1,6 @@
-# Readium License Status Document 1.0.4
+# Readium License Status Document 1.0
+
+**Revision: 4**
 
 *Copyright 2018, Readium Foundation. All Rights Reserved.*
 
@@ -9,10 +11,6 @@
 **This version:** 
 
 * [https://readium.org/lcp-specs/releases/lsd/latest](latest.md)
-
-**Previous version:** 
-
-* [https://readium.org/lcp-specs/releases/lsd/lsd-1-0-3](lsd-1-0-3.md)
 
 ## 1. Overview
 

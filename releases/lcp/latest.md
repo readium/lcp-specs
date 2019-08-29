@@ -1,4 +1,6 @@
-# Readium Licensed Content Protection 1.0.4
+# Readium Licensed Content Protection 1.0
+
+**Revision: 4**
 
 *Copyright 2019, Readium Foundation. All Rights Reserved.*
 
@@ -10,9 +12,6 @@
 
 * [https://readium.org/lcp-specs/releases/lcp/latest](latest.md)
 
-**Previous version:** 
-
-* [https://readium.org/lcp-specs/releases/lcp/lcp-1-0-3](lcp-1-0-3.md)
 
 ## 1. Overview
 
