@@ -672,7 +672,7 @@ The canonical form of the License Document is used when calculating and validati
 
 1. Since the `signature` object of the License Document is the product of the calculation, it <b class="rfc">must</b> be removed.
 
-2. All object members (name/value pairs) of the License Document <b class="rfc">must</b> be sorted in lexicographical order of their names according to their representation as Unicode code point. Note that this rule is recursive, so that members are sorted at all levels of object nesting.
+2. All JSON object properties (i.e. key/value pairs) in the License Document <b class="rfc">must</b> be lexicographically sorted by Unicode Code Point. Note that this rule is recursive, so that members are sorted at all levels of object nesting.
 
 3. Within arrays, the order of elements <b class="rfc">must not</b> be altered.
 
