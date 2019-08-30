@@ -628,7 +628,7 @@ Given the importance of the precise expression of various objects in the License
 
 Calculating a signature is done on a byte stream, which is unique, while the License Document is a JSON document where multiple representations might lead to the same structure. Thus, to ensure a stable signature between the Reading System and the Content Provider, some transformations must be applied prior to signing the Document and verifying the signature.
 
-The steps <b class="rfc">required</b> of the Provider to sign the License Document are:
+The steps <b class="rfc">required</b> from the Provider to sign the License Document are:
 
 1. The contents of the License Document (minus the signature object) are put in a canonical form: alphabetized with non-significant whitespace removed (see [Section 5.3](#53-canonical-form-of-the-license-document))
 
@@ -670,15 +670,15 @@ Reading Systems <b class="rfc">must</b> obtain the Root Certificate in the [[X50
 
 The canonical form of the License Document is used when calculating and validating the signature. To create the canonical form of the License Document, the following serialization rules must be followed:
 
-1. Since it is product of the calculation, the `signature` object of the License Document <b class="rfc">must</b> be removed.
+1. Since the `signature` object of the License Document is the product of the calculation, it <b class="rfc">must</b> be removed.
 
-2. All object members (name/value pairs) of the License Document <b class="rfc">must</b>** **be sorted in lexicographical order of their names according to their representation in UTF-8 (United Character Set code point value). Note that this rule is recursive, so that members are sorted at all levels of object nesting.
+2. All object members (name/value pairs) of the License Document <b class="rfc">must</b> be sorted in lexicographical order of their names according to their representation as Unicode code point. Note that this rule is recursive, so that members are sorted at all levels of object nesting.
 
 3. Within arrays, the order of elements <b class="rfc">must not</b> be altered.
 
 4. Numbers <b class="rfc">must not</b> include insignificant leading or trailing zeroes. Numbers that include a fraction part (non-integers) <b class="rfc">must</b> be expressed as a number, fraction, and exponent (normalized scientific notation) using an upper-case "E".
 
-5. Strings <b class="rfc">must</b> use escaping only for those characters for which it is <b class="rfc">required</b> by [[JSON](#normative-references)]: backslash (\), double-quotation mark ("), and control characters (U+0000 through U+001F). When escaping control characters, the hexadecimal digits <b class="rfc">must</b> be upper case.
+5. Strings <b class="rfc">must</b> use escaping only for those characters for which it is <b class="rfc">required</b> by [[JSON](#normative-references)]: backslash (\\), double-quotation mark ("), and control characters (U+0000 through U+001F). When escaping control characters, the hexadecimal digits <b class="rfc">must</b> be upper case.
 
 6. Non-significant whitespace (as defined in [[JSON](#normative-references)]) <b class="rfc">must</b> be removed. Whitespace found within strings <b class="rfc">must</b> be kept.
 
@@ -786,7 +786,7 @@ q/3IInic9c/EaJHyG1Kkqk5v1zlJNsiQBmxz4lykhyD3dA2jg2ZzrOenYU9GxP/xhe5H5Kt2WaJ/hnt8
 ```
 
 
-With this signature and the certificate, a valid license <b class="rfc">may</b> be created:
+With this signature and the certificate, a valid license will be created as e.g.:
 
 ```json
 {
@@ -822,11 +822,13 @@ With this signature and the certificate, a valid license <b class="rfc">may</b> 
 
 #### **5.5.1. Validating the certificate**
 
-1. It <b class="rfc">must</b> check that the Certificate was not expired when the License Document was last updated.
+1. The Reading System <b class="rfc">must</b> check the signature of the Provider Certificate using the Root Certificate it embeds.
 
-2. It <b class="rfc">must</b> validate the presence of the Provider Certificate in the root chain. To do so, it <b class="rfc">must</b> check the signature of the Provider Certificate using the public key of the Root Certificate.
+2. If a network connection is available, it <b class="rfc">must</b> periodically update its Certificate Revocation List, as defined in [[X509](#normative-references)].
 
-3. It <b class="rfc">must</b> validate that the certificate was not revoked as defined in [[X509](#normative-references)]. If a network connection is available, it <b class="rfc">must</b> update its certificate revocation list before it checks the validity of the certificate.
+3. It <b class="rfc">must</b> check that the Certificate was not revoked, as defined in [[X509](#normative-references)]. 
+
+4. It <b class="rfc">must</b> check that the  Certificate was not expired when the License Document was last updated.
 
 #### **5.5.2. Validating the signature**
 
@@ -847,7 +849,7 @@ In order to validate the signature, the following steps <b class="rfc">must</b> 
 
 LCP is entirely based on standard encryption algorithms, as defined in [[XML-ENC](#normative-references)] and [[XML-SIG](#normative-references)]. In order to maintain maximum flexibility, no specific algorithms are mandated by this specification. Instead, the design of both `encryption.xml` and the License Document allow for the identification of encryption algorithms to be discovered by Reading Systems when presented with a Protected Publication.
 
-In order to simplify this discovery process, the LCP 1.0 specification defines an Encryption Profile, which is the set of encryption algorithms used in a specific Protected Publication and associated Licence Document. Reading Systems that implement the algorithms identified in the Encryption Profile will be able to decrypt Protected Publications encoded using that Encryption Profile. For ease of discovery, the Encryption Profile is identified in the License Document.
+In order to simplify this discovery process, LCP defines an Encryption Profile, which is the set of encryption algorithms used in a specific Protected Publication and associated Licence Document. Reading Systems that implement the algorithms identified in the Encryption Profile will be able to decrypt Protected Publications encoded using that Encryption Profile. For ease of discovery, the Encryption Profile is identified in the License Document.
 
 This specification defines the Basic Encryption Profile 1.0, along with a list of associated algorithms extracted from [[XML-ENC](#normative-references)] or [[XML-SIG](#normative-references)]. All future official or vendor-specific extensions will also define such an Encryption Profile for easy identification by Reading Systems and publish such profiles in the [LCP Encryption Profiles Registry](#informative-references).
 
@@ -863,11 +865,11 @@ All Encryption Profiles <b class="rfc">must</b> identify algorithms for the foll
 
 4. Signature
 
-All algorithms used in an Encryption Profile <b class="rfc">must</b> be defined in [[XML-ENC](#normative-references)] or [[XML-SIG](#normative-references)].
+All algorithms used in an Encryption Profile <b class="rfc">should</b> be defined in [[XML-ENC](#normative-references)] or [[XML-SIG](#normative-references)].
 
 All Encryption Profiles <b class="rfc">must</b> use a URI to identify themselves in `profile` (contained in the `encryption` object of the License Document).
 
-All Encryption Profiles <b class="rfc">must</b> be registered in the LCP Encryption Profiles registry, as explicitly explained in the registry.
+All Encryption Profiles <b class="rfc">must</b> be registered in the LCP Encryption Profiles registry.
 
 ## 6.3. Basic Encryption Profile 1.0
 
@@ -998,7 +1000,7 @@ Reading Systems <b class="rfc">must not</b>:
 * [LCP Link Relations Registry](https://readium.org/lcp-specs/registries/relations)
 * [LCP Rights Registry](https://readium.org/lcp-specs/registries/rights)
 * [LCP User Fields Registry](https://readium.org/lcp-specs/registries/user)
-* LCP Encryption Profiles Registry
+* [LCP Encryption Profiles Registry](https://readium.org/lcp-specs/registries/profiles)
 
 ## Apendix A. JSON Schema
 
