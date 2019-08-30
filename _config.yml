@@ -18,7 +18,6 @@ author: EDRLab
 email: contact@edrlab.org
 description: Specifications and extensions of the Readium LCP DRM.
 url: "https://readium.org/lcp-specs" # the base hostname & protocol for your site
-section: /lcp-specs/ # URL part to be added to links in production
 
 # Build settings
 markdown: kramdown

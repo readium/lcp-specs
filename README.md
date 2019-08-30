@@ -59,7 +59,7 @@ Other requirement papers are:
 
 ## Software
 
-A large [open-source codebase]({{site.section}}readium-lcp-codebase/) has been developed as part of the Readium project by EDRLab. This includes a full featured License Server, DRM libraries compliant with different Readium toolkits (Readium SDK, Readium Mobile / Desktop), plus a lightweight library which can be integrated on any device.
+A large [open-source codebase]({{site.url}}/readium-lcp-codebase/) has been developed as part of the Readium project by EDRLab. This includes a full featured License Server, DRM libraries compliant with different Readium toolkits (Readium SDK, Readium Mobile / Desktop), plus a lightweight library which can be integrated on any device.
 
 ## More Information
 
