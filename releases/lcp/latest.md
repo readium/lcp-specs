@@ -826,9 +826,9 @@ With this signature and the certificate, a valid license will be created as e.g.
 
 2. If a network connection is available, it <b class="rfc">must</b> periodically update its Certificate Revocation List, as defined in [[X509](#normative-references)].
 
-3. It <b class="rfc">must</b> check that the Certificate was not revoked, as defined in [[X509](#normative-references)]. 
+3. The Reading System <b class="rfc">must</b> check that the Certificate was not revoked, as defined in [[X509](#normative-references)]. 
 
-4. It <b class="rfc">must</b> check that the  Certificate was not expired when the License Document was last updated.
+4. The Reading System <b class="rfc">must</b> check that the  Certificate was not expired when the License Document was last updated.
 
 #### **5.5.2. Validating the signature**
 
@@ -836,11 +836,11 @@ In order to validate the signature, the following steps <b class="rfc">must</b> 
 
 1. The Reading System <b class="rfc">must</b> extract and remove the signature from the License Document. 
 
-2. It <b class="rfc">must</b> calculate the canonical form of the License Document following the rules as expressed in [5.3. Canonical form of the License Document](#53-canonical-form-of-the-license-document).
+2. The Reading System <b class="rfc">must</b> calculate the canonical form of the License Document following the rules as expressed in [5.3. Canonical form of the License Document](#53-canonical-form-of-the-license-document).
 
-3. It <b class="rfc">must</b> recalculate the signature as defined in [5.4. Generating the signature](#54-generating-the-signature).
+3. The Reading System <b class="rfc">must</b> recalculate the signature as defined in [5.4. Generating the signature](#54-generating-the-signature).
 
-4. It <b class="rfc">must</b> verify that the calculated signature value is consistent with the one previously extracted from the License Document.
+4. The Reading System <b class="rfc">must</b> verify that the calculated signature value is consistent with the one previously extracted from the License Document.
 
 # 6. Encryption Profiles
 
@@ -849,9 +849,11 @@ In order to validate the signature, the following steps <b class="rfc">must</b> 
 
 LCP is entirely based on standard encryption algorithms, as defined in [[XML-ENC](#normative-references)] and [[XML-SIG](#normative-references)]. In order to maintain maximum flexibility, no specific algorithms are mandated by this specification. Instead, the design of both `encryption.xml` and the License Document allow for the identification of encryption algorithms to be discovered by Reading Systems when presented with a Protected Publication.
 
-In order to simplify this discovery process, LCP defines an Encryption Profile, which is the set of encryption algorithms used in a specific Protected Publication and associated Licence Document. Reading Systems that implement the algorithms identified in the Encryption Profile will be able to decrypt Protected Publications encoded using that Encryption Profile. For ease of discovery, the Encryption Profile is identified in the License Document.
+In order to simplify the discovery process, LCP defines the notion of Encryption Profile, which is the set of encryption algorithms used in a specific Protected Publication and associated Licence Document. Reading Systems that implement the algorithms identified in the Encryption Profile will be able to decrypt Protected Publications encoded using that Encryption Profile. The identification of the Encryption Profile in the License Document eases the discovery of these requirements by Reading Systems.
 
-This specification defines the Basic Encryption Profile 1.0, along with a list of associated algorithms extracted from [[XML-ENC](#normative-references)] or [[XML-SIG](#normative-references)]. All future official or vendor-specific extensions will also define such an Encryption Profile for easy identification by Reading Systems and publish such profiles in the [LCP Encryption Profiles Registry](#informative-references).
+This specification defines the Basic Encryption Profile 1.0, composed from a set of associated algorithms extracted from [[XML-ENC](#normative-references)] or [[XML-SIG](#normative-references)]. The Basic Encryption Profile is for test only, as it does not provide the level of obfuscation required by a reliable protection mechanism. 
+
+Other Encryption Profiles are (or will be) defined for use in production; these profiles are referenced in the [LCP Encryption Profiles Registry](#informative-references).
 
 ## 6.2. Encryption Profile Requirements
 
@@ -868,8 +870,6 @@ All Encryption Profiles <b class="rfc">must</b> identify algorithms for the foll
 All algorithms used in an Encryption Profile <b class="rfc">should</b> be defined in [[XML-ENC](#normative-references)] or [[XML-SIG](#normative-references)].
 
 All Encryption Profiles <b class="rfc">must</b> use a URI to identify themselves in `profile` (contained in the `encryption` object of the License Document).
-
-All Encryption Profiles <b class="rfc">must</b> be registered in the LCP Encryption Profiles registry.
 
 ## 6.3. Basic Encryption Profile 1.0
 
