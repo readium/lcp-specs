@@ -33,7 +33,7 @@ This specification adopts [terms defined in the EPUB 3 family of specifications]
   <dd>A logical document entity consisting of a set of interrelated resources, packaged in an EPUB Container.</dd>
 
   <dt>Publication Resource (or Resource)</dt>
-  <dd>A resource that contains content or instructions that contribute to the logic and rendering of the EPUB Publication. </dd>
+  <dd>A resource which contains content or instructions that contribute to the logic and rendering of the EPUB Publication. </dd>
 
   <dt>Package Document</dt>
   <dd>A Publication Resource carrying meta information about the EPUB Publication, provides a manifest of resources and defines the default reading order.</dd>
@@ -251,7 +251,7 @@ In Publications protected using LCP, the following XML syntax identifies the key
 
 3. The `Type` attribute <b class="rfc">must</b> use a value of "`http://readium.org/2014/01/lcp#EncryptedContentKey`" to identify the target of the URI as an encrypted Content Key.
 
-*Example1: An `image.jpeg` resource is encrypted using AES with the Content Key in `encryption.xml`.*
+*Example1: An `image.jpeg` resource is declared as encrypted using AES within `encryption.xml`.*
 
 ```xml
 <encryption
@@ -346,7 +346,7 @@ The `encryption/user_key` object contains information regarding the User Key use
 | `algorithm` | Algorithm used to generate the User Key from the User Passphrase, identified using the URIs defined in [[XML-ENC]((#normative-references))]. This <b class="rfc">must</b> match the User Key hash algorithm named in the Encryption Profile identified in `encryption/profile`. | URI |
 | `key_check` | The value of the License Document’s `id` field, encrypted using the User Key and the same algorithm identified for Content Key encryption in `encryption/content_key/algorithm`. This is used to verify that the Reading System has the correct User Key. | Base 64 encoded octet sequence |
 
-*Example 2: Encryption information for a License Document that uses the base Encryption Profile for LCP 1.0.*
+*Example 2: Encryption information for a License Document that uses the Basic Encryption Profile for LCP 1.0.*
 
 ```json
 {
@@ -379,6 +379,23 @@ A License Document <b class="rfc">must</b> also contain a `links` object.  This 
 
 Each Link Object nested in `links` contains the link URI, a link relationship and an <b class="rfc">optional</b> set of other link properties.
 
+### Link Object
+
+Each Link Object supports the following keys:
+
+| Name | Value | Format | Required? |
+| ---- | ----- | ------ | --------- |
+| `href` | Location of the linked resource | URI or URI Template | Yes |
+| `rel` | Link relationship to the document | List of well-known relation values, URIs for extensions | Yes |
+| `title` | Title of the link | String | No |
+| `type` | Expected MIME media type value for the external resources | MIME media type | No, but highly recommended |
+| `templated` | Indicates that the href is a URI Template | Boolean | No, default value is "false" |
+| `profile` | Expected profile used to identify the external resource | URI | No |
+| `length` | Content length in octets | Integer | No |
+| `hash` | SHA-256 hash of the resource | Base 64 encoded octet sequence | No |
+
+Templated URIs follow the [[URI-Template]](#normative-references) specification.
+
 ### Link relationships
 
 This specification introduces the following link relationships for each Link Object:
@@ -390,28 +407,12 @@ This specification introduces the following link relationships for each Link Obj
 | `self` | As defined in the IANA registry of link relations: "Conveys an identifier for the link's context." | No |
 | `support` | Support resources for the user (either a website, an email or a telephone number) | No |
 
-In addition to these link relations, this specification introduces the [LCP Link Relations Registry](#informative-references), in which all link relations defined in this specification are referenced.
+In addition to these link relationships, this specification introduces the [LCP Link Relations Registry](#informative-references), in which all link relations defined in this specification are referenced.
 
-Link relations <b class="rfc">may</b> also be extended for vendor-specific applications. Such links <b class="rfc">must</b> use a URI instead of a string to identify their link relations.
+Link relationships <b class="rfc">may</b> also be extended for vendor-specific applications. Such links <b class="rfc">must</b> use a URI instead of a string to identify their link relationships.
 
-### Link Object
-
-Each Link Object supports the following keys:
-
-| Name | Value | Format | Required? |
-| ---- | ----- | ------ | --------- |
-| `href` | Location of the linked resources | URI or URI Template | Yes |
-| `rel` | Link relationship to the document | List of well-known relation values, URIs for extensions | Yes |
-| `title` | Title of the link | String | No |
-| `type` | Expected MIME media type value for the external resources | MIME media type | No, but highly recommended |
-| `templated` | Indicates that the href is a URI Template | Boolean | No, default value is "false" |
-| `profile` | Expected profile used to identify the external resource | URI | No |
-| `length` | Content length in octets | Integer | No |
-| `hash` | SHA-256 hash of the resource | Base 64 encoded octet sequence | No |
-
-Templated URIs follow the [[URI-Template]](#normative-references) specification.
  
-*Example 3: A License Document that points to a publication, contains the location of a hint about its User Passphrase and uses an extension to provide authentication and recommandation services.*
+*Example 3: A License Document that points to a publication, contains the location of a hint about its User Passphrase and uses an extension to provide authentication and recommendation services.*
 
 ```json
 {
@@ -466,10 +467,10 @@ The License Document <b class="rfc">may</b> also express a series of rights usin
 
 | Name | Value | Format | Default |
 | ---- | ----- | ------ | ------- |
-| `print` | Maximum number of pages that can be printed over the lifetime of the license | Integer | Unlimited |
-| `copy` | Maximum number of characters that can be copied to the clipboard over the lifetime of the license | Integer | Unlimited |
-| `start` | Date and time when the license begins | ISO 8601 | None (perpetual license) |
-| `end` | Date and time when the license ends | ISO 8601 | None (perpetual license) |
+| `print` | Maximum number of pages that can be printed over the lifetime of the license. | Integer | Unlimited |
+| `copy` | Maximum number of characters that can be copied to the clipboard over the lifetime of the license. | Integer | Unlimited |
+| `start` | Date and time when the license begins. | ISO 8601 | None (perpetual license) |
+| `end` | Date and time when the license ends. | ISO 8601 | None (perpetual license) |
 
 <br/>
 All name/value pairs using an integer as their data type (print and copy for this specification) <b class="rfc">must not</b> use leading zeroes in values (e.g., "9", not “09”).
@@ -484,11 +485,11 @@ For the `print` right, a page is defined as follows:
 
 The `copy` right only covers the ability to copy to the clipboard and is limited to text (no images, etc.).
 
-In addition to these rights, this specification introduces the [LCP Rights Registry](#informative-references), in which all rights  defined in this specification are referenced.
+In addition to these rights, this specification introduces the [LCP Rights Registry](#informative-references), in which all rights defined in this specification are referenced.
 
 The `rights` object <b class="rfc">may</b> be extended to include any number of implementor-specific rights. Each extension right <b class="rfc">must</b> be identified using a URI controlled by the implementor.
 
-*Example 4:  License Document that grants a number of rights such as not allowing print at all, copying up to 2048 characters, tweeting (using a vendor extension) and a validity limited in time.*
+*Example 4:  this License Document defines the following rights: print up to ten pages and copy up to 10000 characters characters for the lifetime of the license; the license has an expiration date. There is also a vendor extension granting the right to tweet parts of this book.*
 
 ```json
 {
@@ -499,8 +500,8 @@ The `rights` object <b class="rfc">may</b> be extended to include any number of 
   "encryption": "...",
   "links": "...",
   "rights": {
-    "print": 0,
-    "copy": 2048,
+    "print": 10,
+    "copy": 10000,
     "start": "2013-11-04T01:08:15+01:00",
     "end": "2013-11-25T01:08:15+01:00",
     "https://www.imaginaryebookretailer.com/lcp/rights/tweet": true
@@ -522,7 +523,7 @@ The License Document <b class="rfc">may</b> embed information about the user usi
 
 In addition to these user information, this specification introduces the [LCP User Fields Registry](#informative-references), in which all user fields defined in this specification are referenced.
 
-As with rights, The `user` object <b class="rfc">may</b> be extended to include any number of implementor-specific fields. Each extension field <b class="rfc">must</b> be identified by a URI controlled by the implementor.
+As with rights, the `user` object <b class="rfc">may</b> be extended to include any number of implementor-specific fields. Each extension field <b class="rfc">must</b> be identified by a URI controlled by the implementor.
 
 To protect private User data, any of these fields <b class="rfc">may</b> be encrypted, except for the `encrypted` field, which <b class="rfc">must</b> remain in plain text. If encrypted, the field values <b class="rfc">must</b> be encrypted using the User Key and the same encryption algorithm identified in the `encryption/content_key` object. The names of all encrypted fields <b class="rfc">must</b> be listed in the `encrypted` array.
 
@@ -585,7 +586,7 @@ For more information on how the signature and the certificate <b class="rfc">sho
 ## 4.1. Introduction
 *This section is informative*
 
-In order for any symmetrically-encrypted message to work, there must be an agreed-upon key shared by the sender and receiver.  In LCP, this is the User Key. The Provider must have access to the User Key in order to secure the Content Key within the License Document. The Reading System must also have the User Key in order to decrypt the Content Key in the License Document.
+In order for any symmetrically encrypted message to work, there must be an agreed-upon key shared by the sender and receiver.  In LCP, this is the User Key. The Provider must have access to the User Key in order to secure the Content Key within the License Document. The Reading System must also have the User Key in order to decrypt the Content Key in the License Document.
 
 LCP uses a passphrase model for sharing the User Key: in a simple implementation, when the Reading System receives a new License Document, it prompts the User for a passphrase to access the Content Key.  LCP defines the User Key as a hash of this User Passphrase. This passphrase can be anything at all: a User-defined password, a Provider-defined password, an e-mail address, a library card number, etc. 
 
@@ -824,7 +825,7 @@ With this signature and the certificate, a valid license will be created as e.g.
 
 1. The Reading System <b class="rfc">must</b> check the signature of the Provider Certificate using the Root Certificate it embeds.
 
-2. If a network connection is available, it <b class="rfc">must</b> periodically update its Certificate Revocation List, as defined in [[X509](#normative-references)].
+2. If a network connection is available, the Reading System <b class="rfc">must</b> periodically update its Certificate Revocation List, as defined in [[X509](#normative-references)].
 
 3. The Reading System <b class="rfc">must</b> check that the Certificate was not revoked, as defined in [[X509](#normative-references)]. 
 
@@ -836,7 +837,7 @@ In order to validate the signature, the following steps <b class="rfc">must</b> 
 
 1. The Reading System <b class="rfc">must</b> extract and remove the signature from the License Document. 
 
-2. The Reading System <b class="rfc">must</b> calculate the canonical form of the License Document following the rules as expressed in [5.3. Canonical form of the License Document](#53-canonical-form-of-the-license-document).
+2. The Reading System <b class="rfc">must</b> calculate the canonical form of the License Document following the rules expressed in [5.3. Canonical form of the License Document](#53-canonical-form-of-the-license-document).
 
 3. The Reading System <b class="rfc">must</b> recalculate the signature as defined in [5.4. Generating the signature](#54-generating-the-signature).
 
@@ -849,7 +850,7 @@ In order to validate the signature, the following steps <b class="rfc">must</b> 
 
 LCP is entirely based on standard encryption algorithms, as defined in [[XML-ENC](#normative-references)] and [[XML-SIG](#normative-references)]. In order to maintain maximum flexibility, no specific algorithms are mandated by this specification. Instead, the design of both `encryption.xml` and the License Document allow for the identification of encryption algorithms to be discovered by Reading Systems when presented with a Protected Publication.
 
-In order to simplify the discovery process, LCP defines the notion of Encryption Profile, which is the set of encryption algorithms used in a specific Protected Publication and associated Licence Document. Reading Systems that implement the algorithms identified in the Encryption Profile will be able to decrypt Protected Publications encoded using that Encryption Profile. The identification of the Encryption Profile in the License Document eases the discovery of these requirements by Reading Systems.
+In order to simplify the discovery process, LCP defines the notion of Encryption Profile, which is the set of encryption algorithms used in a specific Protected Publication and associated Licence Document. Reading Systems that implement the algorithms identified in the Encryption Profile will be able to decrypt Protected Publications encoded using such Encryption Profile. The identification of the Encryption Profile in the License Document eases the discovery of these requirements by Reading Systems.
 
 This specification defines the Basic Encryption Profile 1.0, composed from a set of associated algorithms extracted from [[XML-ENC](#normative-references)] or [[XML-SIG](#normative-references)]. The Basic Encryption Profile is for test only, as it does not provide the level of obfuscation required by a reliable protection mechanism. 
 
@@ -873,7 +874,7 @@ All Encryption Profiles <b class="rfc">must</b> use a URI to identify themselves
 
 ## 6.3. Basic Encryption Profile 1.0
 
-Basic Encryption Profile 1.0 is identified in the `encryption` object of the License Document using the URL `http://readium.org/lcp/basic-profile` for the `profile` attribute value.
+The Basic Encryption Profile 1.0 is identified in the `encryption` object of the License Document using the URL `http://readium.org/lcp/basic-profile` as value of the `profile` attribute .
 
 The following algorithms are associated to the Basic Encryption Profile 1.0:
 
@@ -915,9 +916,7 @@ Reading Systems <b class="rfc">must</b>:
 
 ### Acquiring the Publication
 
-When License Documents are delivered independently of the Protected Publication, Reading Systems <b class="rfc">must</b>:
-
-1. Download the Protected Publication at the given URL given in `links/publication/href`.
+When License Documents are delivered independently of the Protected Publication, Reading Systems <b class="rfc">must</b> download the Protected Publication at the URL given in `links/publication/href`.
 
 A Reading System that will make the Protected Publication file accessible to the User <b class="rfc">must</b> add the License Document to the downloaded Protected Publication at `META-INF/license.lcpl`.
 
@@ -929,13 +928,13 @@ A Reading System <b class="rfc">should</b> report any failure to acquire the Pro
 
 Reading Systems <b class="rfc">must</b>:
 
-* Show the text hint and URL when prompting the User for their User Passphrase
+* Show the text hint and URL when prompting the User for their User Passphrase.
 
 Reading Systems <b class="rfc">should</b>:
 
-* Store the User Key, but in a secured manner
+* Store the User Key, but in a secured manner.
 
-* Try previously stored User Keys before prompting the User to enter their User Passphrase for a new Protected Publication
+* Try previously stored User Keys before prompting the User to enter their User Passphrase for a new Protected Publication.
 
 Reading Systems <b class="rfc">may</b>:
 
@@ -945,7 +944,7 @@ Reading Systems <b class="rfc">may</b>:
 
 Reading Systems <b class="rfc">must not</b>:
 
-* Store User Passphrase, only the User Key.
+* Store the User Passphrase, only the User Key.
 
 ## 7.4. Signature Processing
 
