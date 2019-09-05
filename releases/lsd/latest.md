@@ -449,12 +449,3 @@ A JSON Schema for LSD 1.0 is available under version control at [https://github.
 For the purpose of validating a status document, use the following JSON Schema resource:
 [https://readium.org/lcp-specs/schema/status.schema.json](https://readium.org/lcp-specs/schema/status.schema.json)
 
-
-<style>
-.rfc {
-    color: #d55;
-    font-variant: small-caps;
-    font-style: normal;
-    font-weight: normal;
-}
-</style>
