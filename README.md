@@ -41,6 +41,7 @@ The following technical notes are currently in draft:
 * [LCP for PDF](notes/lcp-for-pdf.md) defines how PDF documents are protected by LCP. 
 * [LCP for Audiobooks](notes/lcp-for-audiobooks.md) defines how Audiobooks using the Readium Packaged Web Publication format are protected by LCP. 
 * [LCP Profile Upgrade](notes/lcp-profile-upgrade.md) defines a mechanism for seamlessly transitioning an operational LCP ecosystem to the most recent profile revision, whilst ensuring forward compatibility for outdated client software, and for non-updatable user devices.
+* [LCP Automatic Key Retrieval](notes/lcp-key-retrieval.md) defines how hashed passphrases can be automatically retrieved from a server by authentified users. 
 
 ## Registries
 
