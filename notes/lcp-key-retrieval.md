@@ -61,9 +61,9 @@ If one of the supported OAuth 2.0 flows is used, an Access Token is returned to 
 
 ### OAuth 2
 
-RFC 6749 specifies how different types of applications can get an Access Token from an authorization Server using one of four Authization Grant types.
+RFC 6749 specifies how different types of applications can get an Access Token from an authorization Server using one of four Authorization Grant types.
 
-There is not discovery mechanism is the RFC 6749, therefore there may be interoperability issues for deploying many different reading applications accessing many different content servers.
+There is no discovery mechanism in the RFC 6749, therefore there may be interoperability issues when deploying many different reading applications accessing many different content servers.
 
 Restrictions may be added to the use of OAuth 2 in subsequent versions of this specification. 
 
@@ -212,18 +212,18 @@ Note that it is recommended for the client to put in cache the access token and 
 
 RFC 6749 - OAuth 2.0
 
-https://tools.ietf.org/html/rfc6749
+[https://tools.ietf.org/html/rfc6749](https://tools.ietf.org/html/rfc6749)
 
 The OAuth 2.0 Authorization Framework: Bearer Token Usage
 
-https://tools.ietf.org/html/rfc6750
+[https://tools.ietf.org/html/rfc6750](https://tools.ietf.org/html/rfc6750)
 
 OPDS 2.0
 
-https://drafts.opds.io/opds-2.0
+[https://drafts.opds.io/opds-2.0](https://drafts.opds.io/opds-2.0)
 
 Authentication for OPDS
 
-https://drafts.opds.io/authentication-for-opds-1.0
+[https://drafts.opds.io/authentication-for-opds-1.0](https://drafts.opds.io/authentication-for-opds-1.0)
 
 
