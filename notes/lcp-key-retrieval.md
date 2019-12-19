@@ -121,7 +121,7 @@ All examples in this specification are informative.
 
 ### The lcp_hashed_passphrase element
 
-The lcp_hashed_passphrase element represents the hex-encoded value of the hashed passphrase. 
+The lcp_hashed_passphrase element represents the base64-encoded value of the hashed passphrase. 
 
 It is implemented as a property of an OPDS 2 Acquisition Link which references an LCP License or Protected Publication. Such a link is found inside an OPDS Publication Object, or more generically a Readium Web Publication Object.
 
@@ -142,12 +142,14 @@ It is implemented as a property of an OPDS 2 Acquisition Link which references a
       "href": "https://example.com/license.lcpl",
       "type": "application/vnd.readium.lcp.license.v1.0+json",
       "properties": {
-        "lcp_hashed_passphrase": "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08"
+        "lcp_hashed_passphrase": "+usAylGL6nyxGn7zH7YYO0ibG26tt5K+xkoDs/b/gKg="
       }
     }
   ]
 }
 ```
+
+Note about the computation of the base64-encoded value of the hashed passphrase: from the hashed value of the passphrase, expressed as an hex-encoded string, calculate a byte array (32-bytes / 256-bits binary buffer); for instance, "4981AA..." becomes [49, 81, 170, ...]. The expected value is the Base64 encoding of this byte array. Note that a base64 conversion is usually implicitly applied to byte arrays when converted to json structures.
 
 ## Including a hashed passphrase in an OPDS 1 Catalog
 
