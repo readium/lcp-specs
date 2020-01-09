@@ -270,7 +270,7 @@ In Publications protected using LCP, the following XML syntax identifies the key
         </enc:CipherData>
         <enc:EncryptionProperties>
           <enc:EncryptionProperty xmlns:ns="http://www.idpf.org/2016/encryption#compression">
-              <ns:Compression Method="8" OriginalLength="35000"/>
+              <ns:Compression Method="0" OriginalLength="450100"/>
           </enc:EncryptionProperty>
       </enc:EncryptionProperties>
     </enc:EncryptedData>
