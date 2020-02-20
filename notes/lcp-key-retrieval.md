@@ -25,10 +25,10 @@ Note that this advanced feature does not free LCP license providers to communica
 
 Two types of access-restricted resources are particularly interesting in the scope of this specification:
 
-* Links to the personal bookshelf of a User (cf OPDS 1 or OPDS 2) in an OPDS Catalog.
+* Links to the personal bookshelf of a User in an OPDS Catalog.
 * Acquisition links in individual entries of an OPDS Catalog. 
 
-Fetching access-restricted resources require user authentication. This specification does not require a specific user authentication method: the sole requirement is the provision of an Access Token as the result of user authentication. 
+Fetching access-restricted resources requires user authentication. This specification does not require a specific user authentication method: the sole requirement is the provision of an Access Token as the result of user authentication. 
 
 The following sub-sections describe recommended authentication methods. 
 
@@ -69,17 +69,17 @@ Restrictions may be added to the use of OAuth 2 in subsequent versions of this s
 
 ## Terminology
 
-Authorization Server
+*Authorization Server*
 
-A server issuing Access Tokens to Reading Systems after successfully authenticating a User and obtaining authorization to access a given resource.
+Server issuing Access Tokens to Reading Systems after successfully authenticating a User and obtaining authorization to access a given resource.
 
 *Access Token*
 
-A unique string sent back to a Reading System by an Authorization Server after authentication of a User.
+Unique string sent back to a Reading System by an Authorization Server after authentication of a User.
 
 *Encryption Profile*
 
-A set of encryption algorithms used in a specific Protected Publication and associated Licence Document.
+Set of encryption algorithms used in a specific Protected Publication and associated Licence Document.
 
 *License Document*
 
@@ -87,27 +87,31 @@ Document that contains references to the various keys, links to related external
 
 *Passphrase Hash*
 
-A value obtained by hashing a User Passphrase using the algorithm defined in the specific Encryption Profile referenced in a License Document.
+Value obtained by hashing a User Passphrase using the algorithm defined in the specific Encryption Profile referenced in a License Document.
+
+*Personal Bookshelf*
+
+List of publications an authentified User has already acquired.
 
 *Protected Publication*
 
-A Publication that has been protected according to the Readium LCP specification.
+Publication that has been protected according to the Readium LCP specification.
 
 *Provider*
 
-An entity that delivers License Documents and Protected Publications to Users.
+Entity that delivers License Documents and Protected Publications to Users.
 
 *User*
 
-An individual that consumes a Publication using a Reading System.
+Individual that consumes a Publication using a Reading System.
 
 *User Key*
 
-The result of a transform applied to a User Passphrase, used to decrypt the Content Key and selected user information fields contained in a License Document.
+Result of a transform applied to a User Passphrase, used to decrypt the Content Key and selected user information fields contained in a License Document.
 
 *User Passphrase*
 
-A string of text entered by the user and used to generate the User Key. 
+String of text entered by the user and used to generate the User Key. 
 
 ## Conformance Statements
 
@@ -155,14 +159,15 @@ Note about the computation of the base64-encoded value of the hashed passphrase:
 
 ### The lcp:hashed_passphrase element
 
-This specification defines the XML namespace http://readium.org/lcp-specs/ns. This namespace must be declared Its usual namespace prefix is lcp.
+This specification defines the XML namespace `http://readium.org/lcp-specs/ns`. 
+This namespace must be declared. Its usual namespace prefix is `lcp`.
 
 The &lt;hashed_passphrase> element is defined in this namespace as a child of the &lt;link> element defined in the “atom” namespace; it represents the hex-encoded value of the hashed passphrase.
 
 ### Sample of an OPDS 1 Link Object supporting an lcp:hashed_passphrase property
 
 ```
-<entry xmlns="http://www.w3.org/2005/Atom">
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:lcp="http://readium.org/lcp-specs/ns">
   ...
   <link rel="http://opds-spec.org/acquisition/"
       href="https://example.com/license.lcpl"
@@ -180,34 +185,35 @@ Note: line breaks in the hash value are for display purpose only.
 
 ### Getting a hashed passphrase at acquisition time
 
-A usual use case on a Publishing Web site is as follows:
+A usual use case on a Publishing website is as follows:
 
-1. A user browses a catalog without being signed-in.
+1. A user browses a catalog on the website without being signed-in.
 1. He chooses a publication and reads its presentation page. This page contains a “buy” or “borrow” button.
-1. He selects the button.
+1. He hits the button.
 1. A sign-in screen appears, the user enters his credentials and validates. 
 1. A new screen appears where the user can download the protected publication he has acquired. 
 1. During a certain time, every attempt to acquire a publication is immediately successful: the user may just have to confirm his acquisition before the protected publication is downloaded. 
 
 This is achieved by providing to an unknown client an http 401 response to the “buy” or “borrow” action. When Authentication for OPDS is used, an Authentication Document is returned which contains one or more ways for the user to authenticate and get an Authorization Token.  
 
-Once authentified / authorized the user receives, as a response to a “download” action, a JSON Publication Object which contains a link to an LCP license plus the hashed passphrase corresponding to this license.
+Once authentified / authorized, the user receives as a response to a “download” action a JSON Readium Web Publication Object, which contains a link to an LCP license plus the hashed passphrase corresponding to this license.
 
-The client stores the hashed passphrase, fetches the license, then moves to the standard LCP workflow, i.e. validates the license structure, verifies its status, checks that a stored passphrase (any in pratice) corresponds to the license, downloads the encrypted content, embeds the license in the content and opens the ebook.  
+The client stores the hashed passphrase, fetches the license, then follows the standard LCP workflow, i.e. it validates the license structure, verifies its status, checks that a stored passphrase (any in pratice) corresponds to the license, downloads the encrypted content, embeds the license in the content and opens the ebook.  
 
 ### Getting the hashed passphrases related to a personal OPDS bookshelf
 
-A usual use case on a Publishing Web site is as follows:
+A usual use case on an OPDS compliant reading app is as follows:
 
-1. A user enters the web site and signs-in.
-1. He selects his personal bookshelf (i.e. the list of publications an authentified User has already acquired). On each entry a “download” button is shown. 
+1. A user launches his reading app.
+1. He selects his personal bookshelf and signs-in. On each visible entry a “download” button is shown. 
 1. The user can immediately download one or more protected publications.
-1. During a certain time, every attempt to acquire a publication is immediately successful.
+1. During a certain time, every access to his personal bookshelf is immediately successful.
 
 This is achieved by providing to the client of the authentified / authorized user, inside each OPDS 1 or 2 entry, a link to an LCP license plus the hashed passphrase corresponding to this license.
 
-For each publication selected by the user, the download mechanism is identical to the one described in the previous use-case. Even if all hashed passphrases are usually identical in the feed (this is recommended, but not required), using one hashed passphrase per entry is a simpler solution to specifiy and implement. 
-Note that it is recommended for the client to put in cache the access token and optional refresh token for future use. When Authentication for OPDS is used, the Authentication Document has an identifier and the access and refresh tokens are associated with this id. When a call response is 401 with an Authentication Document, the client can send the access token associated with this id, or call the associated refresh URL if the access token has expired. 
+For each publication selected by the user, the download mechanism is identical to the one described in the previous use-case. Even if all hashed passphrases are usually identical in the feed (this is recommended, but not required), using one hashed passphrase per entry is a simpler solution to specify and implement. 
+
+Note that it is recommended for the client to put in cache the access token and optional refresh token for future use. When Authentication for OPDS is used, the Authentication Document has an identifier and the access and refresh tokens are associated with this id. When a response to a call has an http 401 response with an Authentication Document, the client can send the access token associated with this id, or call the associated refresh URL if the access token has expired. 
 
 
 ## References
