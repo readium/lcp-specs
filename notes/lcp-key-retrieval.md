@@ -204,8 +204,8 @@ The client stores the hashed passphrase, fetches the license, then follows the s
 
 A usual use case on an OPDS compliant reading app is as follows:
 
-1. A user launches his reading app.
-1. He selects his personal bookshelf and signs-in. On each visible entry a “download” button is shown. 
+1. A user launches his reading app and selects his personal bookshelf.
+1. A sign-in screen appears, the user enters his credentials and validates. The content of his personal bookshelf appears, with a “download” button on each entry. 
 1. The user can immediately download one or more protected publications.
 1. During a certain time, every access to his personal bookshelf is immediately successful.
 
