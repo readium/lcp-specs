@@ -129,7 +129,7 @@ The lcp_hashed_passphrase element represents the base64-encoded value of the has
 
 It is implemented as a property of an OPDS 2 Acquisition Link which references an LCP License or Protected Publication. Such a link is found inside an OPDS Publication Object, or more generically a Readium Web Publication Object.
 
-### Sample of Readium Web Publication supporting an lcp_hashed_passphrase property
+### Sample of Readium Web Publication Object supporting a link to an LCP license and an lcp_hashed_passphrase property
 
 ```
 {
@@ -164,7 +164,7 @@ This namespace must be declared. Its usual namespace prefix is `lcp`.
 
 The &lt;hashed_passphrase> element is defined in this namespace as a child of the &lt;link> element defined in the “atom” namespace; it represents the hex-encoded value of the hashed passphrase.
 
-### Sample of an OPDS 1 Link Object supporting an lcp:hashed_passphrase property
+### Sample of an OPDS 1 entry supporting a link to an LCP license and an lcp:hashed_passphrase property
 
 ```
 <entry xmlns="http://www.w3.org/2005/Atom" xmlns:lcp="http://readium.org/lcp-specs/ns">
@@ -212,7 +212,7 @@ A usual use case on an OPDS compliant reading app is as follows:
 1. The user can immediately download one or more protected publications.
 1. During a certain time, every access to his personal bookshelf is immediately successful.
 
-This is achieved by providing to the client of the authentified / authorized user, inside each OPDS 1 or 2 entry, a link to an LCP license plus the hashed passphrase corresponding to this license.
+This is achieved by providing to the client of the authentified / authorized user, inside each OPDS 1 or 2 entry, a link to an LCP license plus the hashed passphrase corresponding to this license. Note that an OPDS 2 entry is a Readium Web Publication Object.
 
 For each publication selected by the user, the download mechanism is identical to the one described in the previous use-case. Even if all hashed passphrases are usually identical in the feed (this is recommended, but not required), using one hashed passphrase per entry is a simpler solution to specify and implement. 
 
