@@ -196,7 +196,7 @@ A usual use case on a Publishing website is as follows:
 
 This is achieved by providing to an unknown client an http 401 response to the “buy” or “borrow” action. 
 
-If Authentication for OPDS is used, an Authentication Document is returned which contains one or more ways for the user to authenticate. Once authentified / authorized, the user receives an Access Token which is put in cache and immediately used as a parameter of the "download" link. A Refresh URL may also be returned. The response to the “download” link is a JSON Readium Web Publication Object which contains a link to an LCP license, plus the hashed passphrase corresponding to this license.
+If Authentication for OPDS is used, an Authentication Document is returned which contains one or more ways for the user to authenticate. A Refresh URL may also be returned at this step. Once authentified / authorized, the user receives an Access Token which is put in cache and immediately used as a parameter of the "download" link. The response to the “download” link is a JSON Readium Web Publication Object which contains a link to an LCP license, plus the hashed passphrase corresponding to this license.
 
 Note that when Authentication for OPDS is used, the Authentication Document has an identifier and the Access Token and Refresh URL are associated with this id. When a response to a call has an http 401 response with an Authentication Document, the client can use the Access Token associated with this id, or call the associated refresh URL if the Access Token has expired. 
 
