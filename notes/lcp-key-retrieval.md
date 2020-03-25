@@ -191,14 +191,17 @@ A usual use case on a Publishing website is as follows:
 1. He chooses a publication and reads its presentation page. This page contains a “buy” or “borrow” button.
 1. He hits the button.
 1. A sign-in screen appears, the user enters his credentials and validates. 
-1. A new screen appears where the user can download the protected publication he has acquired. 
+1. A new screen appears where the user can "download" the protected publication he has acquired. 
 1. During a certain time, every attempt to acquire a publication is immediately successful: the user may just have to confirm his acquisition before the protected publication is downloaded. 
 
 This is achieved by providing to an unknown client an http 401 response to the “buy” or “borrow” action. 
 
-If Authentication for OPDS is used, an Authentication Document is returned which contains one or more ways for the user to authenticate. Once authentified / authorized, the user receives as a response to a “download” action a JSON Readium Web Publication Object, which contains a link to an LCP license plus the hashed passphrase corresponding to this license.
+If Authentication for OPDS is used, an Authentication Document is returned which contains one or more ways for the user to authenticate. Once authentified / authorized, the user receives an Access Token which is put in cache and immediately used as a parameter of the "download" link. A Refresh URL may also be returned. The response to the “download” link is a JSON Readium Web Publication Object which contains a link to an LCP license, plus the hashed passphrase corresponding to this license.
+
+Note that when Authentication for OPDS is used, the Authentication Document has an identifier and the Access Token and Refresh URL are associated with this id. When a response to a call has an http 401 response with an Authentication Document, the client can use the Access Token associated with this id, or call the associated refresh URL if the Access Token has expired. 
 
 The client stores the hashed passphrase, fetches the license, then follows the standard LCP workflow, i.e. it validates the license structure, verifies its status, checks that a stored passphrase (any in pratice) corresponds to the license, downloads the encrypted content, embeds the license in the content and opens the ebook.  
+
 
 ### Getting the hashed passphrases related to a personal OPDS bookshelf
 
@@ -212,9 +215,6 @@ A usual use case on an OPDS compliant reading app is as follows:
 This is achieved by providing to the client of the authentified / authorized user, inside each OPDS 1 or 2 entry, a link to an LCP license plus the hashed passphrase corresponding to this license.
 
 For each publication selected by the user, the download mechanism is identical to the one described in the previous use-case. Even if all hashed passphrases are usually identical in the feed (this is recommended, but not required), using one hashed passphrase per entry is a simpler solution to specify and implement. 
-
-Note that it is recommended for the client to put in cache the access token and optional refresh token for future use. When Authentication for OPDS is used, the Authentication Document has an identifier and the access and refresh tokens are associated with this id. When a response to a call has an http 401 response with an Authentication Document, the client can send the access token associated with this id, or call the associated refresh URL if the access token has expired. 
-
 
 ## References
 
