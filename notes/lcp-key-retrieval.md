@@ -202,6 +202,10 @@ Note that when Authentication for OPDS is used, the Authentication Document has 
 
 The client stores the hashed passphrase, fetches the license, then follows the standard LCP workflow, i.e. it validates the license structure, verifies its status, checks that a stored passphrase (any in pratice) corresponds to the license, downloads the encrypted content, embeds the license in the content and opens the ebook.  
 
+#### Sequence diagram
+
+![Automatic LCP key retrieval, use of authentication for OPDS](https://www.edrlab.org/public/readium-lcp/LCP-key-retrieval-authOPDS.png)
+
 
 ### Getting the hashed passphrases related to a personal OPDS bookshelf
 
