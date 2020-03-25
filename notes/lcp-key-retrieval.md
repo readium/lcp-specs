@@ -34,7 +34,7 @@ The following sub-sections describe recommended authentication methods.
 
 ### Authentication for OPDS
 
-The Authentication for OPDS specification defines a standard way for OPDS Catalog providers and clients to:
+The [Authentication for OPDS specification](https://drafts.opds.io/authentication-for-opds-1.0) defines a standard way for OPDS Catalog providers and clients to:
 
 * Provide relevant information for clients to display an authentication page,
 * Expose how a client can authenticate using various Authentication Flows.
@@ -61,7 +61,7 @@ If one of the supported OAuth 2.0 flows is used, an Access Token is returned to 
 
 ### OAuth 2
 
-RFC 6749 specifies how different types of applications can get an Access Token from an authorization Server using one of four Authorization Grant types.
+[RFC 6749](https://tools.ietf.org/html/rfc6749) specifies how different types of applications can get an Access Token from an authorization Server using one of four Authorization Grant types.
 
 There is no discovery mechanism in the RFC 6749, therefore there may be interoperability issues when deploying many different reading applications accessing many different content servers.
 
@@ -194,9 +194,9 @@ A usual use case on a Publishing website is as follows:
 1. A new screen appears where the user can download the protected publication he has acquired. 
 1. During a certain time, every attempt to acquire a publication is immediately successful: the user may just have to confirm his acquisition before the protected publication is downloaded. 
 
-This is achieved by providing to an unknown client an http 401 response to the “buy” or “borrow” action. When Authentication for OPDS is used, an Authentication Document is returned which contains one or more ways for the user to authenticate and get an Authorization Token.  
+This is achieved by providing to an unknown client an http 401 response to the “buy” or “borrow” action. 
 
-Once authentified / authorized, the user receives as a response to a “download” action a JSON Readium Web Publication Object, which contains a link to an LCP license plus the hashed passphrase corresponding to this license.
+If Authentication for OPDS is used, an Authentication Document is returned which contains one or more ways for the user to authenticate. Once authentified / authorized, the user receives as a response to a “download” action a JSON Readium Web Publication Object, which contains a link to an LCP license plus the hashed passphrase corresponding to this license.
 
 The client stores the hashed passphrase, fetches the license, then follows the standard LCP workflow, i.e. it validates the license structure, verifies its status, checks that a stored passphrase (any in pratice) corresponds to the license, downloads the encrypted content, embeds the license in the content and opens the ebook.  
 
