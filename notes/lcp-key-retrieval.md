@@ -1,8 +1,8 @@
 # Readium LCP Automatic Key Retrieval - Technical solution
 
-**Revision: 1**
+**Revision: 2**
 
-*Copyright 2019, Readium Foundation. All Rights Reserved.*
+*Copyright 2020, Readium Foundation. All Rights Reserved.*
 
 By: Laurent Le Meur (EDRLab) and Hadrien Gardeur (De Marque)
 
@@ -131,7 +131,7 @@ It is implemented as a property of an OPDS 2 Acquisition Link which references a
 
 ### Sample of Readium Web Publication Object supporting a link to an LCP license and an lcp_hashed_passphrase property
 
-```
+``` json
 {
   "metadata": {
     "@type": "http://schema.org/Book",
@@ -166,22 +166,51 @@ The &lt;hashed_passphrase> element is defined in this namespace as a child of th
 
 ### Sample of an OPDS 1 entry supporting a link to an LCP license and an lcp:hashed_passphrase property
 
-```
+``` xml
 <entry xmlns="http://www.w3.org/2005/Atom" xmlns:lcp="http://readium.org/lcp-specs/ns">
   ...
   <link rel="http://opds-spec.org/acquisition/"
       href="https://example.com/license.lcpl"
       type="application/vnd.readium.lcp.license.v1.0+json">
-    <lcp:hashed_passphrase>9f86d081884c7d6
-      59a2feaa0c55ad015a3bf4f1b2b0b822cd15d
-      6c15b0f00a08</lcp:hashed_passphrase> 
+    <lcp:hashed_passphrase>9f86d081884c7d65...22cd15d6c15b0f00a08</lcp:hashed_passphrase> 
  </link>
 </entry>
 ```
 
-Note: line breaks in the hash value are for display purpose only.
+## Including a reference to an Authentication Document inside a license
+
+When Authentication for OPDS is used, the URL of the Authentication Document may be provided at the time this Authentication Document is retrieved (ref. Authentication for OPDS specification, [section Authentication Provider](https://drafts.opds.io/authentication-for-opds-1.0#24-authentication-provider)).
+
+In such a URL is provided, it is possible for the client device to store this URL as a link inside the license it retrieves form the LCP server. 
+
+As per the Authentication for OPDS specification, the link-value must be identified by:
+
+* the http://opds-spec.org/auth/document relationship
+* the application/opds-authentication+json media type
+
+The user authentication step can then be automatically re-played after the license has been copied from one device able to inject this URL inside the license, to another device able to process such information.
+
+### Sample 
+
+``` json
+{
+  "metadata": {
+    "@type": "http://schema.org/Book",
+    "title": "A Journey into the Center of the Earth"
+  },
+  "links": [
+    {
+      "rel": "http://opds-spec.org/auth/document",
+      "href": "https://example.com/auth_document.json",
+      "type": "application/opds-authentication+json"
+    }
+  ]
+}
+```
 
 ## Use Cases and Workflows
+
+*This section is informative*
 
 ### Getting a hashed passphrase at acquisition time
 
@@ -198,14 +227,11 @@ This is achieved by providing to an unknown client an http 401 response to the �
 
 If Authentication for OPDS is used, an Authentication Document is returned which contains one or more ways for the user to authenticate. A Refresh URL may also be returned at this step. Once authentified / authorized, the user receives an Access Token which is put in cache and immediately used as a parameter of the "download" link. The response to the “download” link is a JSON Readium Web Publication Object which contains a link to an LCP license, plus the hashed passphrase corresponding to this license.
 
-Note that when Authentication for OPDS is used, the Authentication Document has an identifier and the Access Token and Refresh URL are associated with this id. When a response to a call has an http 401 response with an Authentication Document, the client can use the Access Token associated with this id, or call the associated refresh URL if the Access Token has expired. 
+Note that when Authentication for OPDS is used, the Authentication Document has an identifier and the Access Token and refresh URL can be associated with this id for future reuse. When a response to a call has an http 401 response with an Authentication Document, the client can use the Access Token associated with this id, or call the associated refresh URL if the Access Token has expired, thus avoiding a new user authentication step.
 
-The client stores the hashed passphrase, fetches the license, then follows the standard LCP workflow, i.e. it validates the license structure, verifies its status, checks that a stored passphrase (any in pratice) corresponds to the license, downloads the encrypted content, embeds the license in the content and opens the ebook.  
+The client stores the hashed passphrase, fetches the license, then follows the standard LCP workflow, i.e. it validates the license structure, verifies its status, checks that a stored passphrase (any in pratice) corresponds to the license, downloads the encrypted content, embeds the license in the content and opens the ebook.
 
-#### Sequence diagram
-
-![Automatic LCP key retrieval, use of authentication for OPDS](https://www.edrlab.org/public/readium-lcp/LCP-key-retrieval-authOPDS.png)
-
+If the link to the Authentication Document has been retrieved in a previous step, the client can also inject this link into the LCP license.
 
 ### Getting the hashed passphrases related to a personal OPDS bookshelf
 
@@ -219,6 +245,16 @@ A usual use case on an OPDS compliant reading app is as follows:
 This is achieved by providing to the client of the authentified / authorized user, inside each OPDS 1 or 2 entry, a link to an LCP license plus the hashed passphrase corresponding to this license. Note that an OPDS 2 entry is a Readium Web Publication Object.
 
 For each publication selected by the user, the download mechanism is identical to the one described in the previous use-case. Even if all hashed passphrases are usually identical in the feed (this is recommended, but not required), using one hashed passphrase per entry is a simpler solution to specify and implement. 
+
+### Sequence diagrams
+
+#### Automatic LCP key retrieval, use of Authentication for OPDS
+
+![Automatic LCP key retrieval, use of authentication for OPDS](https://www.edrlab.org/public/readium-lcp/LCP-key-retrieval-authOPDS.png)
+
+#### Automatic LCP key retrieval, reuse of the Authentication Document
+
+![Automatic LCP key retrieval, reuse of the Authentication Document](https://www.edrlab.org/public/readium-lcp/LCP-key-retrieval-fromAuthDocLink.png)
 
 ## References
 
