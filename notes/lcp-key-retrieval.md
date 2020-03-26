@@ -1,10 +1,10 @@
 # Readium LCP Automatic Key Retrieval - Technical solution
 
-**Revision: 2**
+**Revision: 2, DRAFT version**
 
 *Copyright 2020, Readium Foundation. All Rights Reserved.*
 
-By: Laurent Le Meur (EDRLab) and Hadrien Gardeur (De Marque)
+By: Laurent Le Meur (EDRLab), Hadrien Gardeur (De Marque), Rémi Bauzac (Vivlio)
 
 ## Overview
 
@@ -18,54 +18,6 @@ However, in many situations, a user is already authenticated on a Provider serve
 The goal of this project is to provide such a functionality in an open and standard way. By integrating this functionality, public libraries and booksellers who decide to offer such comfort to their users will reach a level of seamless integration currently mainly provided by proprietary platforms.
 
 Note that this advanced feature does not free LCP license providers to communicate to their users a passphrase they can enter manually on any LCP compliant Client application, helped in this by a clear passphrase hint.
-
-## Means of authentication of the user
-
-*This section is informative*
-
-Two types of access-restricted resources are particularly interesting in the scope of this specification:
-
-* Links to the personal bookshelf of a User in an OPDS Catalog.
-* Acquisition links in individual entries of an OPDS Catalog. 
-
-Fetching access-restricted resources requires user authentication. This specification does not require a specific user authentication method: the sole requirement is the provision of an Access Token as the result of user authentication. 
-
-The following sub-sections describe recommended authentication methods. 
-
-### Authentication for OPDS
-
-The [Authentication for OPDS specification](https://drafts.opds.io/authentication-for-opds-1.0) defines a standard way for OPDS Catalog providers and clients to:
-
-* Provide relevant information for clients to display an authentication page,
-* Expose how a client can authenticate using various Authentication Flows.
-* Get an Access Token required for accessing restricted resources.
-
-The discovery of the Authentication Flow(s) supported by a given Provider is achieved by the provision of an Authentication Document, i.e. a discovery document defined by the Authentication for OPDS specification and expressed as a JSON structure.
-
-Such Authentication Document is returned to any client requesting an access-restricted ressource without providing a valid Access Token, along with a 401 Unauthorized HTTP error code.
-By interpreting the information found in the Authentication Document, the client can display an authentication form to the user and conduct the selected Authentication Flow.
-
-Access-restricted resources can be acquired after the User is properly authenticated and his action authorized during the period of validity of the Access Token.  
-
-The multiplicity of authentication services found in the publishing industry requires a large flexibility on the client side. 
-
-The version 1.0 of the Authentication for OPDS specification supports the following Authentication Flows: 
-
-* HTTP Basic Authentication
-* OAuth 2.0 Implicit Grant
-* OAuth 2.0 Resource Owner Password Credentials Grant.
-
-If HTTP Basic Authentication is used, each request sent by the authentified client to a resource URL which requires an authentication must contain a header field in the form of Authorization: Basic &lt;credentials>, where &lt;credentials> is the base64 encoding of the user id and password, joined by a colon. Basic Authentication is a weak protection, therefore Providers should utilize other authentication flows whenever possible.
-
-If one of the supported OAuth 2.0 flows is used, an Access Token is returned to the Reading System after proper authentication and authorization. This token must then be inserted in the header field of each request sent by the authentified client to a resource URL which requires an authentication, in the form of Authorization: Bearer &lt;access-token>. 
-
-### OAuth 2
-
-[RFC 6749](https://tools.ietf.org/html/rfc6749) specifies how different types of applications can get an Access Token from an authorization Server using one of four Authorization Grant types.
-
-There is no discovery mechanism in the RFC 6749, therefore there may be interoperability issues when deploying many different reading applications accessing many different content servers.
-
-Restrictions may be added to the use of OAuth 2 in subsequent versions of this specification. 
 
 ## Terminology
 
@@ -115,11 +67,59 @@ String of text entered by the user and used to generate the User Key.
 
 ## Conformance Statements
 
-The keywords *must, must not, required, shall, shall not, should, should not, recommended, may**, and optional* in this document are to be interpreted as described in [RFC2119].
+The keywords *must, must not, required, shall, shall not, should, should not, recommended, may* and *optional* in this document are to be interpreted as described in [RFC2119].
 
 All sections of this specification are normative except where identified by the informative status label “This section is informative”. The application of informative status to sections and appendices applies to all child content and subsections they may contain.
 
 All examples in this specification are informative.
+
+## Means of authentication of the user
+
+*This section is informative*
+
+Two types of access-restricted resources are particularly interesting in the scope of this specification:
+
+* Links to the personal bookshelf of a User in an OPDS Catalog.
+* Acquisition links in individual entries of an OPDS Catalog. 
+
+Fetching access-restricted resources requires user authentication. This specification does not require a specific user authentication method: the sole requirement is the provision of an Access Token as the result of user authentication. 
+
+The following sub-sections describe recommended authentication methods. 
+
+### Authentication for OPDS
+
+The [Authentication for OPDS specification](https://drafts.opds.io/authentication-for-opds-1.0) defines a standard way for OPDS Catalog providers and clients to:
+
+* Provide relevant information for clients to display an authentication page,
+* Expose how a client can authenticate using various Authentication Flows.
+* Get an Access Token required for accessing restricted resources.
+
+The discovery of the Authentication Flow(s) supported by a given Provider is achieved by the provision of an Authentication Document, i.e. a discovery document defined by the Authentication for OPDS specification and expressed as a JSON structure.
+
+Such Authentication Document is returned to any client requesting an access-restricted ressource without providing a valid Access Token, along with a 401 Unauthorized HTTP error code.
+By interpreting the information found in the Authentication Document, the client can display an authentication form to the user and conduct the selected Authentication Flow.
+
+Access-restricted resources can be acquired after the User is properly authenticated and his action authorized during the period of validity of the Access Token.  
+
+The multiplicity of authentication services found in the publishing industry requires a large flexibility on the client side. 
+
+The version 1.0 of the Authentication for OPDS specification supports the following Authentication Flows: 
+
+* HTTP Basic Authentication
+* OAuth 2.0 Implicit Grant
+* OAuth 2.0 Resource Owner Password Credentials Grant.
+
+If HTTP Basic Authentication is used, each request sent by the authentified client to a resource URL which requires an authentication must contain a header field in the form of Authorization: Basic &lt;credentials>, where &lt;credentials> is the base64 encoding of the user id and password, joined by a colon. Basic Authentication is a weak protection, therefore Providers should utilize other authentication flows whenever possible.
+
+If one of the supported OAuth 2.0 flows is used, an Access Token is returned to the Reading System after proper authentication and authorization. This token must then be inserted in the header field of each request sent by the authentified client to a resource URL which requires an authentication, in the form of Authorization: Bearer &lt;access-token>. 
+
+### OAuth 2
+
+[RFC 6749](https://tools.ietf.org/html/rfc6749) specifies how different types of applications can get an Access Token from an authorization Server using one of four Authorization Grant types.
+
+There is no discovery mechanism in the RFC 6749, therefore there may be interoperability issues when deploying many different reading applications accessing many different content servers.
+
+Restrictions may be added to the use of OAuth 2 in subsequent versions of this specification. 
 
 ## Including a hashed passphrase in a JSON Publication Object
 
@@ -127,9 +127,9 @@ All examples in this specification are informative.
 
 The lcp_hashed_passphrase element represents the base64-encoded value of the hashed passphrase. 
 
-It is implemented as a property of an OPDS 2 Acquisition Link which references an LCP License or Protected Publication. Such a link is found inside an OPDS Publication Object, or more generically a Readium Web Publication Object.
+It is implemented as a property of an OPDS 2 Acquisition Link which references an LCP License or Protected Publication. Such a link is found inside a Readium Web Publication Manifest (which can be a an OPDS entry).
 
-### Sample of Readium Web Publication Object supporting a link to an LCP license and an lcp_hashed_passphrase property
+### Sample of Readium Web Publication Manifest supporting a link to an LCP license and an lcp_hashed_passphrase property
 
 ``` json
 {
@@ -225,7 +225,7 @@ A usual use case on a Publishing website is as follows:
 
 This is achieved by providing to an unknown client an http 401 response to the “buy” or “borrow” action. 
 
-If Authentication for OPDS is used, an Authentication Document is returned which contains one or more ways for the user to authenticate. A Refresh URL may also be returned at this step. Once authentified / authorized, the user receives an Access Token which is put in cache and immediately used as a parameter of the "download" link. The response to the “download” link is a JSON Readium Web Publication Object which contains a link to an LCP license, plus the hashed passphrase corresponding to this license.
+If Authentication for OPDS is used, an Authentication Document is returned which contains one or more ways for the user to authenticate. A Refresh URL may also be returned at this step. Once authentified / authorized, the user receives an Access Token which is put in cache and immediately used as a parameter of the "download" link. The response to the “download” link is a JSON Readium Web Publication Manifest which contains a link to an LCP license, plus the hashed passphrase corresponding to this license.
 
 Note that when Authentication for OPDS is used, the Authentication Document has an identifier and the Access Token and refresh URL can be associated with this id for future reuse. When a response to a call has an http 401 response with an Authentication Document, the client can use the Access Token associated with this id, or call the associated refresh URL if the Access Token has expired, thus avoiding a new user authentication step.
 
@@ -242,7 +242,7 @@ A usual use case on an OPDS compliant reading app is as follows:
 1. The user can immediately download one or more protected publications.
 1. During a certain time, every access to his personal bookshelf is immediately successful.
 
-This is achieved by providing to the client of the authentified / authorized user, inside each OPDS 1 or 2 entry, a link to an LCP license plus the hashed passphrase corresponding to this license. Note that an OPDS 2 entry is a Readium Web Publication Object.
+This is achieved by providing to the client of the authentified / authorized user, inside each OPDS 1 or 2 entry, a link to an LCP license plus the hashed passphrase corresponding to this license. Note that an OPDS 2 entry is a Readium Web Publication Manifest.
 
 For each publication selected by the user, the download mechanism is identical to the one described in the previous use-case. Even if all hashed passphrases are usually identical in the feed (this is recommended, but not required), using one hashed passphrase per entry is a simpler solution to specify and implement. 
 
