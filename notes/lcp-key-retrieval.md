@@ -4,7 +4,13 @@
 
 *Copyright 2020, Readium Foundation. All Rights Reserved.*
 
-By: Laurent Le Meur (EDRLab), Hadrien Gardeur (De Marque), Rémi Bauzac (Vivlio)
+Contributors: 
+Laurent Le Meur (EDRLab)
+Hadrien Gardeur (De Marque)
+Rémi Bauzac (Vivlio)
+Daniel Weck (EDRLab)
+Stefaan Nemegger (ePagine)
+Jean-Philippe Bougie (De Marque)
 
 ## Overview
 
@@ -172,7 +178,7 @@ The &lt;hashed_passphrase> element is defined in this namespace as a child of th
   <link rel="http://opds-spec.org/acquisition/"
       href="https://example.com/license.lcpl"
       type="application/vnd.readium.lcp.license.v1.0+json">
-    <lcp:hashed_passphrase>9f86d081884c7d65...22cd15d6c15b0f00a08</lcp:hashed_passphrase> 
+    <lcp:hashed_passphrase>+usAylGL6nyxGn7zH7YYO0ibG26tt5K+xkoDs/b/gKg=</lcp:hashed_passphrase> 
  </link>
 </entry>
 ```
