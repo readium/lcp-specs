@@ -791,7 +791,8 @@ With this signature and the certificate, a valid license will be created as e.g.
 
 ```json
 {
-  "date": "2013-11-04T01:08:15+01:00",
+  "issued":"2013-11-04T01:08:15+01:00",
+  "updated":"2014-02-21T09:44:17+01:00",
   "encryption": {
     "content_key": {
       "algorithm": "http://www.w3.org/2001/04/xmlenc#aes256-cbc",
@@ -800,6 +801,7 @@ With this signature and the certificate, a valid license will be created as e.g.
     "profile": "http://readium.org/lcp/basic-profile",
     "user_key": {
       "algorithm": "http://www.w3.org/2001/04/xmlenc#sha256",
+      "key_check":"jJEjUDipHK3OjGt6kFq7dcOLZuicQFUYwQ+TYkAIWKm6Xv6kpHFhF7LOkUK/Owww",
       "text_hint": "Enter your email address"
     }
   },
