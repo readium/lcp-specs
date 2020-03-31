@@ -5,12 +5,12 @@
 *Copyright 2020, Readium Foundation. All Rights Reserved.*
 
 Contributors: 
-Laurent Le Meur (EDRLab)
-Hadrien Gardeur (De Marque)
-Rémi Bauzac (Vivlio)
-Daniel Weck (EDRLab)
-Stefaan Nemegger (ePagine)
-Jean-Philippe Bougie (De Marque)
+Laurent Le Meur (EDRLab),
+Hadrien Gardeur (De Marque),
+Rémi Bauzac (Vivlio),
+Daniel Weck (EDRLab),
+Stefaan Nemegger (ePagine),
+Jean-Philippe Bougie (De Marque),
 
 ## Overview
 
@@ -280,4 +280,13 @@ Authentication for OPDS
 
 [https://drafts.opds.io/authentication-for-opds-1.0](https://drafts.opds.io/authentication-for-opds-1.0)
 
+
+## Who was involved in this project
+
+* Laurent Le Meur: CTO of EDRLab, involved in every EDRLab project, including Readium LCP, Readium Mobile, Readium Desktop, Readium Web, Web Publications.
+* Daniel Weck: senior developer at EDRLab; working on Readium LCP, Readium Mobile, Readium Desktop, Readium Web.
+* Hadrien Gardeur: Product manager at De Marque, a Canadian solution provider for the publishing industry and member of EDRLab; implementer of Readium LCP.
+* Jean-Philippe Bougie: Project manager at De Marque.
+* Rémi Bauzac: CTO of TEA (The Ebook Alternative), a French solution provider for the publishing industry and member of EDRLab; implementer of Readium LCP.
+* Stefaan Nemegger: lead developer at ePagine, a French ebook distributor / bookseller and member of EDRLab; implementer of Readium LCP.
 
