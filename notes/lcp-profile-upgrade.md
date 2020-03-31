@@ -2,7 +2,13 @@
 
 *December 2018*
 
-By: Laurent Le Meur & Daniel Weck, EDRLab
+Contributors: 
+Laurent Le Meur (EDRLab)
+Daniel Weck (EDRLab)
+Hadrien Gardeur (De Marque)
+Rémi Bauzac (Vivlio)
+Stefaan Nemegger (ePagine)
+Jean-Philippe Bougie (De Marque)
 
 ## Summary
 This document describes a mechanism for seamlessly transitioning an operational LCP ecosystem to the most recent profile revision, whilst ensuring forward compatibility for outdated client software, and for non-updatable user devices.
@@ -21,7 +27,7 @@ A client app that does not support this “LCP profile upgrade” protocol simpl
 ## Flow Chart
 This activity diagram illustrates the basic steps required to implement the proposed “LCP profile upgrade” via the LSD protocol. A more complete step-by-step example is provided in the next section.
 
-![flow chart LCP profile upgrade](images/lcp-profile-upgrade.png)
+![flow chart LCP profile upgrade](../images/lcp-profile-upgrade.png)
 
 ## Example
 In this example, we suppose that the oldest non-deprecated LCP profile is “1.0” and the newest is “2.0”. 
