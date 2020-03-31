@@ -3,12 +3,12 @@
 *December 2018*
 
 Contributors: 
-Laurent Le Meur (EDRLab)
-Daniel Weck (EDRLab)
-Hadrien Gardeur (De Marque)
-Rémi Bauzac (Vivlio)
-Stefaan Nemegger (ePagine)
-Jean-Philippe Bougie (De Marque)
+Laurent Le Meur (EDRLab),
+Daniel Weck (EDRLab),
+Hadrien Gardeur (De Marque),
+Rémi Bauzac (Vivlio),
+Stefaan Nemegger (ePagine),
+Jean-Philippe Bougie (De Marque),
 
 ## Summary
 This document describes a mechanism for seamlessly transitioning an operational LCP ecosystem to the most recent profile revision, whilst ensuring forward compatibility for outdated client software, and for non-updatable user devices.
@@ -38,15 +38,15 @@ Note: the JSON data is fictitious but nonetheless quite representative of a real
 
 This license’s JSON file is already downloaded on the client side (injected inside the EPUB at /META-INF/license.lcpl).
 
-This LCP license is for the “1.0” profile (URI http://readium.org/lcp/profile-1.0).
+This license matches the LCP “1.0” profile (URI http://readium.org/lcp/profile-1.0).
 
 There is a rel=status LSD link (type=application/vnd.readium.license.status.v1.0+json).
 
 ```json
 {
-    "provider": "https://www.lcp-vendor.org",
+    "provider": "https://www.lcp-provider.org",
     "id": "LICENSE_ID",
-    "issued": "TIMESTAMP_OF_ISSUED",
+    "issued": "TIMESTAMP_OF_ISSUE",
     "encryption": {
         "profile": "http://readium.org/lcp/profile-1.0",
         "content_key": {
@@ -101,7 +101,7 @@ There is a rel=status LSD link (type=application/vnd.readium.license.status.v1.0
 }
 ```
 
-As per the LSD protocol, the client app requests the advertised status document URL. The HTTP response is as follows:
+As per the License Status Document protocol, the client app requests the advertised status document URL. The HTTP response is as follows:
 
 ### 2 - status.lsd
 
@@ -235,7 +235,7 @@ The only limitation is that such “deprecated” reading system will not be abl
 ### Readium “1” clients
 At the time of writing this proposal, the Readium “1” codebase (i.e. readium-sdk + readium-lcp-client) does not yet support the use-case of a client app handling multiple LCP profiles. This limitation is mostly due to how demo apps (e.g. SDKLauncher-iOS and SDKLauncher-Android) bundle the profile certificates, and how this gets integrated into the underlying LCP native library. 
 
-This codebase will therefore need to be seriously modified before this feature is implemented. It may be posponed until Q2 2019.
+This codebase will therefore need to be seriously modified before this feature is implemented. No date can be given at this point. 
 
 ### Readium “2” clients
 
@@ -243,7 +243,7 @@ The Readium “2” codebase involves another - simpler - architecture. The code
 
 However, the proposed mechanism to discover and fetch a new license (upgraded profile) from an old license (legacy profile) must be implemented in platform-specific code for each target application, based upon the existing LSD process (notably, graceful degradation in case of network errors).
 
-This codebase will evolve in Q1 2019.
+This codebase will evolve in Q2 2020.
 
 ### Go server(s)
 
@@ -251,13 +251,13 @@ This codebase will evolve in Q1 2019.
 
 The overarching principle described in this document implicitly considers that encrypted publications do not need to be updated when a new LCP profile is deployed (i.e. no need to create and store expensive publication duplicates because of a “content key” change). Instead, only the emitted licenses need to cater for the differences in legacy and upgraded profiles (typically, “user key” changes). LCP server implementations must expose additional HTTP “routes” so that client apps can request licenses with all the supported profiles (as shown in the above example, an upgraded LCP license can be served on a different URL path indicating the profile name).
 
-This codebase will evolve in Q1 2019.
+This codebase will evolve in Q3 2020.
 
 #### Status Document Server
 
 The server that issues License Status Documents must now be capable of generating multiple license links, one for each LCP profile. The order of links inside the JSON array does matter, in the sense that the first license will be fetched by legacy client implementations that do not handle multiple choices. However, up-to-date client implementations will discriminate links based on their profile URI property, so the ordering of supplemental links does not matter.
 
-This codebase will evolve in Q1 2019.
+This codebase will evolve in Q3 2020.
 
 
 ## Who was involved in this project
@@ -265,7 +265,7 @@ This codebase will evolve in Q1 2019.
 The following EDRLab team members and several members of the association are involved in this project:
 
 * Laurent Le Meur: CTO of EDRLab, involved in every EDRLab project, including Readium LCP, Readium Mobile, Readium Desktop, Readium Web, Web Publications.
-Daniel Weck: senior developer at EDRLab; working on Readium LCP, Readium Mobile, Readium Desktop, Readium Web.
+* Daniel Weck: senior developer at EDRLab; working on Readium LCP, Readium Mobile, Readium Desktop, Readium Web.
 * Hadrien Gardeur: CEO of Feedbooks, a French distributor of EPUB ebooks and developer of mobile reading applications; co-editor of the LCP specification and implementer of Readium LCP.
 * Rémi Bauzac: CTO of TEA (The Ebook Alternative), a French solution provider for the publishing industry and member of EDRLab; implementer of Readium LCP.
 * Stefaan Nemegger: lead developer at ePagine, a French solution provider for the publishing industry and member of EDRLab; implementer of Readium LCP.
