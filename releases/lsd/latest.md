@@ -367,7 +367,7 @@ Renewing a License is also meant primarily for library use cases, where a patron
 | Media Type | Semantics | Templated? | HTTP Verb |
 | ---------- | --------- | ---------- | --------- |
 | `text/html` | A URL where human interactions will be required. Returns an HTML page. These interactions <b class="rfc">should</b> ultimately result in the extension of the term of a License Document. | No | GET |
-| `application/vnd.readium.license.status.v1.0+json` | A URL where the License Document can be programmatically renewed. Returns a Status Document. | Yes | PUT |
+| `application/vnd.readium.` `license.status.v1.0+json` | A URL where the License Document can be programmatically renewed. Returns a Status Document. | Yes | PUT |
 
 These parameters are strictly for the case where the License Document is programmatically renewed.
 
