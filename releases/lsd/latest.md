@@ -364,13 +364,16 @@ Renewing a License is also meant primarily for library use cases, where a patron
 | -------- | --------- | --------- |
 | `renew` | Extends the expiration date of a license into the future | No |
 
-| Media Type | Semantics | Templated? | HTTP Verb |
-| ---------- | --------- | ---------- | --------- |
-| `text/html` | A URL where human interactions will be required. Returns an HTML page. These interactions <b class="rfc">should</b> ultimately result in the extension of the term of a License Document. | No | GET |
-| `application/vnd.readium.` `license.status.v1.0+json` | A URL where the License Document can be programmatically renewed. Returns a Status Document. | Yes | PUT |
 
-These parameters are strictly for the case where the License Document is programmatically renewed.
+The HTTP verb used for such request and the media type of the response payload both depend on the expected interaction between the device and the library server:
 
+| HTTP Verb | Media Type | Semantics | Templated? |
+| --------- | --------- | ---------- | ---------- |
+| PUT | `application/vnd.readium.` `license.status.v1.0+json` | A URL where the License Document can be programmatically renewed. Returns a Status Document. | Yes |
+| GET | `text/html` | A URL where human interactions will be required. Returns an HTML page. These interactions <b class="rfc">should</b> ultimately result in the extension of the term of a License Document. | No |
+
+
+These parameters are strictly for the case where the License Document is programmatically renewed:
 
 | Parameter | Format | Semantics | Required? |
 | --------- | ------ | --------- | --------- |
@@ -392,18 +395,13 @@ These parameters are strictly for the case where the License Document is program
 | http://readium.org/license-status-document/error/renew/date | 403 | Incorrect renewal period, your publication could not be renewed. |
 | http://readium.org/license-status-document/error/server | 5xx | An unexpected error has occurred. |
 
-*An example with two renewal links: one meant for human interactions (HTML) and another for clients that can send the proper information to the server (returns a Status Document).*
+*An example of programmatic renewal.*
 
 ```json
 {
   "links": [
     {
       "rel": "renew",
-      "href": "https://example.org/license/aaa-bbbb-ccc/renew",
-      "type": "text/html"
-    },
-    {
-      "rel": "renew"
       "href": "https://example.org/license/aaa-bbbb-ccc/renew{?end,id,name}",
       "type": "application/vnd.readium.license.status.v1.0+json",
       "templated": true
@@ -411,6 +409,21 @@ These parameters are strictly for the case where the License Document is program
   ]
 }
 ```
+
+*An example of interactive renewal: the mechanisms of the library web portal can be reused for handling lending queues, novelties vs long tail etc.*
+
+```json
+{
+  "links": [
+    {
+      "rel": "renew",
+      "href": "https://example.org/renew.html?license=aaa-bbbb-ccc&user=dddd-eeee-ffff&token=gggg-hhhh-iiii",
+      "type": "text/html"
+    }
+  ]
+}
+```
+
 ## 4. Relationship to Readium Licensed Content Protection 1.0
 
 ### 4.1. Introduction
