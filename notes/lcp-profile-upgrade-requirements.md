@@ -1,9 +1,3 @@
----
-layout: default
-permalink: "/lcp-profile-upgrade-requirements"
-title: "Readium LCP Profile Upgrade Requirements"
----
-
 # Readium LCP Profile upgrade - Requirements
 
 August 2018
