@@ -89,11 +89,6 @@ In the following example, the Status Document indicates that the License has bee
     },
     {
       "rel": "renew",
-      "href": "https://example.org/license/35d9b2d6/renew",
-      "type": "text/html"
-    },
-    {
-      "rel": "renew",
       "href": "https://example.org/license/35d9b2d6/renew{?end,id,name}",
       "type": "application/vnd.readium.license.status.v1.0+json",
       "templated": true
