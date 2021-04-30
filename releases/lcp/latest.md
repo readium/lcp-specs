@@ -336,14 +336,14 @@ The `encryption/content_key` object contains the Content Key (encrypted using th
 | Name | Value | Format |
 | ---- | ----- | ------ |
 | `encrypted_value` | Encrypted Content Key | Base 64 encoded octet sequence |
-| `algorithm` | Algorithm used to encrypt the Content Key, identified using the URIs defined in [XML-ENC]. This <b class="rfc">must</b> match the Content Key encryption algorithm named in the Encryption Profile identified in `encryption/profile`. | URI |
+| `algorithm` | Algorithm used to encrypt the Content Key, identified using the URIs defined in [[XML-ENC](#normative-references)]. This <b class="rfc">must</b> match the Content Key encryption algorithm named in the Encryption Profile identified in `encryption/profile`. | URI |
 
 The `encryption/user_key` object contains information regarding the User Key used to encrypt the Content Key. It <b class="rfc">must</b> contain the following name/value pairs:
 
 | Name | Value | Format |
 | ---- | ----- | ------ |
 | `text_hint` | A hint to be displayed to the User to help them remember the User Passphrase | String |
-| `algorithm` | Algorithm used to generate the User Key from the User Passphrase, identified using the URIs defined in [[XML-ENC]((#normative-references))]. This <b class="rfc">must</b> match the User Key hash algorithm named in the Encryption Profile identified in `encryption/profile`. | URI |
+| `algorithm` | Algorithm used to generate the User Key from the User Passphrase, identified using the URIs defined in [[XML-ENC](#normative-references)]. This <b class="rfc">must</b> match the User Key hash algorithm named in the Encryption Profile identified in `encryption/profile`. | URI |
 | `key_check` | The value of the License Document’s `id` field, encrypted using the User Key and the same algorithm identified for Content Key encryption in `encryption/content_key/algorithm`. This is used to verify that the Reading System has the correct User Key. | Base 64 encoded octet sequence |
 
 *Example 2: Encryption information for a License Document that uses the Basic Encryption Profile for LCP 1.0.*
