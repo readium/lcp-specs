@@ -1,8 +1,11 @@
 # Readium LCP Profile upgrade - Requirements
 
-August 2018
+**Revision: 1**
 
-By: Laurent Le Meur, EDRLab
+*Copyright 2018, Readium Foundation. All Rights Reserved.*
+
+Contributors: 
+Laurent Le Meur (EDRLab)
 
 ## Introduction
 

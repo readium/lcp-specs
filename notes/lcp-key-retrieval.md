@@ -1,6 +1,6 @@
-# Readium LCP Automatic Key Retrieval - Technical solution
+# Readium LCP Automatic Key Retrieval 1.0
 
-**Revision: 2, DRAFT version**
+**Revision: 2**
 
 *Copyright 2020, Readium Foundation. All Rights Reserved.*
 
@@ -10,7 +10,7 @@ Hadrien Gardeur (De Marque),
 Rémi Bauzac (Vivlio),
 Daniel Weck (EDRLab),
 Stefaan Nemegger (ePagine),
-Jean-Philippe Bougie (De Marque),
+Jean-Philippe Bougie (De Marque)
 
 ## Overview
 

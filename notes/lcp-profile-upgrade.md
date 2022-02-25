@@ -1,6 +1,8 @@
-# Readium LCP Profile Upgrade - Technical solution
+# Readium LCP Profile Upgrade 1.0
 
-*December 2018*
+**Revision: 1**
+
+*Copyright 2018, Readium Foundation. All Rights Reserved.*
 
 Contributors: 
 Laurent Le Meur (EDRLab),
@@ -8,7 +10,7 @@ Daniel Weck (EDRLab),
 Hadrien Gardeur (De Marque),
 Rémi Bauzac (Vivlio),
 Stefaan Nemegger (ePagine),
-Jean-Philippe Bougie (De Marque),
+Jean-Philippe Bougie (De Marque)
 
 ## Summary
 This document describes a mechanism for seamlessly transitioning an operational LCP ecosystem to the most recent profile revision, whilst ensuring forward compatibility for outdated client software, and for non-updatable user devices.

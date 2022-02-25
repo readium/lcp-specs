@@ -1,8 +1,12 @@
-# Readium LCP for PDF
+# Readium LCP for PDF 1.0
 
-## Status of this Document
+**Revision: 1**
 
-This document is an early draft.
+*Copyright 2020, Readium Foundation. All Rights Reserved.*
+
+Contributors: 
+Laurent Le Meur (EDRLab),
+Hadrien Gardeur (De Marque)
 
 ## Requirements
 
