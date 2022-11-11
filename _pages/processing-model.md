@@ -1,6 +1,6 @@
 ---
 layout: default
-permalink: "/lcp-license-processin-model"
+permalink: "/lcp-license-processing-model"
 title:  "LCP license processing model"
 ---
 
@@ -133,7 +133,7 @@ For each encrypted resource or chunk, the app will call lcp lib (C++), passing t
 
 # Illustration
 
-![Illustration of the processing model](./lcp-processing-model.png)
+![Illustration of the processing model](./lcp-processing-model.svg)
 
 # Check the print & copy rights
 
