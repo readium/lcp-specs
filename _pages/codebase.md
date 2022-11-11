@@ -16,29 +16,35 @@ The multi-platform reference Readium LCP Server is written in Golang. It provide
 
 ## Readium LCP Client libraries
 
-### C++ library
-
-The Readium LCP Client library, written in C++, is very easy to deploy as a “content module” in a Reading System based on the original Readium SDK. Its code may be adapted to any other Reading System implementation using the lightweight c++ library contained in the LCP Client library.
-
-&gt; Download it on: [GitHub repository](https://github.com/readium/readium-lcp-client)
-
 ### Kotlin library
 
-The R2 LCP Kotlin library, targeting Android devices, is a module of the Readium Mobile for Android toolkit.
+The Readium LCP Kotlin library, targeting Android devices, is a module of the Readium Kotlin toolkit.
 
-&gt; Download it on: [GitHub repository](https://github.com/readium/r2-lcp-kotlin)
+&gt; Download it on: [GitHub repository](https://github.com/readium/kotlin-toolkit/tree/main/readium/lcp)
 
 ### Swift library
 
-The R2 LCP Swift library, targeting iOS devices, is a module of the Readium Mobile for iOS toolkit.
+The Readium LCP Swift library, targeting iOS devices, is a module of the Readium Swift toolkit.
 
-&gt; Download it on: [GitHub repository](https://github.com/readium/r2-lcp-swift)
+&gt; Download it on: [GitHub repository](https://github.com/readium/swift-toolkit/tree/main/Sources/LCP)
 
 ### Node.js library
 
-The R2 LCP Node.js library, targeting desktop computers, is a module of the Readium Mobile for Desktop toolkit.
+The Readium LCP Node.js library, targeting desktop computers, has its own repository.
 
 &gt; Download it on: [GitHub repository](https://github.com/readium/r2-lcp-js)
+
+### C++ library
+
+This module is stable since 2017 and won't be maintained by the Readium core developers. 
+
+The Readium LCP C++ module is deployed as a “content module” of the original Readium SDK. 
+
+&gt; Download it on: [GitHub repository](https://github.com/readium/readium-lcp-client)
+
+It contains a lightweight C++ library which can be (and has been) adapted to any C++ based reading system.  
+
+&gt; Download it on: [GitHub repository](https://github.com/readium/readium-lcp-client/tree/master/src/lcp-client-lib)
 
 ## Be part of the Readium LCP Network
 The interoperability and security of the Readium LCP ecosystem is guaranteed by EDRLab. 
