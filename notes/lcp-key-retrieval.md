@@ -148,7 +148,7 @@ It is implemented as a property of an OPDS 2 Acquisition Link which references a
   },
   "links": [
     {
-      "rel": "http://opds-spec.org/acquisition/",
+      "rel": "http://opds-spec.org/acquisition",
       "href": "https://example.com/license.lcpl",
       "type": "application/vnd.readium.lcp.license.v1.0+json",
       "properties": {
@@ -175,7 +175,7 @@ The &lt;hashed_passphrase> element is defined in this namespace as a child of th
 ``` xml
 <entry xmlns="http://www.w3.org/2005/Atom" xmlns:lcp="http://readium.org/lcp-specs/ns">
   ...
-  <link rel="http://opds-spec.org/acquisition/"
+  <link rel="http://opds-spec.org/acquisition"
       href="https://example.com/license.lcpl"
       type="application/vnd.readium.lcp.license.v1.0+json">
     <lcp:hashed_passphrase>+usAylGL6nyxGn7zH7YYO0ibG26tt5K+xkoDs/b/gKg=</lcp:hashed_passphrase> 
