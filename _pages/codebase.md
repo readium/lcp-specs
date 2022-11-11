@@ -46,6 +46,11 @@ It contains a lightweight C++ library which can be (and has been) adapted to any
 
 &gt; Download it on: [GitHub repository](https://github.com/readium/readium-lcp-client/tree/master/src/lcp-client-lib)
 
+## Processing model
+Processing an LCP license involves a series of steps, which a [detailed in this document]({{site.url}}/lcp-license-processing-model). 
+
+Integrators of LCP compliant reading systems should read this documentation and check their development is following these steps. The Readium Mobile TestApps ar egood examples of a proper implementation.   
+
 ## Be part of the Readium LCP Network
 The interoperability and security of the Readium LCP ecosystem is guaranteed by EDRLab. 
 This implies the integration in LCP compliant software of a specific encryption profile, different from the basic one defined in the LCP specification and provided as part of the open-source software.
