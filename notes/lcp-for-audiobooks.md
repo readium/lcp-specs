@@ -10,7 +10,7 @@ Hadrien Gardeur (De Marque)
 
 ## Requirements
 
-* LCP for Audiobooks is based on the [Audiobook Profile](https://readium.org/webpub-manifest/extensions/audiobook) of the [Readium Web Publication Manifest](https://readium.org/webpub-manifest) and follows its requirements for packaging
+* LCP for Audiobooks is based on the [Audiobook Profile](https://readium.org/webpub-manifest/profiles/audiobook) of the [Readium Web Publication Manifest](https://readium.org/webpub-manifest) and follows its requirements for packaging
 * All LCP for Audiobooks packages <strong class="rfc">must</strong> use:
   * the `.lcpa` extension
   * the `application/audiobook+lcp` media type
