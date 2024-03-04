@@ -1,6 +1,6 @@
 # Readium LCP Automatic Key Retrieval 1.0
 
-**Revision: 2**
+**Revision: 3**
 
 *Copyright 2020, Readium Foundation. All Rights Reserved.*
 
@@ -135,7 +135,7 @@ The lcp_hashed_passphrase element represents the base64-encoded value of the has
 
 It is implemented as a property of an OPDS 2 Acquisition Link which references an LCP License or Protected Publication. Such a link is found inside a Readium Web Publication Manifest (which can be a an OPDS entry).
 
-### Sample of Readium Web Publication Manifest supporting a link to an LCP license and an lcp_hashed_passphrase property
+### Sample of Readium Web Publication Manifest or ODPS 2 entry supporting a link to an LCP license and an lcp_hashed_passphrase property
 
 ``` json
 {
@@ -152,12 +152,15 @@ It is implemented as a property of an OPDS 2 Acquisition Link which references a
       "href": "https://example.com/license.lcpl",
       "type": "application/vnd.readium.lcp.license.v1.0+json",
       "properties": {
-        "lcp_hashed_passphrase": "+usAylGL6nyxGn7zH7YYO0ibG26tt5K+xkoDs/b/gKg="
+        "lcp_hashed_passphrase": "+usAylGL6nyxGn7zH7YYO0ibG26tt5K+xkoDs/b/gKg=",
+        "indirectAcquisition": [{"type": "application/epub+zip"}]
       }
     }
   ]
 }
 ```
+
+In this example, the user will finally obtain an EPUB, as indicated by the `indirectAcquisition` property. 
 
 Note about the computation of the base64-encoded value of the hashed passphrase: from the hashed value of the passphrase, expressed as an hex-encoded string, calculate a byte array (32-bytes / 256-bits binary buffer); for instance, "4981AA..." becomes [49, 81, 170, ...]. The expected value is the Base64 encoding of this byte array. Note that a base64 conversion is usually implicitly applied to byte arrays when converted to json structures.
 
@@ -179,6 +182,7 @@ The &lt;hashed_passphrase> element is defined in this namespace as a child of th
       href="https://example.com/license.lcpl"
       type="application/vnd.readium.lcp.license.v1.0+json">
     <lcp:hashed_passphrase>+usAylGL6nyxGn7zH7YYO0ibG26tt5K+xkoDs/b/gKg=</lcp:hashed_passphrase> 
+    <opds:indirectAcquisition type="application/epub+zip"/>
  </link>
 </entry>
 ```
