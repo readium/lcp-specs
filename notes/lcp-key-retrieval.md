@@ -20,7 +20,8 @@ Jean-Philippe Bougie (De Marque)
 
 LCP is a passphrase based mechanism. The simplicity of the solution is based on the fact that users can access a protected publication from any compliant device, even without network access, by entering the passphrase associated with an LCP license they have acquired. LCP compliant reading systems keep in cache a hash of all passphrases previously entered by their user, and thus rarely request such passphrase. Despite this optimization and the passphrase hint displayed when the passphrase is requested, it may happen that users don’t remember this passphrase and must get support in order to access their protected publications. 
 
-However, in many situations, a user is already authenticated on a Provider server when he acquires an LCP license: this is always the case when the provider is a public library, and this is often the case when the provider is a bookseller. In such a case, wouldn’t it be good for the user to be able to have his passphrase hash retrieved automatically from the server database, put in cache in his client application and used automatically to access the publication?
+However, in many situations, a user is already authenticated on a Provider server when he acquires an LCP license: this is the case when the user is browsing his personal bookshelf via an OPDS feed. In such a case, wouldn’t it be good for the user to be able to have his passphrase retrieved automatically from the server database, cached in his client application and used automatically to access the publication?
+
 The goal of this project is to provide such a functionality in an open and standard way. By integrating this functionality, public libraries and booksellers who decide to offer such comfort to their users will reach a level of seamless integration currently mainly provided by proprietary platforms.
 
 Note that this advanced feature does not free LCP license providers to communicate to their users a passphrase they can enter manually on any LCP compliant Client application, helped in this by a clear passphrase hint.
@@ -119,7 +120,7 @@ If HTTP Basic Authentication is used, each request sent by the authentified clie
 
 If one of the supported OAuth 2.0 flows is used, an Access Token is returned to the Reading System after proper authentication and authorization. This token must then be inserted in the header field of each request sent by the authentified client to a resource URL which requires an authentication, in the form of Authorization: Bearer &lt;access-token>. 
 
-### OAuth 2
+### Vanilla OAuth 2
 
 [RFC 6749](https://tools.ietf.org/html/rfc6749) specifies how different types of applications can get an Access Token from an authorization Server using one of four Authorization Grant types.
 
@@ -127,15 +128,102 @@ There is no discovery mechanism in the RFC 6749, therefore there may be interope
 
 Restrictions may be added to the use of OAuth 2 in subsequent versions of this specification. 
 
-## Including a hashed passphrase in a JSON Publication Object
+## Providing LCP licenses as part of an OPDS feed
 
-### The lcp_hashed_passphrase element
+The following sample corresponds to an e-lending situation. The client application retrieves a feed in which each entry includes an acquisition link. Because the ebook may not be immediately available, the server will respond to a "borrow" action by returning an OPDS entry. This structure provides additional indirect acquisition links: the user will get first an LCP license, and will then acquire an EPUB file. 
+
+If the ebook is immediately available, the OPDS entry returned by the server must be structured as described in the following section. If the ebook is reserved, the OPDS entry must contain an "unavailable" status. 
+
+### Using OPDS 1
+
+``` xml
+<feed ...>
+  <entry ...>
+    <title>A Journey into the Center of the Earth</title>
+    <link href="https://example.com/10333/borrow" rel="http://opds-spec.org/acquisition/borrow" type="application/atom+xml;type=entry;profile=opds-catalog">
+     <opds:indirectAcquisition type="application/vnd.readium.lcp.license.v1.0+json"/>
+         <opds:indirectAcquisition type="application/epub+zip"/>
+     </opds:indirectAcquisition>
+      <opds:availability status="available"/>
+    </link>
+  </entry>
+</feed>
+```
+
+### Using OPDS 2
+
+``` json
+{
+  "metadata": { ... },
+  "links": { ... },
+  "publications": [
+    {
+      "metadata": {
+        "@type": "http://schema.org/Book",
+        "identifier": "urn:isbn:9780000000002",
+        "title": "A Journey into the Center of the Earth",
+        "author": "Jules Verne",
+        "language": "en"
+      },
+      "links": [
+        {
+          "rel": "http://opds-spec.org/acquisition/borrow",
+          "href": "https://example.com/opds-publication/9780000000002",
+          "type": "application/opds-publication+json",
+          "properties": {
+            "indirectAcquisition": [
+              {"type": "application/vnd.readium.lcp.license.v1.0+json",
+              "child":[
+                {"type": "application/epub+zip"}
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
+```
+
+## Including a hashed passphrase in an OPDS Publication
+
+Such entry must be provided to an authenticated user only. Unauthentified users directed to a OPDS entry defined as below will be required to authenticate. 
+
+In the following sample, the link of the OPDS entry corresponds to the direct acquisition of an LCP license. The "indirectAcquisition" property describes the type of publication attached to the license. If the hash of the user passphrase is added as described below, the client application will store this value and use it to open the ebook; the user will not have to enter his passphrase manually.    
+
+### Using OPDS 1
+
+#### The lcp:hashed_passphrase element
+
+This specification defines the XML namespace `http://readium.org/lcp-specs/ns`. 
+This namespace must be declared. Its usual namespace prefix is `lcp`.
+
+The &lt;hashed_passphrase> element is defined in this namespace as a child of the &lt;link> element defined in the “atom” namespace; it represents the hex-encoded value of the hashed passphrase.
+
+#### Sample
+
+``` xml
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:lcp="http://readium.org/lcp-specs/ns">
+  ...
+  <link rel="http://opds-spec.org/acquisition"
+      href="https://example.com/license.lcpl"
+      type="application/vnd.readium.lcp.license.v1.0+json">
+    <lcp:hashed_passphrase>+usAylGL6nyxGn7zH7YYO0ibG26tt5K+xkoDs/b/gKg=</lcp:hashed_passphrase> 
+    <opds:indirectAcquisition type="application/epub+zip"/>
+ </link>
+</entry>
+```
+
+### Using OPDS 2 (or any protocol that uses Readium Web Publication Manifests)
+
+#### The lcp_hashed_passphrase element
 
 The lcp_hashed_passphrase element represents the base64-encoded value of the hashed passphrase. 
 
-It is implemented as a property of an OPDS 2 Acquisition Link which references an LCP License or Protected Publication. Such a link is found inside a Readium Web Publication Manifest (which can be a an OPDS entry).
+It is implemented as a property of an OPDS 2 Acquisition Link which references an LCP License or Protected Publication. Such a link is found inside an OPDS entry.
 
-### Sample of Readium Web Publication Manifest or ODPS 2 entry supporting a link to an LCP license and an lcp_hashed_passphrase property
+#### Sample 
 
 ``` json
 {
@@ -143,8 +231,6 @@ It is implemented as a property of an OPDS 2 Acquisition Link which references a
     "@type": "http://schema.org/Book",
     "identifier": "urn:isbn:9780000000002",
     "title": "A Journey into the Center of the Earth",
-    "author": "Jules Verne",
-    "language": "en"
   },
   "links": [
     {
@@ -160,63 +246,36 @@ It is implemented as a property of an OPDS 2 Acquisition Link which references a
 }
 ```
 
-In this example, the user will finally obtain an EPUB, as indicated by the `indirectAcquisition` property. 
-
 Note about the computation of the base64-encoded value of the hashed passphrase: from the hashed value of the passphrase, expressed as an hex-encoded string, calculate a byte array (32-bytes / 256-bits binary buffer); for instance, "4981AA..." becomes [49, 81, 170, ...]. The expected value is the Base64 encoding of this byte array. Note that a base64 conversion is usually implicitly applied to byte arrays when converted to json structures.
 
-## Including a hashed passphrase in an OPDS 1 Catalog
 
-### The lcp:hashed_passphrase element
+## Including a link to an OPDS Publication inside an LCP license
 
-This specification defines the XML namespace `http://readium.org/lcp-specs/ns`. 
-This namespace must be declared. Its usual namespace prefix is `lcp`.
+The License Provider may decide to include in each LCP license a link to an OPDS Publication containing the hash of the user passphrase (as defined in a previous section). 
 
-The &lt;hashed_passphrase> element is defined in this namespace as a child of the &lt;link> element defined in the “atom” namespace; it represents the hex-encoded value of the hashed passphrase.
+In any reading application able to process such information, at the time the user wants to open the corresponding ebook, he will have to go through the authentication phase. Once the user is authenticated, the client application will fetch the OPDS Publication, extract the passphrase hash, store it, and use it to open the ebook.  
 
-### Sample of an OPDS 1 entry supporting a link to an LCP license and an lcp:hashed_passphrase property
-
-``` xml
-<entry xmlns="http://www.w3.org/2005/Atom" xmlns:lcp="http://readium.org/lcp-specs/ns">
-  ...
-  <link rel="http://opds-spec.org/acquisition"
-      href="https://example.com/license.lcpl"
-      type="application/vnd.readium.lcp.license.v1.0+json">
-    <lcp:hashed_passphrase>+usAylGL6nyxGn7zH7YYO0ibG26tt5K+xkoDs/b/gKg=</lcp:hashed_passphrase> 
-    <opds:indirectAcquisition type="application/epub+zip"/>
- </link>
-</entry>
-```
-
-## Including a reference to an Authentication Document inside a license
-
-When Authentication for OPDS is used, the URL of the Authentication Document may be provided at the time this Authentication Document is retrieved (ref. Authentication for OPDS specification, [section Authentication Provider](https://drafts.opds.io/authentication-for-opds-1.0#24-authentication-provider)).
-
-In such a URL is provided, it is possible for the client device to store this URL as a link inside the license it retrieves form the LCP server. 
-
-As per the Authentication for OPDS specification, the link-value must be identified by:
-
-* the http://opds-spec.org/auth/document relationship
-* the application/opds-authentication+json media type
-
-The user authentication step can then be automatically re-played after the license has been copied from one device able to inject this URL inside the license, to another device able to process such information.
-
-### Sample 
+### Sample LCP license with an embedded link to an OPDS Authentication Document 
 
 ``` json
 {
-  "metadata": {
-    "@type": "http://schema.org/Book",
-    "title": "A Journey into the Center of the Earth"
-  },
+  "id": "ef15e740-697f-11e3-949a-0800200c9a66",
+  "issued": "2013-11-04T01:08:15+01:00",
+  "updated": "2014-02-21T09:44:17+01:00",
+  "provider": "https://www.imaginaryebookretailer.com",
+  "encryption": { ... },
+  "user_key": { ... },
   "links": [
     {
-      "rel": "http://opds-spec.org/auth/document",
-      "href": "https://example.com/auth_document.json",
-      "type": "application/opds-authentication+json"
+      "rel": "http://opds-spec.org/acquisition",
+      "href": "https://example.com/opds-publication/9780000000002",
+      "type": "application/opds-publication+json"
     }
   ]
 }
 ```
+
+The sequence diagram below is an illustration of this workflow. 
 
 ## Use Cases and Workflows
 
@@ -235,13 +294,13 @@ A usual use case on a Publishing website is as follows:
 
 This is achieved by providing to an unknown client an http 401 response to the “buy” or “borrow” action. 
 
-If Authentication for OPDS is used, an Authentication Document is returned which contains one or more ways for the user to authenticate. A Refresh URL may also be returned at this step. Once authentified / authorized, the user receives an Access Token which is put in cache and immediately used as a parameter of the "download" link. The response to the “download” link is a JSON Readium Web Publication Manifest which contains a link to an LCP license, plus the hashed passphrase corresponding to this license.
+If Authentication for OPDS is used, an Authentication Document is returned which contains one or more ways for the user to authenticate. A Refresh URL may also be returned at this step. 
+
+Once authentified / authorized, the user receives an Access Token which is put in cache and immediately used as a parameter of the "download" link. The response to the “download” link is a OPDS Publication which contains a link to an LCP license and the hashed passphrase corresponding to this license.
 
 Note that when Authentication for OPDS is used, the Authentication Document has an identifier and the Access Token and refresh URL can be associated with this id for future reuse. When a response to a call has an http 401 response with an Authentication Document, the client can use the Access Token associated with this id, or call the associated refresh URL if the Access Token has expired, thus avoiding a new user authentication step.
 
 The client stores the hashed passphrase, fetches the license, then follows the standard LCP workflow, i.e. it validates the license structure, verifies its status, checks that a stored passphrase (any in pratice) corresponds to the license, downloads the encrypted content, embeds the license in the content and opens the ebook.
-
-If the link to the Authentication Document has been retrieved in a previous step, the client can also inject this link into the LCP license.
 
 ### Getting the hashed passphrases related to a personal OPDS bookshelf
 
@@ -252,7 +311,7 @@ A usual use case on an OPDS compliant reading app is as follows:
 1. The user can immediately download one or more protected publications.
 1. During a certain time, every access to his personal bookshelf is immediately successful.
 
-This is achieved by providing to the client of the authentified / authorized user, inside each OPDS 1 or 2 entry, a link to an LCP license plus the hashed passphrase corresponding to this license. Note that an OPDS 2 entry is a Readium Web Publication Manifest.
+This is achieved by providing to the client of the authentified / authorized user, inside each OPDS 1 or 2 entry / publication, a link to an LCP license plus the hashed passphrase corresponding to this license. Note that an OPDS 2 Publication is a simplified Readium Web Publication Manifest.
 
 For each publication selected by the user, the download mechanism is identical to the one described in the previous use-case. Even if all hashed passphrases are usually identical in the feed (this is recommended, but not required), using one hashed passphrase per entry is a simpler solution to specify and implement. 
 
