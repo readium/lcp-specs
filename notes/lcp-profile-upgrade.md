@@ -235,17 +235,15 @@ The only limitation is that such “deprecated” reading system will not be abl
 ## Implementations
 
 ### Readium “1” clients
-At the time of writing this proposal, the Readium “1” codebase (i.e. readium-sdk + readium-lcp-client) does not yet support the use-case of a client app handling multiple LCP profiles. This limitation is mostly due to how demo apps (e.g. SDKLauncher-iOS and SDKLauncher-Android) bundle the profile certificates, and how this gets integrated into the underlying LCP native library. 
+At the time of writing this proposal, the Readium “1” codebase (i.e. readium-sdk + readium-lcp-client) does not support the use-case of a client app handling multiple LCP profiles. This limitation is mostly due to how demo apps (e.g. SDKLauncher-iOS and SDKLauncher-Android) bundle the profile certificates, and how this gets integrated into the underlying LCP native library. 
 
-This codebase will therefore need to be seriously modified before this feature is implemented. No date can be given at this point. 
+This codebase would therefore need to be seriously modified before this feature is implemented. Because it is now deprecated, this may never be achieved. 
 
-### Readium “2” clients
+### Readium Mobile clients
 
-The Readium “2” codebase involves another - simpler - architecture. The code can easily switch to the correct crypto material for the active profile when performing LCP tasks.
+The  Readium Mobile codebase has a quite simple architecture. The code can easily switch to the correct crypto material for the active profile when performing LCP tasks.
 
 However, the proposed mechanism to discover and fetch a new license (upgraded profile) from an old license (legacy profile) must be implemented in platform-specific code for each target application, based upon the existing LSD process (notably, graceful degradation in case of network errors).
-
-This codebase will evolve in Q2 2020.
 
 ### Go server(s)
 
@@ -253,13 +251,13 @@ This codebase will evolve in Q2 2020.
 
 The overarching principle described in this document implicitly considers that encrypted publications do not need to be updated when a new LCP profile is deployed (i.e. no need to create and store expensive publication duplicates because of a “content key” change). Instead, only the emitted licenses need to cater for the differences in legacy and upgraded profiles (typically, “user key” changes). LCP server implementations must expose additional HTTP “routes” so that client apps can request licenses with all the supported profiles (as shown in the above example, an upgraded LCP license can be served on a different URL path indicating the profile name).
 
-This codebase will evolve in Q3 2020.
+This codebase will evolve as soon as this specification starts being adopted by client apps (especially Readium toolkits).
 
 #### Status Document Server
 
 The server that issues License Status Documents must now be capable of generating multiple license links, one for each LCP profile. The order of links inside the JSON array does matter, in the sense that the first license will be fetched by legacy client implementations that do not handle multiple choices. However, up-to-date client implementations will discriminate links based on their profile URI property, so the ordering of supplemental links does not matter.
 
-This codebase will evolve in Q3 2020.
+This codebase will evolve as soon as this specification starts being adopted by client apps.
 
 
 ## Who was involved in this project
