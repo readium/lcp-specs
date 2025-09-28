@@ -18,7 +18,8 @@ Hadrien Gardeur (De Marque)
 * PDF documents referenced in the `readingOrder` <strong class="rfc">must not</strong> be compressed in the package.
 * A cover <strong class="rfc">should</strong> be referenced in the `resources` section of the manifest and, if present, <strong class="rfc">must not</strong> be encrypted.
 * An embedded LCP License Document <strong class="rfc">must</strong> be located at `license.lcpl`.
-* Every encrypted resource <strong class="rfc">must</strong> indicate in the `properties` of its Link Object an `encrypted` element where:
+* Each encrypted PDF document <strong class="rfc">must</strong> be accompanied by a `type` property <strong class="rfc">must</strong> of value `application/pdf`. 
+* Each encrypted PDF document <strong class="rfc">must</strong> be accompanied by an `encrypted` element, where:
   * `scheme` <strong class="rfc">must</strong> be set to `http://readium.org/2014/01/lcp`.
   * `profile` and `algorithm` <strong class="rfc">must</strong> be set properly based on the LCP Encryption Profile of the License.
 
@@ -27,20 +28,18 @@ Hadrien Gardeur (De Marque)
 
 ```json
 {
-  "@context": [
-    "https://readium.org/webpub-manifest/context.jsonld", 
-    "https://readium.org/webpub-manifest/contexts/epub/context.jsonld"
-  ],
+  "@context": "https://readium.org/webpub-manifest/context.jsonld",
   "metadata": {
-    "identifier": "https://readium.org/webpub-manifest/",
+    "@type": "http://schema.org/Book",
+    "conformsTo": "https://readium.org/webpub-manifest/profiles/pdf",
     "title": "Readium Web Publication Manifest",
     "author": "Readium Community",
-    "editor": "Hadrien Gardeur",
-    "description": "The Readium Web Publication Manifest is a JSON-based document meant to represent and distribute publications over HTTPS."
+    "numberOfPages": 102
+
   },
   "readingOrder": [
     {
-      "href": "rwpm.pdf",
+      "href": "publication.pdf",
       "type": "application/pdf",
       "properties": {
         "encrypted": {
