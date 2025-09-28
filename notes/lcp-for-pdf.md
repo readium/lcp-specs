@@ -14,8 +14,9 @@ Hadrien Gardeur (De Marque)
 * Every LCP for PDF package <strong class="rfc">must</strong> use:
   * the `.lcpdf` extension.
   * the `application/pdf+lcp` media type.
+* A `numberOfPages` property <strong class="rfc">must</strong> be present in the `metadata` section of the manifest. It is used by Reading Systems to evaluate user's progression in the publication. 
 * PDF documents referenced in the `readingOrder` <strong class="rfc">must not</strong> be compressed in the package.
-* A cover <strong class="rfc">should</strong> be referenced in `resources` of `manifest.json` and <strong class="rfc">must not</strong> be encrypted.
+* A cover <strong class="rfc">should</strong> be referenced in the `resources` section of the manifest and, if present, <strong class="rfc">must not</strong> be encrypted.
 * An embedded LCP License Document <strong class="rfc">must</strong> be located at `license.lcpl`.
 * Every encrypted resource <strong class="rfc">must</strong> indicate in the `properties` of its Link Object an `encrypted` element where:
   * `scheme` <strong class="rfc">must</strong> be set to `http://readium.org/2014/01/lcp`.
