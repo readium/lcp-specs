@@ -27,6 +27,7 @@ Different publication formats can be protected by LCP; this includes:
 * EPUB 2 and EPUB 3, including with embedded audio and video content
 * PDF documents
 * Readium Packaged Web Publications (audiobooks and DiViNa)
+* W3C Packaged Web Publications (audiobooks)
 
 ## Specifications
 
@@ -36,7 +37,7 @@ Different publication formats can be protected by LCP; this includes:
 
 ## Technical Notes
 
-The following technical notes are currently in draft: 
+The following technical notes are provided for review: 
 
 * [LCP for PDF](notes/lcp-for-pdf.md) defines how PDF documents are protected by LCP. 
 * [LCP for Audiobooks](notes/lcp-for-audiobooks.md) defines how Audiobooks using the Readium Packaged Web Publication format are protected by LCP. 
