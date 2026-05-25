@@ -1,6 +1,6 @@
 # Readium LCP for PDF 1.0
 
-**Revision: 1**
+**Revision: 2**
 
 *Copyright 2020, Readium Foundation. All Rights Reserved.*
 
@@ -11,17 +11,19 @@ Hadrien Gardeur (De Marque)
 ## Requirements
 
 * LCP for PDF is based on the [PDF Profile](https://readium.org/webpub-manifest/profiles/pdf.html) of the [Readium Web Publication Manifest](https://readium.org/webpub-manifest) and follows its requirements for packaging.
-* Every LCP for PDF package <strong class="rfc">must</strong> use:
+* Every package <strong class="rfc">must</strong> use:
   * the `.lcpdf` extension.
   * the `application/pdf+lcp` media type.
-* A `numberOfPages` property <strong class="rfc">must</strong> be present in the `metadata` section of the manifest. It is used by Reading Systems to evaluate user's progression in the publication. 
-* PDF documents referenced in the `readingOrder` <strong class="rfc">must not</strong> be compressed in the package.
-* A cover <strong class="rfc">should</strong> be referenced in the `resources` section of the manifest and, if present, <strong class="rfc">must not</strong> be encrypted.
 * An embedded LCP License Document <strong class="rfc">must</strong> be located at `license.lcpl`.
-* Each encrypted PDF document <strong class="rfc">must</strong> be accompanied by a `type` property <strong class="rfc">must</strong> of value `application/pdf`. 
-* Each encrypted PDF document <strong class="rfc">must</strong> be accompanied by an `encrypted` element, where:
+* A `numberOfPages` property <strong class="rfc">must</strong> be present in the `metadata` section of the manifest. It is used by Reading Systems to evaluate user's progression in the publication. 
+* A cover <strong class="rfc">should</strong> be referenced in the `resources` section of the manifest and, if present, <strong class="rfc">must not</strong> be encrypted.
+* The encrypted PDF document referenced in the `readingOrder` <strong class="rfc">must not</strong> be compressed in the package.
+* A `type` property <strong class="rfc">must</strong> be set for the PDF document, its value <strong class="rfc">must</strong> by `application/pdf`. 
+* A `size`property <strong class="rfc">should</strong> be set for the PDF docmuent. It is the size in bytes of the  PDF document before compression and encryption.
+* An `encrypted` <strong class="rfc">must</strong> be set in `properties` for the PDF document, where:
   * `scheme` <strong class="rfc">must</strong> be set to `http://readium.org/2014/01/lcp`.
-  * `profile` and `algorithm` <strong class="rfc">must</strong> be set properly based on the LCP Encryption Profile of the License.
+  * `algorithm` <strong class="rfc">must</strong> be set; it indicates the encryption algorithm applied to the document, currently "http://www.w3.org/2001/04/xmlenc#aes256-cbc".
+
 
   
 ## Example
@@ -41,10 +43,10 @@ Hadrien Gardeur (De Marque)
     {
       "href": "publication.pdf",
       "type": "application/pdf",
+      "size": 8523576,
       "properties": {
         "encrypted": {
           "scheme": "http://readium.org/2014/01/lcp",
-          "profile": "http://readium.org/lcp/basic-profile",
           "algorithm": "http://www.w3.org/2001/04/xmlenc#aes256-cbc"
         }
       }

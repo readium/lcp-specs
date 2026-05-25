@@ -1,6 +1,6 @@
 # Readium LCP for Audiobooks 1.0
 
-**Revision: 1**
+**Revision: 2**
 
 *Copyright 2020, Readium Foundation. All Rights Reserved.*
 
@@ -10,16 +10,18 @@ Hadrien Gardeur (De Marque)
 
 ## Requirements
 
-* LCP for Audiobooks is based on the [Audiobook Profile](https://readium.org/webpub-manifest/profiles/audiobook) of the [Readium Web Publication Manifest](https://readium.org/webpub-manifest) and follows its requirements for packaging
-* All LCP for Audiobooks packages <strong class="rfc">must</strong> use:
-  * the `.lcpa` extension
+* LCP for Audiobooks is based on the [Audiobook Profile](https://readium.org/webpub-manifest/profiles/audiobook) of the [Readium Web Publication Manifest](https://readium.org/webpub-manifest) and follows its requirements for packaging.
+* Every package <strong class="rfc">must</strong> use:
+  * the `.lcpau` extension
   * the `application/audiobook+lcp` media type
-* Audio resources referenced in the `readingOrder` <strong class="rfc">must not</strong> be compressed in the package
-* A cover <strong class="rfc">should</strong> be referenced in `resources` of `manifest.json` and <strong class="rfc">must not</strong> be encrypted
 * An embedded LCP License Document <strong class="rfc">must</strong> be located at `license.lcpl`
-* All encrypted resources <strong class="rfc">must</strong> indicate in the `properties` of their Link Object an `encrypted` element where:
+* A cover <strong class="rfc">should</strong> be referenced in `resources` of `manifest.json` and, if present, <strong class="rfc">must not</strong> be encrypted.
+* Encrypted audio resources referenced in the `readingOrder` <strong class="rfc">must not</strong> be compressed in the package.
+* A `type` property <strong class="rfc">must</strong> be set for each audio resource. 
+* A `bitrate`, `duration`, `size`property <strong class="rfc">should</strong> be set for each audio resource. The latter is the size in bytes of the audio resource before compression and encryption.
+* An `encrypted` <strong class="rfc">must</strong> be set in `properties` for each audio resource, where:
   * `scheme` <strong class="rfc">must</strong> be set to `http://readium.org/2014/01/lcp`
-  * `profile` and `algorithm` <strong class="rfc">must</strong> be set properly based on the LCP Encryption Profile of the License 
+  * `algorithm` <strong class="rfc">must</strong> be set; it indicates the encryption algorithm applied to the document, currently "http://www.w3.org/2001/04/xmlenc#aes256-cbc".
 
   
 ## Example
@@ -59,7 +61,6 @@ Hadrien Gardeur (De Marque)
       "properties": {
         "encrypted": {
           "scheme": "http://readium.org/2014/01/lcp",
-          "profile": "http://readium.org/lcp/basic-profile",
           "algorithm": "http://www.w3.org/2001/04/xmlenc#aes256-cbc"
         }
       }
@@ -73,7 +74,6 @@ Hadrien Gardeur (De Marque)
       "properties": {
         "encrypted": {
           "scheme": "http://readium.org/2014/01/lcp",
-          "profile": "http://readium.org/lcp/basic-profile",
           "algorithm": "http://www.w3.org/2001/04/xmlenc#aes256-cbc"
         }
       }
@@ -87,7 +87,6 @@ Hadrien Gardeur (De Marque)
       "properties": {
         "encrypted": {
           "scheme": "http://readium.org/2014/01/lcp",
-          "profile": "http://readium.org/lcp/basic-profile",
           "algorithm": "http://www.w3.org/2001/04/xmlenc#aes256-cbc"
         }
       }
